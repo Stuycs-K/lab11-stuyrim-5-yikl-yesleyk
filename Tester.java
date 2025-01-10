@@ -5,8 +5,8 @@ public class Tester{
     private static final int BORDER_BACKGROUND = Text.WHITE + Text.BACKGROUND;
 
     public static void main(String[] args) {
-
         drawBackground();
+        Text.go(32,1);
         //run();
     }
 
@@ -49,20 +49,28 @@ public class Tester{
 Text.go(32,1);
 
         }
-    // public static void drawBG(){
-    //     for(int i = 0; i < 80; i++){
-    //         Text.color(BORDER_BACKGROUND);
-    //         Text.go(1,i+1);
-    //         System.out.println("!");
-    //         Text.go(30,i+1);
-    //         System.out.println("!");
-    //       }
-    //       for(int i = 0; i < 30; i++){
-    //         Text.color(BORDER_BACKGROUND);
-    //         Text.go(i+1,1);
-    //         System.out.println("!");
-    //         Text.go(i+1,80);
-    //         System.out.println("!");
-    //       }
-    // }
+        public static void drawText(String s,int startRow, int startCol){
+          /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
+          //YOUR CODE HERE
+          /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
+          Text.go(startRow,startCol);
+          System.out.print(s);
+
+        }
+        /*Use this method to place text on the screen at a particular location.
+        *When the length of the text exceeds width, continue on the next line
+        *for up to height lines.
+        *All remaining locations in the text box should be written with spaces to
+        *clear previously written text.
+        *@param row the row to start the top left corner of the text box.
+        *@param col the column to start the top left corner of the text box.
+        *@param width the number of characters per row
+        *@param height the number of rows
+        */
+        public static void TextBox(int row, int col, int width, int height, String text){
+          /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
+          //YOUR CODE HERE
+          /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
+
+        }
       }

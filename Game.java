@@ -60,6 +60,8 @@ Text.go(32,1);
     /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
     //YOUR CODE HERE
     /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
+    Text.go(startRow,startCol);
+    System.out.print(s);
   }
 
   /*Use this method to place text on the screen at a particular location.
