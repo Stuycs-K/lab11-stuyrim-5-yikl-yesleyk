@@ -1,16 +1,18 @@
 public class Tester{
-    private static final int WIDTH = 82;
+    private static final int WIDTH = 79;
     private static final int HEIGHT = 30;
     private static final int BORDER_COLOR = Text.WHITE;
     private static final int BORDER_BACKGROUND = Text.WHITE + Text.BACKGROUND;
 
     public static void main(String[] args) {
+
         drawBackground();
         //run();
     }
-    
+
 
     public static void drawBackground(){
+      Text.clear();
         for(int j = 1; j <=WIDTH; j ++){
                 Text.go(0,j);
                 System.out.print(Text.colorize(" ", BORDER_BACKGROUND));
@@ -21,15 +23,19 @@ public class Tester{
                 Text.go(i,WIDTH);
                 System.out.print(Text.colorize(" ", BORDER_BACKGROUND));
                 if (i < 10 || i > 21){
-                    Text.go(i,28);
+                    Text.go(i,27);
                     System.out.print(Text.colorize(" ", BORDER_BACKGROUND));
-                    Text.go(i,55);
+                    Text.go(i,53);
                     System.out.print(Text.colorize(" ", BORDER_BACKGROUND));
                 }
-                    
+                else {
+                  Text.go(i,40);
+                  System.out.print(Text.colorize(" ", BORDER_BACKGROUND));
+                }
+
             }
         for(int j = 1; j <=WIDTH ; j ++){
-                Text.go(HEIGHT,j);
+                Text.go(HEIGHT-1,j);
                 System.out.print(Text.colorize(" ", BORDER_BACKGROUND));
         }
         for(int j = 1; j <=WIDTH ; j ++){
@@ -37,10 +43,11 @@ public class Tester{
             System.out.print(Text.colorize(" ", BORDER_BACKGROUND));
     }
         for(int j = 1; j <=WIDTH ; j ++){
-            Text.go(22,j);
+            Text.go(21,j);
             System.out.print(Text.colorize(" ", BORDER_BACKGROUND));
 }
-        
+Text.go(32,1);
+
         }
     // public static void drawBG(){
     //     for(int i = 0; i < 80; i++){

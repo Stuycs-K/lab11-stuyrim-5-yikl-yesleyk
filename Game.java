@@ -27,7 +27,7 @@ public class Game{
               Text.go(i,length);
               Text.color(Text.background(Text.WHITE));
               System.out.print(" ");
-                  
+
               }
           for(int j = 1; j <=WIDTH ; j ++){
               Text.go(height,j);
@@ -36,7 +36,7 @@ public class Game{
           }
       }
     }
-  
+
   //Display a line of text starting at
   //(columns and rows start at 1 (not zero) in the terminal)
   //use this method in your other text drawing methods to make things simpler.
