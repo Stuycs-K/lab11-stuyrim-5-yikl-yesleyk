@@ -14,28 +14,44 @@ public class Game{
 
   //Display the borders of your screen that will not change.
   //Do not write over the blank areas where text will appear or parties will appear.
-    public static void drawBackground(){
+  public static void drawBackground(){
+    Text.clear();
       for(int j = 1; j <=WIDTH; j ++){
               Text.go(0,j);
-              Text.color(Text.background(Text.WHITE));
-              System.out.print(" ");
+              System.out.print(Text.colorize(" ", BORDER_BACKGROUND));
           }
-          for(int i = 2; i < HEIGHT ; i++){
+      for(int i = 2; i < HEIGHT ; i++){
               Text.go(i,0);
-              Text.color(Text.background(Text.WHITE));
-              System.out.print(" ");
-              Text.go(i,length);
-              Text.color(Text.background(Text.WHITE));
-              System.out.print(" ");
-
+              System.out.print(Text.colorize(" ", BORDER_BACKGROUND));
+              Text.go(i,WIDTH);
+              System.out.print(Text.colorize(" ", BORDER_BACKGROUND));
+              if (i < 10 || i > 21){
+                  Text.go(i,27);
+                  System.out.print(Text.colorize(" ", BORDER_BACKGROUND));
+                  Text.go(i,53);
+                  System.out.print(Text.colorize(" ", BORDER_BACKGROUND));
               }
-          for(int j = 1; j <=WIDTH ; j ++){
-              Text.go(height,j);
-              Text.color(Text.background(Text.WHITE));
-              System.out.print(" ");
+              else {
+                Text.go(i,40);
+                System.out.print(Text.colorize(" ", BORDER_BACKGROUND));
+              }
+
           }
+      for(int j = 1; j <=WIDTH ; j ++){
+              Text.go(HEIGHT-1,j);
+              System.out.print(Text.colorize(" ", BORDER_BACKGROUND));
       }
-    }
+      for(int j = 1; j <=WIDTH ; j ++){
+          Text.go(9,j);
+          System.out.print(Text.colorize(" ", BORDER_BACKGROUND));
+  }
+      for(int j = 1; j <=WIDTH ; j ++){
+          Text.go(21,j);
+          System.out.print(Text.colorize(" ", BORDER_BACKGROUND));
+}
+Text.go(32,1);
+
+      }
 
   //Display a line of text starting at
   //(columns and rows start at 1 (not zero) in the terminal)
@@ -67,9 +83,16 @@ public class Game{
 
     //return a random adventurer (choose between all available subclasses)
     //feel free to overload this method to allow specific names/stats.
-    public static Adventurer createRandomAdventurer(){
+    public static Adventurer createRandomBadAdventurer(){
+      String[] funnyadjectives = new String[] {"evil" , "bad-to-the-bone" , "terrible"};
+      int random = (int)(Math.random() * 3);
+      if (random  == 0){
+        return new CodeWarrior("Bob"+(int)(Math.random()*100));
+      }
       return new CodeWarrior("Bob"+(int)(Math.random()*100));
     }
+
+    public static Adventurer 
 
     /*Display a List of 2-4 adventurers on the rows row through row+3 (4 rows max)
     *Should include Name HP and Special on 3 separate lines.
