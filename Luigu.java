@@ -1,3 +1,3 @@
-public class Luigu{
+public class Luigu extends Adventurer{
     
 }
