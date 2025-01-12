@@ -85,7 +85,7 @@ Text.go(32,1);
 
     //return a random adventurer (choose between all available subclasses)
     //feel free to overload this method to allow specific names/stats.
-    public static Adventurer createRandomBadAdventurer(){
+    public static Arraylist<Adventurer> createRandomBadAdventurer(){
       String[] funnyadjectives = new String[] {"evil" , "bad-to-the-bone" , "terrible"};
       int random = (int)(Math.random() * 3);
       if (random  == 0){
