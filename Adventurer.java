@@ -2,7 +2,7 @@ import java.util.Random;
 public abstract class Adventurer{
   private String name;
   private int HP,maxHP;
-  private int bubbleBarrier, blessing, sleep;
+  private int bubbleBarrier, blessing, sleep, revival;
 
   //Abstract methods are meant to be implemented in child classes.
   /*
@@ -62,6 +62,10 @@ public abstract class Adventurer{
     sleep = n;
   }
 
+  public void setRevival(int n){
+    revival = n;
+  }
+
   public int getBubbleBarrier(){
     return bubbleBarrier;
   }
@@ -72,6 +76,10 @@ public abstract class Adventurer{
 
   public int getSleep(){
     return sleep;
+  }
+
+  public int getRevival(){
+    return revival;
   }
 
   public int bubbleBarrierEffect(int damage){
@@ -88,6 +96,19 @@ public abstract class Adventurer{
     setSleep(getSleep() - 1);
     return this.getName() + " is currently sleeping. They fail to ";
   }
+
+  public String revivalEffect(){
+    if (this.getHP() <= 0){
+      setRevival(0);
+      this.setHP(5);
+      return this.getName() + " was revived using a Revival Mushroom! They have resurrected with 5HP";
+    }
+    else {
+      setRevival(getRevival() - 1);
+      return "";
+    }
+  }
+
   /*
   standard methods
   */
@@ -103,12 +124,20 @@ public abstract class Adventurer{
 
   public Adventurer(String name){
     this(name, 10);
+    this.bubbleBarrier = 0;
+    this.blessing = 0;
+    this.sleep = 0;
+    this.revival = 0;
   }
 
   public Adventurer(String name, int hp){
     this.name = name;
     this.HP = hp;
     this.maxHP = hp;
+    this.bubbleBarrier = 0;
+    this.blessing = 0;
+    this.sleep = 0;
+    this.revival = 0;
   }
 
   //toString method
