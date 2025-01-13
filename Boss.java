@@ -1,10 +1,10 @@
 import java.util.Random;
 
-public class Bowser extends Adventurer {
+public class Boss extends Adventurer {
     int shellSpinsMax, shellSpins;
     int shellShocker;
 
-    public Bowser(){
+    public Boss(){
         super("Bowser", 35);
         shellSpinsMax = 3;
         shellSpins = shellSpinsMax;
