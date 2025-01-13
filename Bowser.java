@@ -2,6 +2,7 @@ import java.util.Random;
 
 public class Bowser extends Adventurer {
     int shellSpinsMax, shellSpins;
+    int shellShocker;
 
     public Bowser(){
         super("Bowser", 35);
