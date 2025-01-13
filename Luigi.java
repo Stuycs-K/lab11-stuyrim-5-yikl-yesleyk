@@ -1,12 +1,13 @@
 import java.util.Random;
 
-public class Luigi{
+public class Luigi extends Adventurer {
     int wrenchesMax, wrenches;
+    int bubbleBarrier, blessing, sleep;
 
-    public Mario(){
+    public Luigi(){
         super("Luigi", 12);
         this.wrenchesMax = 1;
-        wrenches =wrenchesMax; 
+        wrenches =wrenchesMax;
     }
 
     public String getSpecialName(){
@@ -21,7 +22,7 @@ public class Luigi{
         wrenches = n;
     }
 
-    public int getSpexialMax(){
+    public int getSpecialMax(){
         return wrenchesMax;
     }
 
@@ -33,15 +34,15 @@ public class Luigi{
     }
 
     public String specialAttack(Adventurer other ){
-
+      return null;
     }
 
     public String support(Adventurer other){
-
+      return null;
     }
 
     public String support(){
         this.restoreSpecial(1);
-        return this.getName() + " opens an item box, restoring one wrench"; 
+        return this.getName() + " opens an item box, restoring one wrench";
     }
 }

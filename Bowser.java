@@ -2,6 +2,7 @@ import java.util.Random;
 
 public class Bowser extends Adventurer {
     int shellSpinsMax, shellSpins;
+    int bubbleBarrier, blessing, sleep;
 
     public Bowser(){
         super("Bowser", 35);
@@ -42,7 +43,7 @@ public class Bowser extends Adventurer {
 
     public String support(Adventurer other){
         // N/A???
-        return this.getName() + " blesses " + other.getName() + " with with the power of peach nectar, healing " + instantHealing + " points of damage and applying " + "STATUS PLACEHOLDER" + " to " + other.getName() + ".";
+        return null;
     }
 
     public String support(){

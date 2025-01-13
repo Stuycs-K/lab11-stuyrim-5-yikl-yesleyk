@@ -2,11 +2,12 @@ import java.util.Random;
 
 public class Mario extends Adventurer{
     int mushroomMax, mushroom;
+    int bubbleBarrier, blessing, sleep;
 
     public Mario(){
         super("Mario", 18);
         this.mushroomMax = 1;
-        mushroom =mushroomMax; 
+        mushroom = mushroomMax;
     }
 
     public String getSpecialName(){
@@ -21,25 +22,25 @@ public class Mario extends Adventurer{
         mushroom = n;
     }
 
-    public int getSpexialMax(){
+    public int getSpecialMax(){
         return mushroomMax;
     }
 
     public String attack(Adventurer other){
         int damage = (int) ((3) * (Math.random()) + 1 );
         other.applyDamage(damage);
-        return this.getName() + " bonks " + other.getName() + " dealing " + damage + " points of damage."
+        return this.getName() + " bonks " + other.getName() + " dealing " + damage + " points of damage.";
     }
 
     public String specialAttack(Adventurer other ){
-
+      return null;
     }
 
     public String support(Adventurer other){
-
+      return null;
     }
 
     public String support(){
-
+      return null;
     }
 }
