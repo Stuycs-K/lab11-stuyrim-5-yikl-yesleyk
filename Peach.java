@@ -3,6 +3,12 @@ import java.util.Random;
 public class Peach extends Adventurer {
     int starsMax, stars;
 
+    public Peach(String Input){
+        super(Input, 14);
+        starsMax = 3;
+        stars = starsMax;
+    }
+
     public Peach(){
         super("Peach", 14);
         starsMax = 3;

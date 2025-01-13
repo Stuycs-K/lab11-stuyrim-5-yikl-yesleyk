@@ -3,6 +3,12 @@ import java.util.Random;
 public class Mario extends Adventurer{
     int mushroomMax, mushroom;
 
+    public Mario(String Input){
+        super(Input, 18);
+        this.mushroomMax = 1;
+        mushroom = mushroomMax;
+    }
+
     public Mario(){
         super("Mario", 18);
         this.mushroomMax = 1;

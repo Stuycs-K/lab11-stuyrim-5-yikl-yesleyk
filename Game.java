@@ -85,16 +85,51 @@ Text.go(32,1);
 
     //return a random adventurer (choose between all available subclasses)
     //feel free to overload this method to allow specific names/stats.
-    public static Arraylist<Adventurer> createRandomBadAdventurer(){
-      String[] funnyadjectives = new String[] {"evil" , "bad-to-the-bone" , "terrible"};
-      int random = (int)(Math.random() * 3);
-      if (random  == 0){
-        return new CodeWarrior("Bob"+(int)(Math.random()*100));
-      }
-      return new CodeWarrior("Bob"+(int)(Math.random()*100));
+    public static Arraylist<Adventurer> createRandomBadAdventurerParty(int capacity){
+      String[] funnyadjectives = new String[] {"evil " , "bad-to-the-bone " , "terrible "};
+      ArrayList<Adventurer> result = new Arraylist<Adventurer>(0); 
+      for (int i = 0; i < capacity; i++ ){
+        int random = (int)(Math.random() * 3);
+        int randomindex = (int)(Math.random() * 3);
+        while(!( funnyadjectives[randomindex].equals("") )) randomindex = (int)(Math.random() * 3);
+        if (random  == 0){
+          result.add(new Mario( funnyadjectives[randomindex] + "Mario" ));
+          funnyadjectives[randomindex] = "";
+        }
+        if (random  == 1){
+          result.add(new Luigi( funnyadjectives[randomindex] + "Luigi" ));
+          funnyadjectives[randomindex] = "";
+        }
+        if (random  == 2){
+          result.add(new Peach( funnyadjectives[randomindex] + "Peach" ));
+          funnyadjectives[randomindex] = "";
+        }
+        return result;
+    }
     }
 
-    public static Adventurer 
+    public static Arraylist<Adventurer> createRandomGoodAdventurerParty(int capacity){
+      String[] funnyadjectives = new String[] {"angelic " , "super " , "terrific "};
+      ArrayList<Adventurer> result = new Arraylist<Adventurer>(0); 
+      for (int i = 0; i < capacity; i++ ){
+        int random = (int)(Math.random() * 3);
+        int randomindex = (int)(Math.random() * 3);
+        while(!( funnyadjectives[randomindex].equals("") )) randomindex = (int)(Math.random() * 3);
+        if (random  == 0){
+          result.add(new Mario( funnyadjectives[randomindex] + "Mario" ));
+          funnyadjectives[randomindex] = "";
+        }
+        if (random  == 1){
+          result.add(new Luigi( funnyadjectives[randomindex] + "Luigi" ));
+          funnyadjectives[randomindex] = "";
+        }
+        if (random  == 2){
+          result.add(new Peach( funnyadjectives[randomindex] + "Peach" ));
+          funnyadjectives[randomindex] = "";
+        }
+        return result;
+    }
+    }
 
     /*Display a List of 2-4 adventurers on the rows row through row+3 (4 rows max)
     *Should include Name HP and Special on 3 separate lines.

@@ -3,6 +3,12 @@ import java.util.Random;
 public class Luigi extends Adventurer {
     int wrenchesMax, wrenches;
 
+    public Luigi(String Input){
+        super(Input, 12);
+        this.wrenchesMax = 1;
+        wrenches =wrenchesMax;
+    }
+
     public Luigi(){
         super("Luigi", 12);
         this.wrenchesMax = 1;
