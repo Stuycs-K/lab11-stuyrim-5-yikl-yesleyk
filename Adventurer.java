@@ -50,7 +50,7 @@ public abstract class Adventurer{
   public abstract String specialAttack(Adventurer other);
 
   // methods for status effects (needs to be in all adventurers so they can all be affected)
-  public void setbubbleBarrier(int n){
+  public void setBubbleBarrier(int n){
     bubbleBarrier = n;
   }
 
@@ -62,16 +62,31 @@ public abstract class Adventurer{
     sleep = n;
   }
 
-  public int getbubbleBarrier(int n){
+  public int getBubbleBarrier(){
     return bubbleBarrier;
   }
 
-  public int getBlessing(int n){
+  public int getBlessing(){
     return blessing;
   }
 
-  public int getSleep(int n){
+  public int getSleep(){
     return sleep;
+  }
+
+  public int bubbleBarrierEffect(int damage){
+    setBubbleBarrier(getBubbleBarrier() - 1);
+    return (int) (damage * .6);
+  }
+
+  public int blessingEffect(){
+    setBlessing(getBlessing() - 1);
+    return (int) (Math.random() + 2);
+  }
+
+  public String sleepEffect(){
+    setSleep(getSleep() - 1);
+    return this.getName() + " is currently sleeping. They fail to ";
   }
   /*
   standard methods
