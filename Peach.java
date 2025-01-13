@@ -2,7 +2,6 @@ import java.util.Random;
 
 public class Peach extends Adventurer {
     int starsMax, stars;
-    int bubbleBarrier, blessing, sleep;
 
     public Peach(){
         super("Peach", 14);

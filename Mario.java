@@ -2,7 +2,6 @@ import java.util.Random;
 
 public class Mario extends Adventurer{
     int mushroomMax, mushroom;
-    int bubbleBarrier, blessing, sleep;
 
     public Mario(){
         super("Mario", 18);

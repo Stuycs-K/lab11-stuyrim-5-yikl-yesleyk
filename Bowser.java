@@ -2,7 +2,6 @@ import java.util.Random;
 
 public class Bowser extends Adventurer {
     int shellSpinsMax, shellSpins;
-    int bubbleBarrier, blessing, sleep;
 
     public Bowser(){
         super("Bowser", 35);
@@ -61,4 +60,5 @@ public class Bowser extends Adventurer {
         // smth with the status effect
         return "Unable to use this move due to insufficient " + this.getSpecialName();
     }
+
 }

@@ -2,7 +2,6 @@ import java.util.Random;
 
 public class Luigi extends Adventurer {
     int wrenchesMax, wrenches;
-    int bubbleBarrier, blessing, sleep;
 
     public Luigi(){
         super("Luigi", 12);

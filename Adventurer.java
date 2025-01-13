@@ -2,6 +2,7 @@ import java.util.Random;
 public abstract class Adventurer{
   private String name;
   private int HP,maxHP;
+  private int bubbleBarrier, blessing, sleep;
 
   //Abstract methods are meant to be implemented in child classes.
   /*
@@ -48,6 +49,30 @@ public abstract class Adventurer{
   //hurt or hinder the target adventurer, consume some special resource
   public abstract String specialAttack(Adventurer other);
 
+  // methods for status effects (needs to be in all adventurers so they can all be affected)
+  public void setbubbleBarrier(int n){
+    bubbleBarrier = n;
+  }
+
+  public void setBlessing(int n){
+    blessing = n;
+  }
+
+  public void setSleep(int n){
+    sleep = n;
+  }
+
+  public int getbubbleBarrier(int n){
+    return bubbleBarrier;
+  }
+
+  public int getBlessing(int n){
+    return blessing;
+  }
+
+  public int getSleep(int n){
+    return sleep;
+  }
   /*
   standard methods
   */
