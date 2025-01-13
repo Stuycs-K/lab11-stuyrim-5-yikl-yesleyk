@@ -36,10 +36,12 @@ public class Mario extends Adventurer{
     }
 
     public String support(Adventurer other){
-      return null;
+      other.setBubbleBarrier(3);
+      return this.getName() + " uses a bubble on " + other.getName() + ", blocking incoming damage to that character for 3 turns.";
     }
 
     public String support(){
-      return null;
+      this.setBubbleBarrier(3);
+      return this.getName() + " uses a bubble on himself, blocking incoming damage to that character for 3 turns.";
     }
 }
