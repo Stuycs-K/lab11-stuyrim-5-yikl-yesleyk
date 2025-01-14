@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 // import org.w3c.dom.Text;
 
@@ -189,5 +190,15 @@ public class Tester{
     //draw enemy party
     ArrayList<Adventurer> goodParty = createRandomGoodAdventurerParty(3);
     drawParty(goodParty, 23);
-      }
+  }
+  public static String userInput(Scanner in){
+      //Move cursor to prompt location
+      Text.go(32,1);
+      //show cursor
+      Text.showCursor();
+      String input = in.nextLine();
+      //clear the text that was written
+      System.out.println('\r');
+      return input;
+  }
     }
