@@ -140,4 +140,10 @@ Text.go(32,1);
       
       }
 
- 
+      public static String colorByPercent(int hp, int maxHP){
+        String output = String.format("%2s", hp+"")+"/"+String.format("%2s", maxHP+"");
+        if (hp < 0.25 * maxHP) Text.colorize(output, Text.RED);
+        else if (hp < 0.75 * maxHP) Text.colorize(output, Text.YELLOW);
+        else Text.colorize(output, Text.WHITE);
+        return output;
+      }

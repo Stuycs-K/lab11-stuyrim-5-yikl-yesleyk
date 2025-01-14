@@ -159,10 +159,9 @@ Text.go(32,1);
   //Use this to create a colorized number string based on the % compared to the max value.
   public static String colorByPercent(int hp, int maxHP){
     String output = String.format("%2s", hp+"")+"/"+String.format("%2s", maxHP+"");
-    //COLORIZE THE OUTPUT IF HIGH/LOW:
-    // under 25% : red
-    // under 75% : yellow
-    // otherwise : white
+    if (hp < 0.25 * maxHP) Text.colorize(output, Text.RED);
+    else if (hp < 0.75 * maxHP) Text.colorize(output, Text.YELLOW);
+    else Text.colorize(output, Text.WHITE);
     return output;
   }
 
