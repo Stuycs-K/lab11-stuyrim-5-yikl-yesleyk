@@ -107,19 +107,14 @@ Text.go(32,1);
       ArrayList<Adventurer> result = new ArrayList<Adventurer>(0); 
       for (int i = 0; i < capacity; i++ ){
         int random = (int)(Math.random() * 3);
-        int randomindex = (int)(Math.random() * 3);
-        while(!( funnyadjectives[randomindex].equals("") )) randomindex = (int)(Math.random() * 3);
         if (random  == 0){
-          result.add(new Mario( funnyadjectives[randomindex] + "Mario" ));
-          funnyadjectives[randomindex] = "";
+          result.add(new Mario( funnyadjectives[i] + "Mario" ));
         }
         if (random  == 1){
-          result.add(new Luigi( funnyadjectives[randomindex] + "Luigi" ));
-          funnyadjectives[randomindex] = "";
+          result.add(new Luigi( funnyadjectives[i] + "Luigi" ));
         }
         if (random  == 2){
-          result.add(new Peach( funnyadjectives[randomindex] + "Peach" ));
-          funnyadjectives[randomindex] = "";
+          result.add(new Peach( funnyadjectives[i] + "Peach" ));
         }
     }
     return result;
@@ -130,19 +125,14 @@ Text.go(32,1);
       ArrayList<Adventurer> result = new ArrayList<Adventurer>(0); 
       for (int i = 0; i < capacity; i++ ){
         int random = (int)(Math.random() * 3);
-        int randomindex = (int)(Math.random() * 3);
-        while(!( funnyadjectives[randomindex].equals("") )) randomindex = (int)(Math.random() * 3);
         if (random  == 0){
-          result.add(new Mario( funnyadjectives[randomindex] + "Mario" ));
-          funnyadjectives[randomindex] = "";
+          result.add(new Mario( funnyadjectives[i] + "Mario" ));
         }
         if (random  == 1){
-          result.add(new Luigi( funnyadjectives[randomindex] + "Luigi" ));
-          funnyadjectives[randomindex] = "";
+          result.add(new Luigi( funnyadjectives[i] + "Luigi" ));
         }
         if (random  == 2){
-          result.add(new Peach( funnyadjectives[randomindex] + "Peach" ));
-          funnyadjectives[randomindex] = "";
+          result.add(new Peach( funnyadjectives[i] + "Peach" ));
         }
     }
     return result;
