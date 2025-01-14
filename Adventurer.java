@@ -2,11 +2,11 @@ import java.util.Random;
 public abstract class Adventurer{
   private String name;
   private int HP,maxHP;
+    //counters
   private int bubbleBarrier, blessing, sleep, revival;
   //flags 
-  private boolean revivalFlag, MarioSupport , extraTurnFlag , PeachBlessingFlag , sleepyTimeFlag ; 
-  //counters
-  private int revivalCounter, MarioSupportCounter , PeachBlessingCounter ;
+  private boolean revivalFlag, bubbleBarrierFlag , extraTurnFlag , blessingFlag , sleepFlag ; 
+
 
   //Abstract methods are meant to be implemented in child classes.
   /*
@@ -54,20 +54,29 @@ public abstract class Adventurer{
   public abstract String specialAttack(Adventurer other);
 
   // methods for status effects (needs to be in all adventurers so they can all be affected)
+  private setFlag(int n, boolean x){
+    if (n > 0 ) x = true;
+    else x=false; 
+  }
+  
   public void setBubbleBarrier(int n){
     bubbleBarrier = n;
+    setFlag(n , bubbleBarrierFlag);
   }
 
   public void setBlessing(int n){
     blessing = n;
+    setFlag(n , blessingFlag);
   }
 
   public void setSleep(int n){
     sleep = n;
+    setFlag( n , sleepFlag);
   }
 
   public void setRevival(int n){
     revival = n;
+    setFlag(n, revivalFlag);
   }
 
   public int getBubbleBarrier(){
@@ -138,10 +147,8 @@ public abstract class Adventurer{
     this.name = name;
     this.HP = hp;
     this.maxHP = hp;
-    this.bubbleBarrier = 0;
-    this.blessing = 0;
-    this.sleep = 0;
-    this.revival = 0;
+    this.bubbleBarrier = this.blessing = this.sleep = this.revival = 0;
+    this.revivalFlag = this.bubbleBarrierFlag = this.extraTurnFlag = this.blessingFlag = this.sleepFlag = false ;
   }
 
   //toString method
@@ -175,14 +182,17 @@ public abstract class Adventurer{
   }
 
   public void decreaseCounter(){
-    if (revivalCounter > 0 ){
-      revivalCounter--;
+    if (bubbleBarrierFlag ){
+      setBubbleBarrier(getBubbleBarrier() - 1);
     }
-    if (MarioSupportCounter > 0 ){
-      MarioSupportCounter--;
+    if (blessingFlag ){
+      setBlessing(getBlessing() - 1);
     }
-    if (PeachBlessingCounter > 0 ){
-      PeachBlessingCounter--;
+    if (sleepFlag){
+      setSleep(getSleep() - 1);
+    }
+    if (revivalFlag){
+      setRevival(getRevival() - 1);
     }
   }
 }
