@@ -269,7 +269,9 @@ Text.go(32,1);
 
         //You should decide when you want to re-ask for user input
         //If no errors:
+        party.get(whichPlayer).decreaseCounter();
         whichPlayer++;
+        
 
 
         if(whichPlayer < party.size()){
@@ -281,9 +283,10 @@ Text.go(32,1);
         }else{
           //This is after the player's turn, and allows the user to see the enemy turn
           //Decide where to draw the following prompt:
-          String prompt = "press enter to see monster's turn";
+          String prompt = "press enter to see enemy turn";
 
           partyTurn = false;
+
           whichOpponent = 0;
         }
         //done with one party member
@@ -300,6 +303,8 @@ Text.go(32,1);
 
         //Decide where to draw the following prompt:
         String prompt = "press enter to see next turn";
+
+        party.get(whichOpponent).decreaseCounter();
 
         whichOpponent++;
 

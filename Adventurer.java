@@ -3,6 +3,10 @@ public abstract class Adventurer{
   private String name;
   private int HP,maxHP;
   private int bubbleBarrier, blessing, sleep, revival;
+  //flags 
+  private boolean revivalFlag, MarioSupport , extraTurnFlag , PeachBlessingFlag , sleepyTimeFlag ; 
+  //counters
+  private int revivalCounter, MarioSupportCounter , PeachBlessingCounter ;
 
   //Abstract methods are meant to be implemented in child classes.
   /*
@@ -168,5 +172,17 @@ public abstract class Adventurer{
 
   public void setName(String s){
     this.name = s;
+  }
+
+  public void decreaseCounter(){
+    if (revivalCounter > 0 ){
+      revivalCounter--;
+    }
+    if (MarioSupportCounter > 0 ){
+      MarioSupportCounter--;
+    }
+    if (PeachBlessingCounter > 0 ){
+      PeachBlessingCounter--;
+    }
   }
 }
