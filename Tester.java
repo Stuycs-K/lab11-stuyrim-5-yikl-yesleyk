@@ -12,9 +12,9 @@ public class Tester{
     drawBackground();
     Text.go(32,1);
     ArrayList<Adventurer> badParty  = createRandomBadAdventurerParty(3);
-    //ArrayList<Adventurer> goodParty = createRandomGoodAdventurerParty(3);
-    //drawParty(badParty, 2);
-    //drawParty(goodParty, 25);
+    ArrayList<Adventurer> goodParty = createRandomGoodAdventurerParty(3);
+    drawParty(badParty, 2);
+    drawParty(goodParty, 25);
     //run();
   }
   public static void drawBackground(){
@@ -91,48 +91,61 @@ public class Tester{
   public static ArrayList<Adventurer> createRandomBadAdventurerParty(int capacity){
     String[] funnyadjectives = new String[] {"evil " , "bad-to-the-bone " , "terrible "};
     ArrayList<Adventurer> result = new ArrayList<Adventurer>(0); 
+    boolean[] usedAdjs = new boolean[funnyadjectives.length];
+
     for (int i = 0; i < capacity; i++ ){
+      int randomidx = -1;
       int random = (int)(Math.random() * 3);
-      int randomindex = (int)(Math.random() * 3);
-      
-      while(!( funnyadjectives[randomindex].equals("") )) randomindex = (int)(Math.random() * 3);
-      if (random  == 0){
-        result.add(new Mario( funnyadjectives[randomindex] + "Mario" ));
-        funnyadjectives[randomindex] = "";
+
+      for (int j = 0; j < funnyadjectives.length; j++){
+        if (!usedAdjs[j]) {
+          randomidx = j;
+          usedAdjs[j] = true;
+          break;
+        }
       }
-      if (random  == 1){
-        result.add(new Luigi( funnyadjectives[randomindex] + "Luigi" ));
-        funnyadjectives[randomindex] = "";
+
+      if (random == 0){
+        result.add(new Mario( funnyadjectives[randomidx] + "Mario" ));
       }
-      if (random  == 2){
-        result.add(new Peach( funnyadjectives[randomindex] + "Peach" ));
-        funnyadjectives[randomindex] = "";
+      if (random == 1){
+        result.add(new Luigi( funnyadjectives[randomidx] + "Luigi" ));
       }
-  }
-  return result;
+      if (random == 2){
+        result.add(new Peach( funnyadjectives[randomidx] + "Peach" ));
+      }
+    }
+    return result;
   }
 
   public static ArrayList<Adventurer> createRandomGoodAdventurerParty(int capacity){
     String[] funnyadjectives = new String[] {"angelic " , "super " , "terrific "};
     ArrayList<Adventurer> result = new ArrayList<Adventurer>(0); 
+    boolean[] usedAdjs = new boolean[funnyadjectives.length];
+
     for (int i = 0; i < capacity; i++ ){
+      int randomidx = -1;
       int random = (int)(Math.random() * 3);
-      int randomindex = (int)(Math.random() * 3);
-      while(!( funnyadjectives[randomindex].equals("") )) randomindex = (int)(Math.random() * 3);
-      if (random  == 0){
-        result.add(new Mario( funnyadjectives[randomindex] + "Mario" ));
-        funnyadjectives[randomindex] = "";
+
+      for (int j = 0; j < funnyadjectives.length; j++){
+        if (!usedAdjs[j]) {
+          randomidx = j;
+          usedAdjs[j] = true;
+          break;
+        }
       }
-      if (random  == 1){
-        result.add(new Luigi( funnyadjectives[randomindex] + "Luigi" ));
-        funnyadjectives[randomindex] = "";
+
+      if (random == 0){
+        result.add(new Mario( funnyadjectives[randomidx] + "Mario" ));
       }
-      if (random  == 2){
-        result.add(new Peach( funnyadjectives[randomindex] + "Peach" ));
-        funnyadjectives[randomindex] = "";
+      if (random == 1){
+        result.add(new Luigi( funnyadjectives[randomidx] + "Luigi" ));
       }
-  }
-  return result;
+      if (random == 2){
+        result.add(new Peach( funnyadjectives[randomidx] + "Peach" ));
+      }
+    }
+    return result;
   }
 
   /*Display a List of 2-4 adventurers on the rows row through row+3 (4 rows max)
