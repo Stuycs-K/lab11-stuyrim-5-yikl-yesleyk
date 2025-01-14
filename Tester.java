@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-import org.w3c.dom.Text;
+// import org.w3c.dom.Text;
 
 public class Tester{
     private static final int WIDTH = 79;
@@ -11,8 +11,8 @@ public class Tester{
     public static void main(String[] args) {
         drawBackground();
         Text.go(32,1);
-        Arraylist<Adventurer> badParty  = createRandomBadAdventurerParty(3);
-        Arraylist<Adventurer> goodparty = createRandomGoodAdventurerParty(3);
+        ArrayList<Adventurer> badParty  = createRandomBadAdventurerParty(3);
+        ArrayList<Adventurer> goodparty = createRandomGoodAdventurerParty(3);
         System.out.println( badParty);
         System.out.println( goodparty);
 
@@ -81,7 +81,25 @@ Text.go(32,1);
           /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
           //YOUR CODE HERE
           /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
+          String[] words = text.split(" ");
+          String line = "";
+          int currRow = row;
 
+          for (int i = 0; i < words.length; i++){
+            if (line.length() > 0){
+              if (line.length() + words[i].length() + 1 > width){
+                drawText(line,currRow,col);
+                currRow++;
+                line = "";
+              }
+              else line += " ";
+            }
+            line += words[i];
+          }
+          // if line wasnt full print it
+          if (line.length() > 0){
+            drawText(line,currRow,col);
+          }
         }
 
     public static ArrayList<Adventurer> createRandomBadAdventurerParty(int capacity){
@@ -103,8 +121,8 @@ Text.go(32,1);
           result.add(new Peach( funnyadjectives[randomindex] + "Peach" ));
           funnyadjectives[randomindex] = "";
         }
-        return result;
     }
+    return result;
     }
 
     public static ArrayList<Adventurer> createRandomGoodAdventurerParty(int capacity){
@@ -126,8 +144,8 @@ Text.go(32,1);
           result.add(new Peach( funnyadjectives[randomindex] + "Peach" ));
           funnyadjectives[randomindex] = "";
         }
-        return result;
     }
+    return result;
     }
       
       }
