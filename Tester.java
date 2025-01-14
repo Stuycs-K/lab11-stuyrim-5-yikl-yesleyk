@@ -74,6 +74,3 @@ Text.go(32,1);
 
         }
       }
-
-
-      //changing something
