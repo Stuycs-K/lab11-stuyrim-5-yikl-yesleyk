@@ -9,6 +9,7 @@ public class Tester{
   private static final int BORDER_BACKGROUND = Text.WHITE + Text.BACKGROUND;
   
   public static void main(String[] args) {
+    drawText("Hello, world!", 0, 0);
     drawBackground();
     Text.go(32,1);
     ArrayList<Adventurer> badParty  = createRandomBadAdventurerParty(3);
@@ -54,8 +55,9 @@ public class Tester{
     Text.go(32,1);
   }
   public static void drawText(String s,int startRow, int startCol){
+    System.out.println("aaaaaaaaaaaaaaaaaa");
     Text.go(startRow,startCol);
-    System.out.print(Text.colorize(s,BORDER_COLOR));
+    System.out.println(Text.colorize(s,BORDER_COLOR));
   }
   /*Use this method to place text on the screen at a particular location.
   *When the length of the text exceeds width, continue on the next line
@@ -68,23 +70,28 @@ public class Tester{
   *@param height the number of rows
   */
   public static void TextBox(int row, int col, int width, int height, String text){
-    String[] words = text.split(" ");
-    String line = "";
-    int currRow = row;
-    for (int i = 0; i < words.length; i++){
-      if (line.length() > 0){
-        if (line.length() + words[i].length() + 1 > width){
-          drawText(line,currRow,col);
-          currRow++;
-          line = "";
+    String[] lines = text.split("\n");
+    for (String line : lines){
+      if (line.length() > width){
+        String[] words = line.split(" ");
+        String currLine = "";
+        
+        for (String word : words){
+          if (currLine.length() + 1 + word.length() <= width) {
+            if (currLine.length() > 0) currLine += " ";
+            currLine += word;
+          }
+          else {
+            drawText(line, row, col);
+            row++;
+            currLine = "";
+          }
         }
-        else line += " ";
+        if (currLine.length() > 0){
+          drawText(line,row,col);
+          row++;
+        }
       }
-      line += words[i];
-    }
-    // if line wasnt full print it
-    if (line.length() > 0){
-      drawText(line,currRow,col);
     }
   }
 
@@ -158,14 +165,16 @@ public class Tester{
   * ***THIS ROW INTENTIONALLY LEFT BLANK***
   */
   public static void drawParty(ArrayList<Adventurer> party,int startRow){
-    int column = 2;
+    int column = 5;
     for (int i = 0; i < party.size(); i++){
-      String text = "";
       Adventurer curr = party.get(i);
-      text += curr.getName() + '\n' + "HP: " + curr.getHP() + '\n' + curr.getSpecialName() + ": " + curr.getSpecial();
+      String text = curr.getName() + '\n' + 
+                    "HP: " + curr.getHP() + '\n' + 
+                    curr.getSpecialName() + ": " + curr.getSpecial();
       TextBox(startRow, column, 25, 3, text);
-      column += 25;
+      column += 27;
     }
+    Text.go(32,1);
   }
       
 
