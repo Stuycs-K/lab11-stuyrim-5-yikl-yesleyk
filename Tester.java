@@ -1,3 +1,7 @@
+import java.util.ArrayList;
+
+import org.w3c.dom.Text;
+
 public class Tester{
     private static final int WIDTH = 79;
     private static final int HEIGHT = 30;
@@ -7,6 +11,12 @@ public class Tester{
     public static void main(String[] args) {
         drawBackground();
         Text.go(32,1);
+        Arraylist<Adventurer> badParty  = createRandomBadAdventurerParty(3);
+        Arraylist<Adventurer> goodparty = createRandomGoodAdventurerParty(3);
+        System.out.println( badParty);
+        System.out.println( goodparty);
+
+
         //run();
     }
 
@@ -73,4 +83,53 @@ Text.go(32,1);
           /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
 
         }
+
+    public static ArrayList<Adventurer> createRandomBadAdventurerParty(int capacity){
+      String[] funnyadjectives = new String[] {"evil " , "bad-to-the-bone " , "terrible "};
+      ArrayList<Adventurer> result = new ArrayList<Adventurer>(0); 
+      for (int i = 0; i < capacity; i++ ){
+        int random = (int)(Math.random() * 3);
+        int randomindex = (int)(Math.random() * 3);
+        while(!( funnyadjectives[randomindex].equals("") )) randomindex = (int)(Math.random() * 3);
+        if (random  == 0){
+          result.add(new Mario( funnyadjectives[randomindex] + "Mario" ));
+          funnyadjectives[randomindex] = "";
+        }
+        if (random  == 1){
+          result.add(new Luigi( funnyadjectives[randomindex] + "Luigi" ));
+          funnyadjectives[randomindex] = "";
+        }
+        if (random  == 2){
+          result.add(new Peach( funnyadjectives[randomindex] + "Peach" ));
+          funnyadjectives[randomindex] = "";
+        }
+        return result;
+    }
+    }
+
+    public static ArrayList<Adventurer> createRandomGoodAdventurerParty(int capacity){
+      String[] funnyadjectives = new String[] {"angelic " , "super " , "terrific "};
+      ArrayList<Adventurer> result = new ArrayList<Adventurer>(0); 
+      for (int i = 0; i < capacity; i++ ){
+        int random = (int)(Math.random() * 3);
+        int randomindex = (int)(Math.random() * 3);
+        while(!( funnyadjectives[randomindex].equals("") )) randomindex = (int)(Math.random() * 3);
+        if (random  == 0){
+          result.add(new Mario( funnyadjectives[randomindex] + "Mario" ));
+          funnyadjectives[randomindex] = "";
+        }
+        if (random  == 1){
+          result.add(new Luigi( funnyadjectives[randomindex] + "Luigi" ));
+          funnyadjectives[randomindex] = "";
+        }
+        if (random  == 2){
+          result.add(new Peach( funnyadjectives[randomindex] + "Peach" ));
+          funnyadjectives[randomindex] = "";
+        }
+        return result;
+    }
+    }
+      
       }
+
+ 
