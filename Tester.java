@@ -9,13 +9,12 @@ public class Tester{
   private static final int BORDER_BACKGROUND = Text.WHITE + Text.BACKGROUND;
   
   public static void main(String[] args) {
-    drawText("Hello, world!", 0, 0);
     drawBackground();
     Text.go(32,1);
     ArrayList<Adventurer> badParty  = createRandomBadAdventurerParty(3);
     ArrayList<Adventurer> goodParty = createRandomGoodAdventurerParty(3);
-    drawParty(badParty, 2);
-    drawParty(goodParty, 25);
+    drawParty(badParty, 3);
+    drawParty(goodParty, 23);
     //run();
   }
   public static void drawBackground(){
@@ -55,7 +54,6 @@ public class Tester{
     Text.go(32,1);
   }
   public static void drawText(String s,int startRow, int startCol){
-    System.out.println("aaaaaaaaaaaaaaaaaa");
     Text.go(startRow,startCol);
     System.out.println(Text.colorize(s,BORDER_COLOR));
   }
@@ -70,6 +68,7 @@ public class Tester{
   *@param height the number of rows
   */
   public static void TextBox(int row, int col, int width, int height, String text){
+    
     String[] lines = text.split("\n");
     for (String line : lines){
       if (line.length() > width){
@@ -92,6 +91,8 @@ public class Tester{
           row++;
         }
       }
+      drawText(line, row, col);
+      row++;
     }
   }
 
