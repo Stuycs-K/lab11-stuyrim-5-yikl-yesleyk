@@ -8,7 +8,7 @@ public class Game{
   private static final int BORDER_BACKGROUND = Text.WHITE + Text.BACKGROUND;
 
   public static void main(String[] args) {
-    drawBackground();
+    drawScreen();
     //run();
   }
 
@@ -78,6 +78,25 @@ Text.go(32,1);
     /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
     //YOUR CODE HERE
     /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
+    String[] words = text.split(" ");
+    String line = "";
+    int currRow = row;
+
+    for (int i = 0; i < words.length; i++){
+      if (line.length() > 0){
+        if (line.length() + words[i].length() + 1 > width){
+          drawText(line,currRow,col);
+          currRow++;
+          line = "";
+        }
+        else line += " ";
+      }
+      line += words[i];
+    }
+    // if line wasnt full print it
+    if (line.length() > 0){
+      drawText(line,currRow,col);
+    }
   }
 
 
