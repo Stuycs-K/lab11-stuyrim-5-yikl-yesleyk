@@ -282,6 +282,11 @@ public class Tester{
         }
 
         //You should decide when you want to re-ask for user input
+        else {
+          // re ask for input
+
+        }
+
         //If no errors:
         party.get(whichPlayer).decreaseCounter();
         whichPlayer++;
