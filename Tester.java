@@ -251,7 +251,7 @@ public class Tester{
       input = userInput(in);
       String[] inputs = input.split(" ");
       int target = Integer.parseInt(inputs[1]);
-      Adventurer currAdventurer = party.get()
+      Adventurer currAdv = party.get(whichPlayer);
 
       //example debug statment
       TextBox(24,2,1,78,"input: "+input+" partyTurn:"+partyTurn+ " whichPlayer="+whichPlayer+ " whichOpp="+whichOpponent );
@@ -260,17 +260,20 @@ public class Tester{
       if(partyTurn){
         //Process user input for the last Adventurer:
         if(inputs[0].equals("attack") || inputs[0].equals("a")){
-          whichPlayer.attack(enemies.get(target));
+          currAdv.attack(enemies.get(target));
           /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
           //YOUR CODE HERE
           /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
         }
         else if(input.equals("special") || input.equals("sp")){
+          currAdv.specialAttack(enemies.get(target));
           /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
           //YOUR CODE HERE
           /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
         }
         else if(input.startsWith("su ") || input.startsWith("support ")){
+          if (target == whichPlayer) currAdv.support();
+          else currAdv.support(party.get(target));
           //"support 0" or "su 0" or "su 2" etc.
           //assume the value that follows su  is an integer.
           /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
