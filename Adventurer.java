@@ -54,9 +54,9 @@ public abstract class Adventurer{
   public abstract String specialAttack(Adventurer other);
 
   // methods for status effects (needs to be in all adventurers so they can all be affected)
-  private setFlag(int n, boolean x){
-    if (n > 0 ) x = true;
-    else x=false; 
+  private boolean setFlag(int n, boolean x){
+    if (n > 0 ) return true;
+    else return false; 
   }
   
   public void setBubbleBarrier(int n){

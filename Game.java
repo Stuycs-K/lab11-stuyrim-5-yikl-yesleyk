@@ -1,6 +1,8 @@
 import java.util.*;
 
-import org.w3c.dom.Text;
+//import org.w3c.dom.Text;
+
+//import org.w3c.dom.Text;
 public class Game{
   private static final int WIDTH = 82;
   private static final int HEIGHT = 30;
@@ -75,28 +77,31 @@ Text.go(32,1);
   *@param height the number of rows
   */
   public static void TextBox(int row, int col, int width, int height, String text){
-    /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
-    //YOUR CODE HERE
-    /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
-    String[] words = text.split(" ");
-    String line = "";
-    int currRow = row;
+    String[] lines = text.split("\n");
+        for (String line : lines){
+          if (line.length() > width){
+            String[] words = line.split(" ");
+            String currLine = "";
 
-    for (int i = 0; i < words.length; i++){
-      if (line.length() > 0){
-        if (line.length() + words[i].length() + 1 > width){
-          drawText(line,currRow,col);
-          currRow++;
-          line = "";
-        }
-        else line += " ";
-      }
-      line += words[i];
-    }
-    // if line wasnt full print it
-    if (line.length() > 0){
-      drawText(line,currRow,col);
-    }
+            for (String word : words){
+              if (currLine.length() + 1 + word.length() <= width) {
+                if (currLine.length() > 0) currLine += " ";
+                currLine += word;
+              }
+              else {
+                drawText(line, row, col);
+                row++;
+                currLine = "";
+              }
+            }
+            if (currLine.length() > 0){
+              drawText(line,row,col);
+              row++;
+            }
+          }
+          drawText(line, row, col);
+          row++;
+     }
   }
 
 
@@ -149,10 +154,16 @@ Text.go(32,1);
     * ***THIS ROW INTENTIONALLY LEFT BLANK***
     */
     public static void drawParty(ArrayList<Adventurer> party,int startRow){
-
-      /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
-      //YOUR CODE HERE
-      /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
+      int column = 4;
+      for (int i = 0; i < party.size(); i++){
+        Adventurer curr = party.get(i);
+        String text = curr.getName() + '\n' +
+                      "HP: " + colorByPercent(curr.getHP(),curr.getmaxHP()) + '\n' +
+                      curr.getSpecialName() + ": " + curr.getSpecial();
+        TextBox(startRow, column, 25, 3, text);
+        column += 27;
+      }
+      Text.go(32,1);
     }
 
 
@@ -173,26 +184,28 @@ Text.go(32,1);
   //Do not write over the blank areas where text will appear.
   //Place the cursor at the place where the user will by typing their input at the end of this method.
   public static void drawScreen(){
-
     drawBackground();
-
+    Text.go(32,1);
     //draw player party
-
+    ArrayList<Adventurer> badParty  = createRandomBadAdventurerParty(3);
+    drawParty(badParty, 3);
     //draw enemy party
-
+    ArrayList<Adventurer> goodParty = createRandomGoodAdventurerParty(3);
+    drawParty(goodParty, 23);
   }
+
 
   public static String userInput(Scanner in){
       //Move cursor to prompt location
-
+      Text.go(32,1);
       //show cursor
-
+      Text.showCursor();
       String input = in.nextLine();
-
       //clear the text that was written
-
+      System.out.println('\r');
       return input;
   }
+  
 
   public static void quit(){
     Text.reset();
