@@ -249,15 +249,18 @@ public class Tester{
     while(! (input.equalsIgnoreCase("q") || input.equalsIgnoreCase("quit"))){
       //Read user input
       input = userInput(in);
+      String[] inputs = input.split(" ");
+      int target = Integer.parseInt(inputs[1]);
+      Adventurer currAdventurer = party.get()
 
       //example debug statment
       TextBox(24,2,1,78,"input: "+input+" partyTurn:"+partyTurn+ " whichPlayer="+whichPlayer+ " whichOpp="+whichOpponent );
 
       //display event based on last turn's input
       if(partyTurn){
-
         //Process user input for the last Adventurer:
-        if(input.equals("attack") || input.equals("a")){
+        if(inputs[0].equals("attack") || inputs[0].equals("a")){
+          whichPlayer.attack(enemies.get(target));
           /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
           //YOUR CODE HERE
           /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
