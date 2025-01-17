@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-// import org.w3c.dom.Text;
+
 
 public class Tester{
   private static final int WIDTH = 79;
@@ -10,6 +10,10 @@ public class Tester{
   private static final int BORDER_BACKGROUND = Text.WHITE + Text.BACKGROUND;
 
   public static void main(String[] args) {
+    drawBackground();
+    ArrayList<Adventurer> enemies = createRandomBadAdventurerParty(3);
+    ArrayList<Adventurer> party = createRandomGoodAdventurerParty(3);
+    drawScreen(enemies, party);
     //run();
   }
   public static void drawBackground(){

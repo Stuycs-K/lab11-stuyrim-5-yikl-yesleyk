@@ -1,8 +1,5 @@
 import java.util.*;
 
-//import org.w3c.dom.Text;
-
-//import org.w3c.dom.Text;
 public class Game{
   private static final int WIDTH = 82;
   private static final int HEIGHT = 30;
@@ -10,8 +7,7 @@ public class Game{
   private static final int BORDER_BACKGROUND = Text.WHITE + Text.BACKGROUND;
 
   public static void main(String[] args) {
-    drawScreen();
-    //run();
+    run();
   }
 
   //Display the borders of your screen that will not change.
@@ -183,15 +179,12 @@ Text.go(32,1);
   //Display the party and enemies
   //Do not write over the blank areas where text will appear.
   //Place the cursor at the place where the user will by typing their input at the end of this method.
-  public static void drawScreen(){
-    drawBackground();
+  public static void drawScreen(ArrayList<Adventurer> enemies, ArrayList<Adventurer> party){
     Text.go(32,1);
     //draw player party
-    ArrayList<Adventurer> badParty  = createRandomBadAdventurerParty(3);
-    drawParty(badParty, 3);
+    drawParty(enemies, 3);
     //draw enemy party
-    ArrayList<Adventurer> goodParty = createRandomGoodAdventurerParty(3);
-    drawParty(goodParty, 23);
+    drawParty(party, 23);
   }
 
 
@@ -218,22 +211,19 @@ Text.go(32,1);
     Text.hideCursor();
     Text.clear();
 
-
-    //Things to attack:
-    //Make an ArrayList of Adventurers and add 1-3 enemies to it.
-    //If only 1 enemy is added it should be the boss class.
-    //start with 1 boss and modify the code to allow 2-3 adventurers later.
     ArrayList<Adventurer>enemies = new ArrayList<Adventurer>();
-    /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
-    //YOUR CODE HERE
-    /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
+    int enemyCount = ((int) (Math.random() * 2) + 1);
+    if (enemyCount == 1){
+      enemies.add(new Boss());
+    }
+    else {
+      enemies = createRandomBadAdventurerParty(enemyCount);
+    }
 
     //Adventurers you control:
-    //Make an ArrayList of Adventurers and add 2-4 Adventurers to it.
-    ArrayList<Adventurer> party = new ArrayList<>();
-    /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
-    //YOUR CODE HERE
-    /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
+    //Make an ArrayList of Adventurers and add 1-3 Adventurers to it.
+    ArrayList<Adventurer> party = createRandomGoodAdventurerParty((int) (Math.random() * 2) + 1);
+
 
     boolean partyTurn = true;
     int whichPlayer = 0;
@@ -241,22 +231,24 @@ Text.go(32,1);
     int turn = 0;
     String input = "";//blank to get into the main loop.
     Scanner in = new Scanner(System.in);
-    //Draw the window border
 
     //You can add parameters to draw screen!
-    drawScreen();//initial state.
+    drawBackground();
+    drawScreen(enemies, party);//initial state.
 
     //Main loop
 
     //display this prompt at the start of the game.
-    String preprompt = "Enter command for "+party.get(whichPlayer)+": attack/special/quit";
+    String preprompt = "Enter command for "+party.get(whichPlayer)+": \n attack \n special \n quit";
+    TextBox(10 , 41 ,37 , 11, preprompt);
+
 
     while(! (input.equalsIgnoreCase("q") || input.equalsIgnoreCase("quit"))){
       //Read user input
       input = userInput(in);
 
       //example debug statment
-      TextBox(24,2,1,78,"input: "+input+" partyTurn:"+partyTurn+ " whichPlayer="+whichPlayer+ " whichOpp="+whichOpponent );
+      //TextBox(24,2,1,78,"input: "+input+" partyTurn:"+partyTurn+ " whichPlayer="+whichPlayer+ " whichOpp="+whichOpponent );
 
       //display event based on last turn's input
       if(partyTurn){
@@ -335,7 +327,8 @@ Text.go(32,1);
       }
 
       //display the updated screen after input has been processed.
-      drawScreen();
+      
+      drawScreen(enemies, party);
 
 
     }//end of main game loop
