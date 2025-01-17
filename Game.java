@@ -195,7 +195,7 @@ Text.go(32,1);
       Text.showCursor();
       String input = in.nextLine();
       //clear the text that was written
-      System.out.println('\r');
+      System.out.print('\r');
       return input;
   }
   
@@ -212,7 +212,7 @@ Text.go(32,1);
     Text.clear();
 
     ArrayList<Adventurer>enemies = new ArrayList<Adventurer>();
-    int enemyCount = ((int) (Math.random() * 2) + 1);
+    int enemyCount = ((int) (Math.random() * 3) + 1);
     if (enemyCount == 1){
       enemies.add(new Boss());
     }
@@ -222,7 +222,7 @@ Text.go(32,1);
 
     //Adventurers you control:
     //Make an ArrayList of Adventurers and add 1-3 Adventurers to it.
-    ArrayList<Adventurer> party = createRandomGoodAdventurerParty((int) (Math.random() * 2) + 1);
+    ArrayList<Adventurer> party = createRandomGoodAdventurerParty((int) (Math.random() * 3) + 1);
 
 
     boolean partyTurn = true;
@@ -239,7 +239,7 @@ Text.go(32,1);
     //Main loop
 
     //display this prompt at the start of the game.
-    String preprompt = "Enter command for "+party.get(whichPlayer)+": \n attack \n special \n quit";
+    String preprompt = "Enter command for "+party.get(whichPlayer)+": \n attack \n special \n support \n quit";
     TextBox(10 , 41 ,37 , 11, preprompt);
 
 
