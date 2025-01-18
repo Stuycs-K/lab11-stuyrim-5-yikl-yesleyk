@@ -10,11 +10,15 @@ public class Tester{
   private static final int BORDER_BACKGROUND = Text.WHITE + Text.BACKGROUND;
 
   public static void main(String[] args) {
+
     drawBackground();
     ArrayList<Adventurer> enemies = createRandomBadAdventurerParty(3);
     ArrayList<Adventurer> party = createRandomGoodAdventurerParty(3);
     drawScreen(enemies, party);
     //run();
+
+    run();
+
   }
   public static void drawBackground(){
     Text.clear();
@@ -322,6 +326,29 @@ public class Tester{
         /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
         //YOUR CODE HERE
         /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
+        // enemy acttions
+        Adventurer currEnemy = enemies.get(whichOpponent);
+        int enemyMove = (int) (3 * Math.random());
+        if (enemyMove == 0){
+          // attack
+          int ntarget = (int) (party.size() * Math.random());
+          Adventurer attacked = party.get(target);
+          currEnemy.attack(attacked);
+        }
+        if (enemyMove == 1){
+          // special attack
+          int ntarget = (int) (party.size() * Math.random());
+          Adventurer attacked = party.get(target);
+          currEnemy.specialAttack(attacked);
+        }
+        if (enemyMove == 2){
+          // support
+          int ally = (int) (enemies.size() * Math.random());
+          if (ally == whichOpponent){
+            currEnemy.support();
+          }
+          else currEnemy.support(enemies.get(ally));
+        }
 
 
         //Decide where to draw the following prompt:
