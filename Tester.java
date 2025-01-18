@@ -224,7 +224,7 @@ public class Tester{
     //If only 1 enemy is added it should be the boss class.
     //start with 1 boss and modify the code to allow 2-3 adventurers later.
     ArrayList<Adventurer>enemies = new ArrayList<Adventurer>();
-    int enemyCount = (int) (Math.random() * 3);
+    int enemyCount = (int) (Math.random() * 3 + 1);
     if (enemyCount == 1){
       enemies.add(new Boss());
     }
@@ -235,7 +235,7 @@ public class Tester{
     //Adventurers you control:
     //Make an ArrayList of Adventurers and add 1-3 Adventurers to it.
     ArrayList<Adventurer> party = new ArrayList<>();
-    createRandomGoodAdventurerParty((int) (Math.random() * 3));
+    party = createRandomGoodAdventurerParty((int) (Math.random() * 3 + 1));
 
 
     boolean partyTurn = true;
