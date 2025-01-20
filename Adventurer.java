@@ -3,7 +3,7 @@ public abstract class Adventurer{
   private String name;
   private int HP,maxHP;
     //counters
-  private int bubbleBarrier, blessing, sleep, revival;
+  private int bubbleBarrier, blessing, revival;
   //flags 
   private boolean revivalFlag, bubbleBarrierFlag , extraTurnFlag , blessingFlag , sleepFlag ; 
 
@@ -69,9 +69,8 @@ public abstract class Adventurer{
     setFlag(n , blessingFlag);
   }
 
-  public void setSleep(int n){
-    sleep = n;
-    setFlag( n , sleepFlag);
+  public void setSleep(boolean n){
+    sleepFlag = n;
   }
 
   public void setRevival(int n){
@@ -96,8 +95,8 @@ public abstract class Adventurer{
     return extraTurnFlag;
   }
 
-  public int getSleep(){
-    return sleep;
+  public boolean getSleep(){
+    return sleepFlag;
   }
 
   public int getRevival(){
@@ -114,10 +113,6 @@ public abstract class Adventurer{
   //  return (int) (Math.random() + 2);
   //0}
 
-  public String sleepEffect(){
-    setSleep(getSleep() - 1);
-    return this.getName() + " is currently sleeping. They fail to ";
-  }
 
   public String revivalEffect(){
     if (this.getHP() <= 0){
@@ -134,7 +129,7 @@ public abstract class Adventurer{
 
   public void applyDamage(int amount){
     if (bubbleBarrierFlag) this.HP -= 0.5 * amount;
-    else if (name.equals("Mario")) this.HP -= 0.6 * amount;
+    else if (this.getName().equals("Mario")) this.HP -= 0.6 * amount;
     else this.HP -= amount;
   }
 
@@ -152,7 +147,6 @@ public abstract class Adventurer{
     this(name, 10);
     this.bubbleBarrier = 0;
     this.blessing = 0;
-    this.sleep = 0;
     this.revival = 0;
   }
 
@@ -160,7 +154,7 @@ public abstract class Adventurer{
     this.name = name;
     this.HP = hp;
     this.maxHP = hp;
-    this.bubbleBarrier = this.blessing = this.sleep = this.revival = 0;
+    this.bubbleBarrier = this.blessing = this.revival = 0;
     this.revivalFlag = this.bubbleBarrierFlag = this.extraTurnFlag = this.blessingFlag = this.sleepFlag = false ;
   }
 
@@ -201,9 +195,6 @@ public abstract class Adventurer{
     //if (blessingFlag ){
     //  setBlessing(getBlessing() - 1);
     //}
-    if (sleepFlag){
-      setSleep(getSleep() - 1);
-    }
     if (revivalFlag){
       setRevival(getRevival() - 1);
     }
