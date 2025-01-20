@@ -234,6 +234,15 @@ public class Game{
     }
   }
 
+  public static boolean isInteger(String str){
+    try {
+      Integer.parseInt(str);
+      return true;
+    } catch (NumberFormatException e) {
+      return false;
+    }
+  }
+
   public static void run(){
     //Clear and initialize
     Text.hideCursor();
@@ -283,7 +292,7 @@ public class Game{
       Adventurer currAdv = party.get(whichPlayer);
       TextBox(10 , 42 ,36 , 11, preprompt);
 
-      String[] userInputErrors = {"too many arguments", "invalid move", "invalid character", "too little arguments"};
+      String[] userInputErrors = {"Too many arguments. Try again.", "Invalid move. Try again.", "You can't select this character. Try again.", "Too little arguments. Try again.", "Second argument is not an integer. Try again."};
 
       //example debug statment
       //TextBox(24,2,1,78,"input: "+input+" partyTurn:"+partyTurn+ " whichPlayer="+whichPlayer+ " whichOpp="+whichOpponent );
@@ -296,28 +305,35 @@ public class Game{
         input = userInput(in);
         inputs = input.split(" ");
         action = inputs[0];
-        target = Integer.parseInt(inputs[1]);
         currAdv = party.get(whichPlayer);
         
 
         if (inputs.length > 2){
-          TextBox(17, 42, 36, 11, userInputErrors[0]);
+          TextBox(16, 42, 36, 2, userInputErrors[0]);
+          input = userInput(in);
+          inputs = input.split(" ");
         }
-        else if (inputs.length < 2){
-          TextBox(17, 42, 36, 11, userInputErrors[3]);
+        if (inputs.length < 2){
+          TextBox(16, 42, 36, 2, userInputErrors[3]);
+          input = userInput(in);
+          inputs = input.split(" ");
         }
-        else if (!(inputs[0].equals("attack") || inputs[0].equals("a") || 
+        if (!(inputs[0].equals("attack") || inputs[0].equals("a") || 
         inputs[0].equals("special") || inputs[0].equals("sp") || 
         inputs[0].startsWith("su ") || inputs[0].startsWith("support "))){
-          TextBox(17,42,36,11,userInputErrors[1]);
+          TextBox(16,42,36,2,userInputErrors[1]);
+        }
+
+        if (!(isInteger(inputs[1]))){
+          TextBox(16,42,36,2,userInputErrors[4]);
         }
         else if(target > enemies.size() || target < 0){
-          String invalidChar = "Please select another enemy to attack. ";
-          TextBox(17,42,36,2,userInputErrors[2] + invalidChar);
+          TextBox(16,42,36,2,userInputErrors[2]);
         }
         else validinput = true;
         //fix other stuff like if the support is for someone whos dead
       }
+      target = Integer.parseInt(inputs[1]);
 
       
         // check for invalid inputs
