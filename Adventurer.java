@@ -140,7 +140,7 @@ public abstract class Adventurer{
 
   public void heal(int amount){
     this.HP += amount;
-    if (this.HP > this.maxHP) this.HP = this.maxHP;
+    if (getHP() > getmaxHP()) setHP(getmaxHP());
   }
 
   //You did it wrong if this happens.

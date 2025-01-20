@@ -342,6 +342,7 @@ public class Game{
       }else{
         //not the party turn!
 
+        String words = " ";
 
         //enemy attacks a randomly chosen person with a randomly chosen attack.z`
         //Enemy action choices go here!
@@ -353,21 +354,25 @@ public class Game{
           // attack
           int enemyTarget = (int) (party.size() * Math.random());
           Adventurer attacked = party.get(enemyTarget);
-          currEnemy.attack(attacked);
+          words = currEnemy.attack(attacked);
+          TextBox(10 , 2 ,37 , 11, words);
         }
         if (enemyMove == 1){
           // special attack
           int enemyTarget = (int) (party.size() * Math.random());
           Adventurer attacked = party.get(enemyTarget);
-          currEnemy.specialAttack(attacked);
+          words = currEnemy.specialAttack(attacked);
+          TextBox(10 , 2 ,37 , 11, words);
         }
         if (enemyMove == 2){
           // support
           int ally = (int) (enemies.size() * Math.random());
           if (ally == whichOpponent){
-            currEnemy.support();
+            words = currEnemy.support();
           }
-          else currEnemy.support(enemies.get(ally));
+          else words = currEnemy.support(enemies.get(ally));
+
+          TextBox(10 , 2 ,37 , 11, words);
         }
 
 
