@@ -52,8 +52,8 @@ public class Game{
       Text.go(21,j);
       System.out.print(Text.colorize(" ", BORDER_BACKGROUND));
     }
-    // move cursor to bottom
-    Text.go(32,1);
+    // move cursor to bottom right side box
+    Text.go(17,42);
   }
 
   //Display a line of text starting at
@@ -79,16 +79,16 @@ public class Game{
   */
   public static void TextBox(int row, int col, int width, int height, String text){
     //clearing box
-/* 
+ 
     for(int i = row ; i < row + height  ; i++){
       for( int j = col ; j < col + width; j ++){
         Text.go(i, j );
-        //System.out.print(" ");
+        System.out.print(" ");
       }
-      System.out.print("\r");
+      //System.out.print("\r");
     }
     Text.go(32,1);
-    */
+    
     //print text
     String[] lines = text.split("\n");
     for (String line : lines){
@@ -168,10 +168,10 @@ public class Game{
         String text = colorbyAliveness(curr) + '\n' +
                       "HP: " + colorByPercent(curr.getHP(),curr.getmaxHP()) + '\n' +
                       curr.getSpecialName() + ": " + curr.getSpecial();
-        TextBox(startRow, column, 25, 3, text);
+        TextBox(startRow, column, 22, 3, text);
         column += 27;
       }
-      Text.go(32,1);
+      Text.go(17,42);
     }
 
 
@@ -205,25 +205,27 @@ public class Game{
     //draw enemy party
     drawParty(party, 23);
 
-    Text.go(32,1);
+    Text.go(17,42);
   }
 
 
   public static String userInput(Scanner in){
       //Move cursor to prompt location
-      Text.go(31,1);
-      System.out.print("\033[2K");
-      Text.go(31, 1);
+      Text.go(17,42);
+      //System.out.print("\033[2K");
+      Text.go(17,42);
       //show cursor
       Text.showCursor();
       String input = in.nextLine();
       //clear the text that was written
-      Text.go(31, 1);
-      System.out.print("\033[2K");
+      TextBox(17,42,36,1,"                            ");
+      Text.go(17,42);
+      //System.out.print("\033[2K");
       Text.hideCursor();
       /*System.out.print("\r");
       System.out.print("     ");
       System.out.print("\r");*/
+      //drawBackground();
       return input;
   }
   
@@ -231,7 +233,7 @@ public class Game{
   public static void quit(){
     Text.reset();
     Text.showCursor();
-    Text.go(32,1);
+    Text.go(17,42);
   }
 
   public static void run(){
@@ -277,11 +279,6 @@ public class Game{
     while(! (input.equalsIgnoreCase("q") || input.equalsIgnoreCase("quit"))){
       //Read user input
 
-      Text.hideCursor();
-      Text.clear();
-      drawBackground();
-      drawScreen(enemies, party);
-
       String[] inputs = input.split(" ");
       String action = " ";
       int target = 0;
@@ -317,7 +314,7 @@ public class Game{
         }
         else if(target > enemies.size() || target < 0){
           String invalidChar = "Please select another enemy to attack. ";
-          TextBox(17,42,36,11,userInputErrors[2] + invalidChar);
+          TextBox(17,42,36,2,userInputErrors[2] + invalidChar);
         }
         else validinput = true;
         //fix other stuff like if the support is for someone whos dead
