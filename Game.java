@@ -166,10 +166,16 @@ public class Game{
   //Use this to create a colorized number string based on the % compared to the max value.
   public static String colorByPercent(int hp, int maxHP){
     String output = String.format("%2s", hp+"")+"/"+String.format("%2s", maxHP+"");
+<<<<<<< HEAD
     if (hp < 0.25 * maxHP) output = Text.colorize(output, Text.RED);
     else if (hp < 0.75 * maxHP) output = Text.colorize(output, Text.YELLOW);
     else output = Text.colorize(output, Text.WHITE);
     return output;
+=======
+    if (hp < 0.25 * maxHP) return Text.colorize(output, Text.RED);
+    else if (hp < 0.75 * maxHP) return Text.colorize(output, Text.YELLOW);
+    else return Text.colorize(output, Text.GREEN);
+>>>>>>> 8a2d582821ce96b2c451a8f6ed34b4e8f5be4d0b
   }
 
 
@@ -192,12 +198,14 @@ public class Game{
 
   public static String userInput(Scanner in){
       //Move cursor to prompt location
-      Text.go(32,1);
+      Text.go(31,1);
       //show cursor
       Text.showCursor();
       String input = in.nextLine();
       //clear the text that was written
-      System.out.print('\r');
+      System.out.print("\r");
+      System.out.print("     ");
+      System.out.print("\r");
       return input;
   }
   
@@ -271,6 +279,12 @@ public class Game{
 
       //display event based on last turn's input
       if(partyTurn){
+        input = userInput(in);
+        String[] inputs = input.split(" ");
+        String action = inputs[0];
+        int target = Integer.parseInt(inputs[1]);
+        Adventurer currAdv = party.get(whichPlayer);
+
         // check for invalid inputs
         /*while( ||
              target > enemies.size()){
