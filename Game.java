@@ -52,8 +52,8 @@ public class Game{
       Text.go(21,j);
       System.out.print(Text.colorize(" ", BORDER_BACKGROUND));
     }
-    // move cursor to bottom
-    Text.go(32,1);
+    // move cursor to bottom right side box
+    Text.go(17,42);
   }
 
   //Display a line of text starting at
@@ -171,7 +171,7 @@ public class Game{
         TextBox(startRow, column, 25, 3, text);
         column += 27;
       }
-      Text.go(32,1);
+      Text.go(17,42);
     }
 
 
@@ -205,20 +205,20 @@ public class Game{
     //draw enemy party
     drawParty(party, 23);
 
-    Text.go(32,1);
+    Text.go(17,42);
   }
 
 
   public static String userInput(Scanner in){
       //Move cursor to prompt location
-      Text.go(31,1);
+      Text.go(17,42);
       System.out.print("\033[2K");
-      Text.go(31, 1);
+      Text.go(17,42);
       //show cursor
       Text.showCursor();
       String input = in.nextLine();
       //clear the text that was written
-      Text.go(31, 1);
+      Text.go(17,42);
       System.out.print("\033[2K");
       Text.hideCursor();
       /*System.out.print("\r");
@@ -231,7 +231,7 @@ public class Game{
   public static void quit(){
     Text.reset();
     Text.showCursor();
-    Text.go(32,1);
+    Text.go(17,42);
   }
 
   public static void run(){
@@ -276,11 +276,6 @@ public class Game{
 
     while(! (input.equalsIgnoreCase("q") || input.equalsIgnoreCase("quit"))){
       //Read user input
-
-      Text.hideCursor();
-      Text.clear();
-      drawBackground();
-      drawScreen(enemies, party);
 
       String[] inputs = input.split(" ");
       String action = " ";
