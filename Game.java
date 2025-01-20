@@ -222,11 +222,12 @@ public class Game{
     else {
       enemies = createRandomBadAdventurerParty(enemyCount);
     }
+    boolean[] deadEnemies = new boolean[enemies.size()];
 
     //Adventurers you control:
     //Make an ArrayList of Adventurers and add 1-3 Adventurers to it.
     ArrayList<Adventurer> party = createRandomGoodAdventurerParty((int) (Math.random() * 3) + 1);
-
+    boolean[] deadParty = new boolean[party.size()];
 
     boolean partyTurn = true;
     int whichPlayer = 0;
@@ -248,15 +249,19 @@ public class Game{
     // validifying userInput
     input = userInput(in);
     String[] inputs = input.split(" ");
-    String[] userInputErrors = {"too many arguments", "invalid move", "invalid character"};
+    String[] userInputErrors = {"too little arguments","too many arguments", "invalid move", "invalid character", "this party member has fainted. choose another."};
 
-    if (partyTurn && inputs.length > 2){
+    if (partyTurn && inputs.length < 2){
       TextBox(17, 41, 37, 11, userInputErrors[0]);
+    }
+    
+    if (partyTurn && inputs.length > 2){
+      TextBox(17, 41, 37, 11, userInputErrors[1]);
     }
     if (partyTurn && !(inputs[0].equals("attack") || inputs[0].equals("a") || 
     inputs[0].equals("special") || inputs[0].equals("sp") || 
     inputs[0].startsWith("su ") || inputs[0].startsWith("support "))){
-      TextBox(17,41,37,11,userInputErrors[1]);
+      TextBox(17,41,37,11,userInputErrors[2]);
     }
     
 
@@ -272,7 +277,7 @@ public class Game{
 
       //display event based on last turn's input
       if(partyTurn){
-        input = userInput(in);
+        //input = userInput(in);
 
         // check for invalid inputs
         /*while( ||
@@ -290,7 +295,12 @@ public class Game{
         String words ="";
         //Process user input for the last Adventurer:
 
+        
+
         if(action.equals("attack") || action.equals("a")){
+          while (target > enemies.size() || target < 0){
+            TextBox(17,41,37,11,userInputErrors[3]);
+          }
           words = currAdv.attack(enemies.get(target));
           TextBox(10 , 2 ,37, 11, words);
         }
