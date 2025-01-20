@@ -255,6 +255,13 @@ public class Game{
 
       //display event based on last turn's input
       if(partyTurn){
+        // check for invalid inputs
+        if (!(inputs[0].equals("attack") || inputs[0].equals("a") || 
+             inputs[0].equals("special") || inputs[0].equals("sp") || 
+             inputs[0].startsWith("su ") || inputs[0].startsWith("support "))){
+              System.out.print("invalid move");
+              input = userInput(in);
+             }
 
         //Process user input for the last Adventurer:
         if(input.equals("attack") || input.equals("a")){
@@ -326,6 +333,7 @@ public class Game{
           }
           else currEnemy.support(enemies.get(ally));
         }
+
 
 
         //Decide where to draw the following prompt:
