@@ -79,13 +79,15 @@ public class Game{
   */
   public static void TextBox(int row, int col, int width, int height, String text){
     //clearing box
+/* 
     for(int i = row ; i < row + height  ; i++){
       for( int j = col ; j < col + width; j ++){
         Text.go(i, j );
         System.out.print(" ");
       }
     }
-    
+    Text.go(32,1);
+    */
     //print text
     String[] lines = text.split("\n");
     for (String line : lines){
@@ -271,6 +273,7 @@ public class Game{
 
       //display event based on last turn's input
       if(partyTurn){
+
       boolean validinput = false;
       while(!validinput){
         input = userInput(in);
@@ -278,7 +281,7 @@ public class Game{
         action = inputs[0];
         target = Integer.parseInt(inputs[1]);
         currAdv = party.get(whichPlayer);
-
+        validinput = true;
         String[] userInputErrors = {"too many arguments", "invalid move", "invalid character", "too little arguments"};
 
         if (inputs.length > 2){
