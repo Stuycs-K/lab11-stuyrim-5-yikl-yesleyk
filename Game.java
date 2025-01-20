@@ -79,16 +79,16 @@ public class Game{
   */
   public static void TextBox(int row, int col, int width, int height, String text){
     //clearing box
-/* 
+ 
     for(int i = row ; i < row + height  ; i++){
       for( int j = col ; j < col + width; j ++){
         Text.go(i, j );
-        //System.out.print(" ");
+        System.out.print(" ");
       }
-      System.out.print("\r");
+      //System.out.print("\r");
     }
     Text.go(32,1);
-    */
+    
     //print text
     String[] lines = text.split("\n");
     for (String line : lines){
@@ -168,7 +168,7 @@ public class Game{
         String text = colorbyAliveness(curr) + '\n' +
                       "HP: " + colorByPercent(curr.getHP(),curr.getmaxHP()) + '\n' +
                       curr.getSpecialName() + ": " + curr.getSpecial();
-        TextBox(startRow, column, 25, 3, text);
+        TextBox(startRow, column, 22, 3, text);
         column += 27;
       }
       Text.go(17,42);
@@ -212,18 +212,20 @@ public class Game{
   public static String userInput(Scanner in){
       //Move cursor to prompt location
       Text.go(17,42);
-      System.out.print("\033[2K");
+      //System.out.print("\033[2K");
       Text.go(17,42);
       //show cursor
       Text.showCursor();
       String input = in.nextLine();
       //clear the text that was written
+      TextBox(17,42,36,1,"                            ");
       Text.go(17,42);
-      System.out.print("\033[2K");
+      //System.out.print("\033[2K");
       Text.hideCursor();
       /*System.out.print("\r");
       System.out.print("     ");
       System.out.print("\r");*/
+      //drawBackground();
       return input;
   }
   
@@ -313,7 +315,7 @@ public class Game{
         }
         else if(target > enemies.size() || target < 0){
           String invalidChar = "Please select another enemy to attack. ";
-          TextBox(17,42,36,11,userInputErrors[2] + invalidChar);
+          TextBox(17,42,36,2,userInputErrors[2] + invalidChar);
         }
         else validinput = true;
         //fix other stuff like if the support is for someone whos dead
