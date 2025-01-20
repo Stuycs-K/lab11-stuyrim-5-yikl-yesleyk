@@ -79,8 +79,16 @@ public class Game{
   */
   public static void TextBox(int row, int col, int width, int height, String text){
     //clearing box
-    for(int i = row; i <)
-    //printing new stuff
+    /* 
+    for(int i = row ; i < row + height  ; i++){
+      Text.go(i, col );
+      for( int j = col ; j < col + width - 1; j ++){
+        System.out.print(" ");
+      }
+    }
+      */
+    
+    //print text
     String[] lines = text.split("\n");
     for (String line : lines){
       String[] words = line.split(" ");
@@ -277,10 +285,10 @@ public class Game{
       //display event based on last turn's input
       if(partyTurn){
         input = userInput(in);
-        String[] inputs = input.split(" ");
-        String action = inputs[0];
-        int target = Integer.parseInt(inputs[1]);
-        Adventurer currAdv = party.get(whichPlayer);
+        inputs = input.split(" ");
+        action = inputs[0];
+        target = Integer.parseInt(inputs[1]);
+        currAdv = party.get(whichPlayer);
 
         // check for invalid inputs
         /*while( ||
