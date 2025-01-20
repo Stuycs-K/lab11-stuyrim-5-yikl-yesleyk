@@ -296,7 +296,8 @@ public class Game{
           TextBox(17,41,37,11,userInputErrors[1]);
         }
         else if(target > enemies.size() || target < 0){
-          TextBox(17,41,37,11,userInputErrors[2]);
+          String invalidChar = "Please select another enemy to attack. ";
+          TextBox(17,41,37,11,userInputErrors[2] + invalidChar);
         }
         else validinput = true;
         //fix other stuff like if the support is for someone whos dead
@@ -311,10 +312,6 @@ public class Game{
         
 
         if(action.equals("attack") || action.equals("a")){
-          while (target > enemies.size() || target < 0){
-            String invalidChar = userInputErrors[3] + "Please select another enemy to attack. ";
-            TextBox(17,41,37,11, invalidChar);
-          }
           words = currAdv.attack(enemies.get(target));
           TextBox(10 , 2 ,37, 11, words);
         }
