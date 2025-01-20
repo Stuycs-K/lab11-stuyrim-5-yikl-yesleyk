@@ -79,14 +79,12 @@ public class Game{
   */
   public static void TextBox(int row, int col, int width, int height, String text){
     //clearing box
-    /* 
     for(int i = row ; i < row + height  ; i++){
-      Text.go(i, col );
-      for( int j = col ; j < col + width - 1; j ++){
+      for( int j = col ; j < col + width; j ++){
+        Text.go(i, j );
         System.out.print(" ");
       }
     }
-      */
     
     //print text
     String[] lines = text.split("\n");
