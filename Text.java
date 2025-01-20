@@ -8,6 +8,7 @@ public class Text{
   public static final int MAGENTA = 35;
   public static final int CYAN = 36;
   public static final int WHITE = 37;
+  public static final int GRAY = 90;
 
   /*Text modifiers to be ADDED to a color*/
   public static final int BACKGROUND = 10;

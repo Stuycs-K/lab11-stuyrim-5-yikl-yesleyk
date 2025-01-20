@@ -82,8 +82,9 @@ public class Game{
     for(int i = row ; i < row + height  ; i++){
       for( int j = col ; j < col + width; j ++){
         Text.go(i, j );
-        System.out.print(" ");
+        //System.out.print(" ");
       }
+      System.out.print("\r");
     }
     
     //print text
@@ -115,7 +116,7 @@ public class Game{
     //return a random adventurer (choose between all available subclasses)
     //feel free to overload this method to allow specific names/stats.
     public static ArrayList<Adventurer> createRandomBadAdventurerParty(int capacity){
-      String[] funnyadjectives = new String[] {"evil " , "bad-to-the-bone " , "terrible "};
+      String[] funnyadjectives = new String[] {"Evil " , "Bad-to-the-Bone " , "Terrible "};
       ArrayList<Adventurer> result = new ArrayList<Adventurer>(0); 
       for (int i = 0; i < capacity; i++ ){
         int random = (int)(Math.random() * 3);
@@ -133,7 +134,7 @@ public class Game{
     }
 
     public static ArrayList<Adventurer> createRandomGoodAdventurerParty(int capacity){
-      String[] funnyadjectives = new String[] {"angelic " , "super " , "terrific "};
+      String[] funnyadjectives = new String[] {"Angelic " , "Super " , "Terrific "};
       ArrayList<Adventurer> result = new ArrayList<Adventurer>(0); 
       for (int i = 0; i < capacity; i++ ){
         int random = (int)(Math.random() * 3);
@@ -162,7 +163,7 @@ public class Game{
       int column = 4;
       for (int i = 0; i < party.size(); i++){
         Adventurer curr = party.get(i);
-        String text = curr.getName() + '\n' +
+        String text = colorbyAliveness(curr) + '\n' +
                       "HP: " + colorByPercent(curr.getHP(),curr.getmaxHP()) + '\n' +
                       curr.getSpecialName() + ": " + curr.getSpecial();
         TextBox(startRow, column, 25, 3, text);
@@ -178,6 +179,14 @@ public class Game{
     if (hp < 0.25 * maxHP) return Text.colorize(output, Text.RED);
     else if (hp < 0.75 * maxHP) return Text.colorize(output, Text.YELLOW);
     else return Text.colorize(output, Text.GREEN);
+  }
+
+  public static String colorbyAliveness(Adventurer currChar){
+    String name = currChar.getName();
+    if (currChar.getHP() <= 0){
+      return Text.colorize(name, Text.GRAY);
+    }
+    return name;
   }
 
 
@@ -200,7 +209,7 @@ public class Game{
 
   public static String userInput(Scanner in){
       //Move cursor to prompt location
-      Text.go(31,1);
+      Text.go(32,1);
       //show cursor
       Text.showCursor();
       String input = in.nextLine();
