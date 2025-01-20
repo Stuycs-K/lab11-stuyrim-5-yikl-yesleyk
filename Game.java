@@ -291,13 +291,8 @@ public class Game{
         action = inputs[0];
         target = Integer.parseInt(inputs[1]);
         currAdv = party.get(whichPlayer);
-<<<<<<< HEAD
-        validinput = true;
-        String[] userInputErrors = {"too many arguments", "invalid move", "invalid character", "too little arguments"};
-=======
 
         
->>>>>>> 97382be5f6cd167e82106ecd86fba8fa640dd9c6
 
         if (inputs.length > 2){
           TextBox(17, 41, 37, 11, userInputErrors[0]);
