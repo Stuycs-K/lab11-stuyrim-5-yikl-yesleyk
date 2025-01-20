@@ -283,6 +283,7 @@ public class Game{
       String action = " ";
       int target = 0;
       Adventurer currAdv = party.get(whichPlayer);
+      TextBox(10 , 42 ,36 , 11, preprompt);
 
       String[] userInputErrors = {"too many arguments", "invalid move", "invalid character", "too little arguments"};
 
