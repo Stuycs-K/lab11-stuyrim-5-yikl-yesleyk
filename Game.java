@@ -248,17 +248,19 @@ public class Game{
 
     while(! (input.equalsIgnoreCase("q") || input.equalsIgnoreCase("quit"))){
       //Read user input
-      input = userInput(in);
-      String[] inputs = input.split(" ");
-      String action = inputs[0];
-      int target = Integer.parseInt(inputs[1]);
-      Adventurer currAdv = party.get(whichPlayer);
+      
 
       //example debug statment
       //TextBox(24,2,1,78,"input: "+input+" partyTurn:"+partyTurn+ " whichPlayer="+whichPlayer+ " whichOpp="+whichOpponent );
 
       //display event based on last turn's input
       if(partyTurn){
+        input = userInput(in);
+        String[] inputs = input.split(" ");
+        String action = inputs[0];
+        int target = Integer.parseInt(inputs[1]);
+        Adventurer currAdv = party.get(whichPlayer);
+
         // check for invalid inputs
         while(!(inputs[0].equals("attack") || inputs[0].equals("a") || 
              inputs[0].equals("special") || inputs[0].equals("sp") || 
