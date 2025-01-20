@@ -189,6 +189,8 @@ public class Game{
       return Text.colorize(name, Text.GRAY);
     }
     return name;
+
+    //should do this based on dead or alive
   }
 
 
@@ -267,6 +269,7 @@ public class Game{
     drawBackground();
     drawScreen(enemies, party);//initial state.
 
+
     //Main loop
 
     //display this prompt at the start of the game.
@@ -333,7 +336,10 @@ public class Game{
           TextBox(10 , 2 ,36, 11, words);
         }
         else if(action.equals("special") || action.equals("sp")){
-          words = currAdv.specialAttack(enemies.get(target));
+          if(currAdv instanceof Mario){
+            words = currAdv.specialAttack(party.get(target));
+          }
+          else words = currAdv.specialAttack(enemies.get(target));
           TextBox(10 , 2 ,36 , 11, words);
         }
         else if(action.equals("su") || action.equals("support")){
@@ -412,9 +418,16 @@ public class Game{
         }
         if (enemyMove == 1){
           // special attack
+          if(currEnemy instanceof Mario){
+            int enemyTarget = (int) (enemies.size() * Math.random());
+            Adventurer attacked = enemies.get(enemyTarget);
+            words = currEnemy.specialAttack(attacked);
+          }
+          else{
           int enemyTarget = (int) (party.size() * Math.random());
           Adventurer attacked = party.get(enemyTarget);
           words = currEnemy.specialAttack(attacked);
+          }
           TextBox(10 , 2 ,36 , 11, words);
         }
         if (enemyMove == 2){

@@ -49,7 +49,8 @@ public class Luigi extends Adventurer {
     }
 
     public String support(Adventurer other){
-      return null;
+    other.setExtraTurn(true);
+      return this.getName() + " hyped up  " + other.getName() + " they know have an extra turn";
     }
 
     public String support(){
