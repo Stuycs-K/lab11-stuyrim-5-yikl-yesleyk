@@ -180,7 +180,6 @@ public class Game{
     if (hp < 0.25 * maxHP) return Text.colorize(output, Text.RED);
     else if (hp < 0.75 * maxHP) return Text.colorize(output, Text.YELLOW);
     else return Text.colorize(output, Text.GREEN);
-
   }
 
 
@@ -254,7 +253,7 @@ public class Game{
     //Main loop
 
     //display this prompt at the start of the game.
-    String preprompt = "Enter command for "+party.get(whichPlayer)+": \n attack \n special \n support \n quit";
+    String preprompt = "Enter command for "+party.get(whichPlayer)+": \n >> attack (a) \n >> special (sp) \n >> support (su) \n >> quit (q)";
     TextBox(10 , 41 ,37 , 11, preprompt);
 
     // validifying userInput
@@ -262,10 +261,10 @@ public class Game{
     String[] inputs = input.split(" ");
     String[] userInputErrors = {"too many arguments", "invalid move", "invalid character"};
 
-    if (inputs.length > 2){
+    if (partyTurn && inputs.length > 2){
       TextBox(17, 41, 37, 11, userInputErrors[0]);
     }
-    if (!(inputs[0].equals("attack") || inputs[0].equals("a") || 
+    if (partyTurn && !(inputs[0].equals("attack") || inputs[0].equals("a") || 
     inputs[0].equals("special") || inputs[0].equals("sp") || 
     inputs[0].startsWith("su ") || inputs[0].startsWith("support "))){
       TextBox(17,41,37,11,userInputErrors[1]);
