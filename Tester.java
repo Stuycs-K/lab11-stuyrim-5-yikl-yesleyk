@@ -12,10 +12,11 @@ public class Tester{
   public static void main(String[] args) {
 
     drawBackground();
+    //TextBox(10 , 2 ,37, 11, " Luigi bonks the other guy on thehead dealint 5 damages");
     ArrayList<Adventurer> enemies = createRandomBadAdventurerParty(3);
     ArrayList<Adventurer> party = createRandomGoodAdventurerParty(3);
     drawScreen(enemies, party);
-    //run();
+    run();
 
     run();
 

@@ -88,13 +88,13 @@ public class Game{
           currLine += word;
         }
         else {
-          drawText(line, row, col);
+          drawText(currLine, row, col);
           row++;
           currLine = "";
         }
       }
       if (currLine.length() > 0){
-        drawText(line,row,col);
+        drawText(currLine,row,col);
         row++;
       }
     }
@@ -166,9 +166,9 @@ public class Game{
   //Use this to create a colorized number string based on the % compared to the max value.
   public static String colorByPercent(int hp, int maxHP){
     String output = String.format("%2s", hp+"")+"/"+String.format("%2s", maxHP+"");
-    if (hp < 0.25 * maxHP) Text.colorize(output, Text.RED);
-    else if (hp < 0.75 * maxHP) Text.colorize(output, Text.YELLOW);
-    else Text.colorize(output, Text.WHITE);
+    if (hp < 0.25 * maxHP) output = Text.colorize(output, Text.RED);
+    else if (hp < 0.75 * maxHP) Toutput = Text.colorize(output, Text.YELLOW);
+    else output = Text.colorize(output, Text.WHITE);
     return output;
   }
 
@@ -180,11 +180,13 @@ public class Game{
   //Do not write over the blank areas where text will appear.
   //Place the cursor at the place where the user will by typing their input at the end of this method.
   public static void drawScreen(ArrayList<Adventurer> enemies, ArrayList<Adventurer> party){
-    Text.go(32,1);
+    
     //draw player party
     drawParty(enemies, 3);
     //draw enemy party
     drawParty(party, 23);
+
+    Text.go(32,1);
   }
 
 
@@ -247,6 +249,7 @@ public class Game{
       //Read user input
       input = userInput(in);
       String[] inputs = input.split(" ");
+      String action = inputs[0];
       int target = Integer.parseInt(inputs[1]);
       Adventurer currAdv = party.get(whichPlayer);
 
@@ -256,25 +259,37 @@ public class Game{
       //display event based on last turn's input
       if(partyTurn){
         // check for invalid inputs
-        if (!(inputs[0].equals("attack") || inputs[0].equals("a") || 
+        while(!(inputs[0].equals("attack") || inputs[0].equals("a") || 
              inputs[0].equals("special") || inputs[0].equals("sp") || 
-             inputs[0].startsWith("su ") || inputs[0].startsWith("support "))){
-              System.out.print("invalid move");
+             inputs[0].startsWith("su ") || inputs[0].startsWith("support ")) ||
+             target > enemies.size()){
+              TextBox(10 , 2 ,37 , 11, "invalid move");
+              Text.go(32,1);
               input = userInput(in);
+              inputs = input.split(" ");
+              action = inputs[0];
+              target = Integer.parseInt(inputs[1]);
+              currAdv = party.get(whichPlayer);
              }
+            
 
+        String words ="";
         //Process user input for the last Adventurer:
-        if(input.equals("attack") || input.equals("a")){
-          currAdv.attack(enemies.get(target));
+
+        if(action.equals("attack") || action.equals("a")){
+          words = currAdv.attack(enemies.get(target));
+          TextBox(10 , 2 ,37, 11, words);
         }
-        else if(input.equals("special") || input.equals("sp")){
-          currAdv.specialAttack(enemies.get(target));
+        else if(action.equals("special") || action.equals("sp")){
+          words = currAdv.specialAttack(enemies.get(target));
+          TextBox(10 , 2 ,37 , 11, words);
         }
-        else if(input.startsWith("su ") || input.startsWith("support ")){
+        else if(action.equals("su") || action.equals("support")){
           //"support 0" or "su 0" or "su 2" etc.
           //assume the value that follows su  is an integer.
-          if (target == whichPlayer) currAdv.support();
-          else currAdv.support(party.get(target));
+          if (target == whichPlayer) words = currAdv.support();
+          else words = currAdv.support(party.get(target));
+          TextBox(10 , 2 ,37 , 11, words);
         }
 
         //You should decide when you want to re-ask for user input
@@ -284,12 +299,12 @@ public class Game{
         //If no errors:
         party.get(whichPlayer).decreaseCounter();
         if(party.get(whichPlayer).getRevival() > 0){
-          String action = party.get(whichPlayer).revivalEffect();
-          //make a function that prints actions in left box)
+          words = party.get(whichPlayer).revivalEffect();
+          TextBox(10 , 2 ,37 , 11, words);
         }
         if(!(party.get(whichPlayer).getExtraTurn())) whichPlayer++;
         else party.get(whichPlayer).setExtraTurn(false);
-        
+       
 
 
         if(whichPlayer < party.size()){
@@ -303,7 +318,7 @@ public class Game{
           //This is after the player's turn, and allows the user to see the enemy turn
           //Decide where to draw the following prompt:
           String prompt = "press enter to see enemy turn";
-          
+          TextBox(10 , 41 ,37 , 11, prompt);
 
           partyTurn = false;
 
@@ -345,7 +360,7 @@ public class Game{
 
         //Decide where to draw the following prompt:
         String prompt = "press enter to see next turn";
-
+        TextBox(10 , 41 ,37 , 11, prompt);
         enemies.get(whichOpponent).decreaseCounter();
 
         if(!(enemies.get(whichOpponent).getExtraTurn())) whichOpponent++;
@@ -362,6 +377,7 @@ public class Game{
         partyTurn=true;
         //display this prompt before player's turn
         String prompt = "Enter command for "+party.get(whichPlayer)+": attack/special/quit";
+        TextBox(10 , 41 ,37 , 11, prompt);
       }
 
       //display the updated screen after input has been processed.
