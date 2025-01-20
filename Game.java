@@ -166,9 +166,16 @@ public class Game{
   //Use this to create a colorized number string based on the % compared to the max value.
   public static String colorByPercent(int hp, int maxHP){
     String output = String.format("%2s", hp+"")+"/"+String.format("%2s", maxHP+"");
+<<<<<<< HEAD
+    if (hp < 0.25 * maxHP) output = Text.colorize(output, Text.RED);
+    else if (hp < 0.75 * maxHP) output = Text.colorize(output, Text.YELLOW);
+    else output = Text.colorize(output, Text.WHITE);
+    return output;
+=======
     if (hp < 0.25 * maxHP) return Text.colorize(output, Text.RED);
     else if (hp < 0.75 * maxHP) return Text.colorize(output, Text.YELLOW);
     else return Text.colorize(output, Text.GREEN);
+>>>>>>> 8a2d582821ce96b2c451a8f6ed34b4e8f5be4d0b
   }
 
 
@@ -245,10 +252,27 @@ public class Game{
     String preprompt = "Enter command for "+party.get(whichPlayer)+": \n attack \n special \n support \n quit";
     TextBox(10 , 41 ,37 , 11, preprompt);
 
+    // validifying userInput
+    input = userInput(in);
+    String[] inputs = input.split(" ");
+    String[] userInputErrors = {"too many arguments", "invalid move", "invalid character"};
+
+    if (inputs.length > 2){
+      TextBox(17, 41, 37, 11, userInputErrors[0]);
+    }
+    if (!(inputs[0].equals("attack") || inputs[0].equals("a") || 
+    inputs[0].equals("special") || inputs[0].equals("sp") || 
+    inputs[0].startsWith("su ") || inputs[0].startsWith("support "))){
+      TextBox(17,41,37,11,userInputErrors[1]);
+    }
+    
+
 
     while(! (input.equalsIgnoreCase("q") || input.equalsIgnoreCase("quit"))){
       //Read user input
-      
+      String action = inputs[0];
+      int target = Integer.parseInt(inputs[1]);
+      Adventurer currAdv = party.get(whichPlayer);
 
       //example debug statment
       //TextBox(24,2,1,78,"input: "+input+" partyTurn:"+partyTurn+ " whichPlayer="+whichPlayer+ " whichOpp="+whichOpponent );
@@ -262,9 +286,7 @@ public class Game{
         Adventurer currAdv = party.get(whichPlayer);
 
         // check for invalid inputs
-        while(!(inputs[0].equals("attack") || inputs[0].equals("a") || 
-             inputs[0].equals("special") || inputs[0].equals("sp") || 
-             inputs[0].startsWith("su ") || inputs[0].startsWith("support ")) ||
+        /*while( ||
              target > enemies.size()){
               TextBox(10 , 2 ,37 , 11, "invalid move");
               Text.go(32,1);
@@ -274,7 +296,7 @@ public class Game{
               target = Integer.parseInt(inputs[1]);
               currAdv = party.get(whichPlayer);
              }
-            
+            */
 
         String words ="";
         //Process user input for the last Adventurer:
