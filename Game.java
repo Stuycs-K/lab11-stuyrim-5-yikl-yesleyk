@@ -300,7 +300,6 @@ public class Game{
         action = inputs[0];
         target = Integer.parseInt(inputs[1]);
         currAdv = party.get(whichPlayer);
-
         
 
         if (inputs.length > 2){
@@ -353,18 +352,36 @@ public class Game{
           words = party.get(whichPlayer).revivalEffect();
           TextBox(10 , 2 ,36 , 11, words);
         }
-        if(!(party.get(whichPlayer).getExtraTurn())) whichPlayer++;
+        if(!(party.get(whichPlayer).getExtraTurn()))whichPlayer++;
+
         else party.get(whichPlayer).setExtraTurn(false);
-       
+
+
 
 
         if(whichPlayer < party.size()){
           //This is a player turn.
           //Decide where to draw the following prompt:
+
+          if(party.get(whichPlayer).getSleep()){
+            String sleepyname = party.get(whichPlayer).getName();
+            party.get(whichPlayer).setSleep(false);
+            whichPlayer++;
+            TextBox(10 , 2 ,36 , 11, sleepyname + " has gone to sleep and missed their turn");
+          }
+          if(whichPlayer < party.size()){
+
           String prompt = "Enter command for "+party.get(whichPlayer)+": attack/special/quit";
           TextBox(10 , 42 ,36 , 11, prompt);
 
+          }else{
+            String prompt = "press enter to see enemy turn";
+            TextBox(10 , 42 ,36 , 11, prompt);
 
+            partyTurn = false;
+            whichPlayer = 0;
+            whichOpponent = 0;
+          }
         }else{
           //This is after the player's turn, and allows the user to see the enemy turn
           //Decide where to draw the following prompt:
