@@ -257,50 +257,52 @@ public class Game{
     TextBox(10 , 41 ,37 , 11, preprompt);
 
     // validifying userInput
-    input = userInput(in);
-    String[] inputs = input.split(" ");
-    String[] userInputErrors = {"too many arguments", "invalid move", "invalid character"};
 
-    if (partyTurn && inputs.length > 2){
-      TextBox(17, 41, 37, 11, userInputErrors[0]);
-    }
-    if (partyTurn && !(inputs[0].equals("attack") || inputs[0].equals("a") || 
-    inputs[0].equals("special") || inputs[0].equals("sp") || 
-    inputs[0].startsWith("su ") || inputs[0].startsWith("support "))){
-      TextBox(17,41,37,11,userInputErrors[1]);
-    }
-    
 
 
     while(! (input.equalsIgnoreCase("q") || input.equalsIgnoreCase("quit"))){
       //Read user input
-      String action = inputs[0];
-      int target = Integer.parseInt(inputs[1]);
+      String[] inputs = input.split(" ");
+      String action = " ";
+      int target = 0;
       Adventurer currAdv = party.get(whichPlayer);
+  
 
       //example debug statment
       //TextBox(24,2,1,78,"input: "+input+" partyTurn:"+partyTurn+ " whichPlayer="+whichPlayer+ " whichOpp="+whichOpponent );
 
       //display event based on last turn's input
       if(partyTurn){
+      boolean validinput = false;
+      while(!validinput){
         input = userInput(in);
         inputs = input.split(" ");
         action = inputs[0];
         target = Integer.parseInt(inputs[1]);
         currAdv = party.get(whichPlayer);
 
+        String[] userInputErrors = {"too many arguments", "invalid move", "invalid character", "too little arguments"};
+
+        if (inputs.length > 2){
+          TextBox(17, 41, 37, 11, userInputErrors[0]);
+        }
+        else if (inputs.length < 2){
+          TextBox(17, 41, 37, 11, userInputErrors[3]);
+        }
+        else if (!(inputs[0].equals("attack") || inputs[0].equals("a") || 
+        inputs[0].equals("special") || inputs[0].equals("sp") || 
+        inputs[0].startsWith("su ") || inputs[0].startsWith("support "))){
+          TextBox(17,41,37,11,userInputErrors[1]);
+        }
+        else if(target > enemies.size() || target < 0){
+          TextBox(17,41,37,11,userInputErrors[2]);
+        }
+        else validinput = true;
+        //fix other stuff like if the support is for someone whos dead
+      }
+
+      
         // check for invalid inputs
-        /*while( ||
-             target > enemies.size()){
-              TextBox(10 , 2 ,37 , 11, "invalid move");
-              Text.go(32,1);
-              input = userInput(in);
-              inputs = input.split(" ");
-              action = inputs[0];
-              target = Integer.parseInt(inputs[1]);
-              currAdv = party.get(whichPlayer);
-             }
-            */
 
         String words ="";
         //Process user input for the last Adventurer:
@@ -350,7 +352,7 @@ public class Game{
           TextBox(10 , 41 ,37 , 11, prompt);
 
           partyTurn = false;
-
+          whichPlayer = 0;
           whichOpponent = 0;
         }
         //done with one party member
