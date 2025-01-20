@@ -38,7 +38,8 @@ public class Mario extends Adventurer{
     }
 
     public String specialAttack(Adventurer other ){
-      return null;
+        other.setRevival(2);
+      return this.getName() + " has given the power of reviving for 2 turns to " + other.getName();
     }
 
     public String support(Adventurer other){

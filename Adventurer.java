@@ -129,7 +129,7 @@ public abstract class Adventurer{
 
   public void applyDamage(int amount){
     if (bubbleBarrierFlag) this.HP -= 0.5 * amount;
-    else if (this.getName().equals("Mario")) this.HP -= 0.6 * amount;
+    else if (this instanceof Mario) this.HP -= 0.6 * amount;
     else this.HP -= amount;
   }
 
