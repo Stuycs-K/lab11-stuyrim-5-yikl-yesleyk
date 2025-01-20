@@ -275,7 +275,12 @@ Text.go(32,1);
         //You should decide when you want to re-ask for user input
         //If no errors:
         party.get(whichPlayer).decreaseCounter();
-        whichPlayer++;
+        if(party.get(whichPlayer).getRevival() > 0){
+          String action = party.get(whichPlayer).revivalEffect();
+          //make a function that prints actions in left box)
+        }
+        if(!(party.get(whichPlayer).getExtraTurn())) whichPlayer++;
+        else party.get(whichPlayer).setExtraTurn(false);
         
 
 
@@ -283,12 +288,14 @@ Text.go(32,1);
           //This is a player turn.
           //Decide where to draw the following prompt:
           String prompt = "Enter command for "+party.get(whichPlayer)+": attack/special/quit";
+          TextBox(10 , 41 ,37 , 11, prompt);
 
 
         }else{
           //This is after the player's turn, and allows the user to see the enemy turn
           //Decide where to draw the following prompt:
           String prompt = "press enter to see enemy turn";
+          
 
           partyTurn = false;
 
@@ -309,9 +316,10 @@ Text.go(32,1);
         //Decide where to draw the following prompt:
         String prompt = "press enter to see next turn";
 
-        party.get(whichOpponent).decreaseCounter();
+        enemies.get(whichOpponent).decreaseCounter();
 
-        whichOpponent++;
+        if(!(enemies.get(whichOpponent).getExtraTurn())) whichOpponent++;
+        else enemies.get(whichOpponent).setExtraTurn(false);
 
       }//end of one enemy.
 

@@ -48,7 +48,7 @@ public class Boss extends Adventurer {
 
     public String support(){
         int healing = (int) (Math.random() + 1);
-        this.applyDamage(healing);
+        this.heal(healing);
         return this.getName() + " uses the powerful singing powers of the turtle, healing " + healing + " points of damage.";
     }
 

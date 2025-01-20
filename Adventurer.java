@@ -54,9 +54,9 @@ public abstract class Adventurer{
   public abstract String specialAttack(Adventurer other);
 
   // methods for status effects (needs to be in all adventurers so they can all be affected)
-  private boolean setFlag(int n, boolean x){
-    if (n > 0 ) return true;
-    else return false; 
+  private void setFlag(int n, boolean x){
+    if (n > 0 )  x = true;
+    else  x = false; 
   }
   
   public void setBubbleBarrier(int n){
@@ -79,12 +79,21 @@ public abstract class Adventurer{
     setFlag(n, revivalFlag);
   }
 
+  public void setExtraTurn(boolean n){
+    extraTurnFlag = n;
+  }
+
+
   public int getBubbleBarrier(){
     return bubbleBarrier;
   }
 
-  public int getBlessing(){
-    return blessing;
+  //public int getBlessing(){
+  //  return blessing;
+  //}
+
+  public boolean getExtraTurn(){
+    return extraTurnFlag;
   }
 
   public int getSleep(){
@@ -100,10 +109,10 @@ public abstract class Adventurer{
     return (int) (damage * .6);
   }
 
-  public int blessingEffect(){
-    setBlessing(getBlessing() - 1);
-    return (int) (Math.random() + 2);
-  }
+  //public int blessingEffect(){
+  //  setBlessing(getBlessing() - 1);
+  //  return (int) (Math.random() + 2);
+  //0}
 
   public String sleepEffect(){
     setSleep(getSleep() - 1);
@@ -115,19 +124,22 @@ public abstract class Adventurer{
       setRevival(0);
       this.setHP(5);
       return this.getName() + " was revived using a Revival Mushroom! They have resurrected with 5HP";
-    }
-    else {
-      setRevival(getRevival() - 1);
-      return "";
-    }
-  }
+  }else return "";
+}
+  
 
   /*
   standard methods
   */
 
   public void applyDamage(int amount){
-    this.HP -= amount;
+    if (bubbleBarrierFlag) this.HP -= 0.5 * amount;
+    else if (name.equals("Mario")) this.HP -= 0.6 * amount;
+    else this.HP -= amount;
+  }
+
+  public void heal(int amount){
+    this.HP += amount;
   }
 
   //You did it wrong if this happens.
@@ -185,9 +197,9 @@ public abstract class Adventurer{
     if (bubbleBarrierFlag ){
       setBubbleBarrier(getBubbleBarrier() - 1);
     }
-    if (blessingFlag ){
-      setBlessing(getBlessing() - 1);
-    }
+    //if (blessingFlag ){
+    //  setBlessing(getBlessing() - 1);
+    //}
     if (sleepFlag){
       setSleep(getSleep() - 1);
     }

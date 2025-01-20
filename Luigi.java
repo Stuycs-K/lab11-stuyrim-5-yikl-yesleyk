@@ -39,7 +39,13 @@ public class Luigi extends Adventurer {
     }
 
     public String specialAttack(Adventurer other ){
-      return null;
+        wrenches--;
+        double random = Math.random();
+        if (random < 0.7){
+            other.applyDamage(6);
+            return this.getName() + " hit " + other.getName() + " with a pipe and dealt 6 damage";
+        }
+        else return this.getName() + " did not hit " + other.getName() + " and did no damage";
     }
 
     public String support(Adventurer other){

@@ -50,4 +50,5 @@ public class Mario extends Adventurer{
       this.setBubbleBarrier(3);
       return this.getName() + " uses a bubble on himself, blocking incoming damage to that character for 3 turns.";
     }
+
 }
