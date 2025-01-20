@@ -78,6 +78,9 @@ public class Game{
   *@param height the number of rows
   */
   public static void TextBox(int row, int col, int width, int height, String text){
+    //clearing box
+    for(int i = row; i <)
+    //printing new stuff
     String[] lines = text.split("\n");
     for (String line : lines){
       String[] words = line.split(" ");
@@ -166,16 +169,10 @@ public class Game{
   //Use this to create a colorized number string based on the % compared to the max value.
   public static String colorByPercent(int hp, int maxHP){
     String output = String.format("%2s", hp+"")+"/"+String.format("%2s", maxHP+"");
-<<<<<<< HEAD
-    if (hp < 0.25 * maxHP) output = Text.colorize(output, Text.RED);
-    else if (hp < 0.75 * maxHP) output = Text.colorize(output, Text.YELLOW);
-    else output = Text.colorize(output, Text.WHITE);
-    return output;
-=======
     if (hp < 0.25 * maxHP) return Text.colorize(output, Text.RED);
     else if (hp < 0.75 * maxHP) return Text.colorize(output, Text.YELLOW);
     else return Text.colorize(output, Text.GREEN);
->>>>>>> 8a2d582821ce96b2c451a8f6ed34b4e8f5be4d0b
+
   }
 
 
