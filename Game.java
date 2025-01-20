@@ -391,6 +391,7 @@ public class Game{
           whichOpponent = 0;
         }
         //done with one party member
+      deathChecker(enemies,deadEnemies);
       }else{
         //not the party turn!
 
@@ -436,7 +437,8 @@ public class Game{
 
         if(!(enemies.get(whichOpponent).getExtraTurn())) whichOpponent++;
         else enemies.get(whichOpponent).setExtraTurn(false);
-
+        
+        deathChecker(party,deadParty);
       }//end of one enemy.
 
       //modify this if statement.
