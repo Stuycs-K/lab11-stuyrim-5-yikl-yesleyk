@@ -14,42 +14,47 @@ public class Game{
   //Do not write over the blank areas where text will appear or parties will appear.
   public static void drawBackground(){
     Text.clear();
-      for(int j = 1; j <=WIDTH; j ++){
-              Text.go(0,j);
-              System.out.print(Text.colorize(" ", BORDER_BACKGROUND));
-          }
-      for(int i = 2; i < HEIGHT ; i++){
-              Text.go(i,0);
-              System.out.print(Text.colorize(" ", BORDER_BACKGROUND));
-              Text.go(i,WIDTH);
-              System.out.print(Text.colorize(" ", BORDER_BACKGROUND));
-              if (i < 10 || i > 21){
-                  Text.go(i,27);
-                  System.out.print(Text.colorize(" ", BORDER_BACKGROUND));
-                  Text.go(i,53);
-                  System.out.print(Text.colorize(" ", BORDER_BACKGROUND));
-              }
-              else {
-                Text.go(i,40);
-                System.out.print(Text.colorize(" ", BORDER_BACKGROUND));
-              }
-
-          }
-      for(int j = 1; j <=WIDTH ; j ++){
-              Text.go(HEIGHT-1,j);
-              System.out.print(Text.colorize(" ", BORDER_BACKGROUND));
+    // top border
+    for(int j = 1; j <=WIDTH; j ++){
+      Text.go(0,j);
+      System.out.print(Text.colorize(" ", BORDER_BACKGROUND));
+    }
+    // 
+    for(int i = 2; i < HEIGHT ; i++){
+      // left  border
+      Text.go(i,0);
+      System.out.print(Text.colorize(" ", BORDER_BACKGROUND));
+      // right border
+      Text.go(i,WIDTH);
+      System.out.print(Text.colorize(" ", BORDER_BACKGROUND));
+      // vertical borders separating characters
+      if (i < 10 || i > 21){
+        Text.go(i,27);
+        System.out.print(Text.colorize(" ", BORDER_BACKGROUND));
+        Text.go(i,53);
+        System.out.print(Text.colorize(" ", BORDER_BACKGROUND));
       }
-      for(int j = 1; j <=WIDTH ; j ++){
-          Text.go(9,j);
-          System.out.print(Text.colorize(" ", BORDER_BACKGROUND));
+      // vetical borders between 2 boxes in middle
+      else {
+        Text.go(i,40);
+        System.out.print(Text.colorize(" ", BORDER_BACKGROUND));
+      }
+    }
+    // bottom border
+    for(int j = 1; j <=WIDTH ; j ++){
+      Text.go(HEIGHT-1,j);
+      System.out.print(Text.colorize(" ", BORDER_BACKGROUND));
+    }
+    // draw horizontal borders at rows 9 and 11
+    for(int j = 1; j <=WIDTH ; j ++){
+      Text.go(9,j);
+      System.out.print(Text.colorize(" ", BORDER_BACKGROUND));
+      Text.go(21,j);
+      System.out.print(Text.colorize(" ", BORDER_BACKGROUND));
+    }
+    // move cursor to bottom
+    Text.go(32,1);
   }
-      for(int j = 1; j <=WIDTH ; j ++){
-          Text.go(21,j);
-          System.out.print(Text.colorize(" ", BORDER_BACKGROUND));
-}
-Text.go(32,1);
-
-      }
 
   //Display a line of text starting at
   //(columns and rows start at 1 (not zero) in the terminal)
@@ -74,30 +79,25 @@ Text.go(32,1);
   */
   public static void TextBox(int row, int col, int width, int height, String text){
     String[] lines = text.split("\n");
-        for (String line : lines){
-          if (line.length() > width){
-            String[] words = line.split(" ");
-            String currLine = "";
-
-            for (String word : words){
-              if (currLine.length() + 1 + word.length() <= width) {
-                if (currLine.length() > 0) currLine += " ";
-                currLine += word;
-              }
-              else {
-                drawText(line, row, col);
-                row++;
-                currLine = "";
-              }
-            }
-            if (currLine.length() > 0){
-              drawText(line,row,col);
-              row++;
-            }
-          }
+    for (String line : lines){
+      String[] words = line.split(" ");
+      String currLine = "";
+      for (String word : words){
+        if (currLine.length() + 1 + word.length() <= width) {
+          if (currLine.length() > 0) currLine += " ";
+          currLine += word;
+        }
+        else {
           drawText(line, row, col);
           row++;
-     }
+          currLine = "";
+        }
+      }
+      if (currLine.length() > 0){
+        drawText(line,row,col);
+        row++;
+      }
+    }
   }
 
 
@@ -246,6 +246,9 @@ Text.go(32,1);
     while(! (input.equalsIgnoreCase("q") || input.equalsIgnoreCase("quit"))){
       //Read user input
       input = userInput(in);
+      String[] inputs = input.split(" ");
+      int target = Integer.parseInt(inputs[1]);
+      Adventurer currAdv = party.get(whichPlayer);
 
       //example debug statment
       //TextBox(24,2,1,78,"input: "+input+" partyTurn:"+partyTurn+ " whichPlayer="+whichPlayer+ " whichOpp="+whichOpponent );
@@ -255,24 +258,22 @@ Text.go(32,1);
 
         //Process user input for the last Adventurer:
         if(input.equals("attack") || input.equals("a")){
-          /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
-          //YOUR CODE HERE
-          /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
+          currAdv.attack(enemies.get(target));
         }
         else if(input.equals("special") || input.equals("sp")){
-          /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
-          //YOUR CODE HERE
-          /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
+          currAdv.specialAttack(enemies.get(target));
         }
         else if(input.startsWith("su ") || input.startsWith("support ")){
           //"support 0" or "su 0" or "su 2" etc.
           //assume the value that follows su  is an integer.
-          /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
-          //YOUR CODE HERE
-          /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
+          if (target == whichPlayer) currAdv.support();
+          else currAdv.support(party.get(target));
         }
 
         //You should decide when you want to re-ask for user input
+        else {
+          // re ask for input?
+        }
         //If no errors:
         party.get(whichPlayer).decreaseCounter();
         whichPlayer++;
@@ -301,9 +302,30 @@ Text.go(32,1);
 
         //enemy attacks a randomly chosen person with a randomly chosen attack.z`
         //Enemy action choices go here!
-        /*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
-        //YOUR CODE HERE
-        /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
+        
+        // enemy acttions
+        Adventurer currEnemy = enemies.get(whichOpponent);
+        int enemyMove = (int) (3 * Math.random());
+        if (enemyMove == 0){
+          // attack
+          int enemyTarget = (int) (party.size() * Math.random());
+          Adventurer attacked = party.get(enemyTarget);
+          currEnemy.attack(attacked);
+        }
+        if (enemyMove == 1){
+          // special attack
+          int enemyTarget = (int) (party.size() * Math.random());
+          Adventurer attacked = party.get(enemyTarget);
+          currEnemy.specialAttack(attacked);
+        }
+        if (enemyMove == 2){
+          // support
+          int ally = (int) (enemies.size() * Math.random());
+          if (ally == whichOpponent){
+            currEnemy.support();
+          }
+          else currEnemy.support(enemies.get(ally));
+        }
 
 
         //Decide where to draw the following prompt:
