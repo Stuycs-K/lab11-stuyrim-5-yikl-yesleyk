@@ -112,9 +112,6 @@ public class Game{
     }
   }
 
-
-
-
     //return a random adventurer (choose between all available subclasses)
     //feel free to overload this method to allow specific names/stats.
     public static ArrayList<Adventurer> createRandomBadAdventurerParty(int capacity){
@@ -174,7 +171,6 @@ public class Game{
       Text.go(17,42);
     }
 
-
   //Use this to create a colorized number string based on the % compared to the max value.
   public static String colorByPercent(int hp, int maxHP){
     String output = String.format("%2s", hp+"")+"/"+String.format("%2s", maxHP+"");
@@ -191,15 +187,10 @@ public class Game{
     return name;
   }
 
-
-
-
-
   //Display the party and enemies
   //Do not write over the blank areas where text will appear.
   //Place the cursor at the place where the user will by typing their input at the end of this method.
   public static void drawScreen(ArrayList<Adventurer> enemies, ArrayList<Adventurer> party){
-    
     //draw player party
     drawParty(enemies, 3);
     //draw enemy party
@@ -207,7 +198,6 @@ public class Game{
 
     Text.go(17,42);
   }
-
 
   public static String userInput(Scanner in){
       //Move cursor to prompt location
@@ -229,11 +219,19 @@ public class Game{
       return input;
   }
   
-
   public static void quit(){
     Text.reset();
     Text.showCursor();
     Text.go(17,42);
+  }
+
+  public static void deathChecker(ArrayList<Adventurer> group, boolean[] status){
+    for (int i = 0; i < group.size(); i++){
+      if (group.get(i).getHP() <= 0){
+        group.get(i).setHP(0);
+        status[i] = true;
+      }
+    }
   }
 
   public static void run(){
