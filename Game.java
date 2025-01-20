@@ -211,14 +211,19 @@ public class Game{
 
   public static String userInput(Scanner in){
       //Move cursor to prompt location
-      Text.go(32,1);
+      Text.go(31,1);
+      System.out.print("\033[2K");
+      Text.go(31, 1);
       //show cursor
       Text.showCursor();
       String input = in.nextLine();
       //clear the text that was written
-      System.out.print("\r");
+      Text.go(31, 1);
+      System.out.print("\033[2K");
+      Text.hideCursor();
+      /*System.out.print("\r");
       System.out.print("     ");
-      System.out.print("\r");
+      System.out.print("\r");*/
       return input;
   }
   
@@ -264,13 +269,19 @@ public class Game{
 
     //display this prompt at the start of the game.
     String preprompt = "Enter command for "+party.get(whichPlayer)+": \n >> attack (a) \n >> special (sp) \n >> support (su) \n >> quit (q)";
-    TextBox(10 , 41 ,37 , 11, preprompt);
+    TextBox(10 , 42 ,36 , 11, preprompt);
 
     // validifying userInput
 
 
     while(! (input.equalsIgnoreCase("q") || input.equalsIgnoreCase("quit"))){
       //Read user input
+
+      Text.hideCursor();
+      Text.clear();
+      drawBackground();
+      drawScreen(enemies, party);
+
       String[] inputs = input.split(" ");
       String action = " ";
       int target = 0;
@@ -295,19 +306,19 @@ public class Game{
         
 
         if (inputs.length > 2){
-          TextBox(17, 41, 37, 11, userInputErrors[0]);
+          TextBox(17, 42, 36, 11, userInputErrors[0]);
         }
         else if (inputs.length < 2){
-          TextBox(17, 41, 37, 11, userInputErrors[3]);
+          TextBox(17, 42, 36, 11, userInputErrors[3]);
         }
         else if (!(inputs[0].equals("attack") || inputs[0].equals("a") || 
         inputs[0].equals("special") || inputs[0].equals("sp") || 
         inputs[0].startsWith("su ") || inputs[0].startsWith("support "))){
-          TextBox(17,41,37,11,userInputErrors[1]);
+          TextBox(17,42,36,11,userInputErrors[1]);
         }
         else if(target > enemies.size() || target < 0){
           String invalidChar = "Please select another enemy to attack. ";
-          TextBox(17,41,37,11,userInputErrors[2] + invalidChar);
+          TextBox(17,42,36,11,userInputErrors[2] + invalidChar);
         }
         else validinput = true;
         //fix other stuff like if the support is for someone whos dead
@@ -323,29 +334,26 @@ public class Game{
 
         if(action.equals("attack") || action.equals("a")){
           words = currAdv.attack(enemies.get(target));
-          TextBox(10 , 2 ,37, 11, words);
+          TextBox(10 , 2 ,36, 11, words);
         }
         else if(action.equals("special") || action.equals("sp")){
           words = currAdv.specialAttack(enemies.get(target));
-          TextBox(10 , 2 ,37 , 11, words);
+          TextBox(10 , 2 ,36 , 11, words);
         }
         else if(action.equals("su") || action.equals("support")){
           //"support 0" or "su 0" or "su 2" etc.
           //assume the value that follows su  is an integer.
           if (target == whichPlayer) words = currAdv.support();
           else words = currAdv.support(party.get(target));
-          TextBox(10 , 2 ,37 , 11, words);
+          TextBox(10 , 2 ,36 , 11, words);
         }
 
         //You should decide when you want to re-ask for user input
-        else {
-          // re ask for input?
-        }
         //If no errors:
         party.get(whichPlayer).decreaseCounter();
         if(party.get(whichPlayer).getRevival() > 0){
           words = party.get(whichPlayer).revivalEffect();
-          TextBox(10 , 2 ,37 , 11, words);
+          TextBox(10 , 2 ,36 , 11, words);
         }
         if(!(party.get(whichPlayer).getExtraTurn())) whichPlayer++;
         else party.get(whichPlayer).setExtraTurn(false);
@@ -356,14 +364,14 @@ public class Game{
           //This is a player turn.
           //Decide where to draw the following prompt:
           String prompt = "Enter command for "+party.get(whichPlayer)+": attack/special/quit";
-          TextBox(10 , 41 ,37 , 11, prompt);
+          TextBox(10 , 42 ,36 , 11, prompt);
 
 
         }else{
           //This is after the player's turn, and allows the user to see the enemy turn
           //Decide where to draw the following prompt:
           String prompt = "press enter to see enemy turn";
-          TextBox(10 , 41 ,37 , 11, prompt);
+          TextBox(10 , 42 ,36 , 11, prompt);
 
           partyTurn = false;
           whichPlayer = 0;
@@ -386,14 +394,14 @@ public class Game{
           int enemyTarget = (int) (party.size() * Math.random());
           Adventurer attacked = party.get(enemyTarget);
           words = currEnemy.attack(attacked);
-          TextBox(10 , 2 ,37 , 11, words);
+          TextBox(10 , 2 ,36 , 11, words);
         }
         if (enemyMove == 1){
           // special attack
           int enemyTarget = (int) (party.size() * Math.random());
           Adventurer attacked = party.get(enemyTarget);
           words = currEnemy.specialAttack(attacked);
-          TextBox(10 , 2 ,37 , 11, words);
+          TextBox(10 , 2 ,36 , 11, words);
         }
         if (enemyMove == 2){
           // support
@@ -403,14 +411,14 @@ public class Game{
           }
           else words = currEnemy.support(enemies.get(ally));
 
-          TextBox(10 , 2 ,37 , 11, words);
+          TextBox(10 , 2 ,36 , 11, words);
         }
 
 
 
         //Decide where to draw the following prompt:
         String prompt = "press enter to see next turn";
-        TextBox(10 , 41 ,37 , 11, prompt);
+        TextBox(10 , 42 ,36 , 11, prompt);
         enemies.get(whichOpponent).decreaseCounter();
 
         if(!(enemies.get(whichOpponent).getExtraTurn())) whichOpponent++;
@@ -427,7 +435,7 @@ public class Game{
         partyTurn=true;
         //display this prompt before player's turn
         String prompt = "Enter command for "+party.get(whichPlayer)+": attack/special/quit";
-        TextBox(10 , 41 ,37 , 11, prompt);
+        TextBox(10 , 42 ,36 , 11, prompt);
       }
 
       //display the updated screen after input has been processed.
