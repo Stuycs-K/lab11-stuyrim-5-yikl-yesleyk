@@ -7,8 +7,7 @@ public class Game{
   private static final int BORDER_BACKGROUND = Text.WHITE + Text.BACKGROUND;
 
   public static void main(String[] args) {
-    drawLosingScreen();
-    //run();
+    run();
   }
 
   //Display the borders of your screen that will not change.
@@ -228,7 +227,7 @@ public class Game{
     Text.go(17,42);
   }
 
-public static void drawLosingScreen(){
+public static void drawLosingScreen(ArrayList<Adventurer> enemies){
   for (int i = 1; i < WIDTH; i++){
     for (int j = 1; j < HEIGHT; j ++){
       Text.go(i,j);
@@ -242,7 +241,7 @@ public static void drawLosingScreen(){
   TextBox(14, 25, 10, 10, textToDisplay);
 }
 
-public static void drawWinningScreen(){
+public static void drawWinningScreen(ArrayList<Adventurer> enemies){
   for (int i = 1; i < WIDTH; i++){
     for (int j = 1; j < HEIGHT; j ++){
       Text.go(i,j);
@@ -577,8 +576,8 @@ public static void drawWinningScreen(){
       //display the updated screen after input has been processed.
       
       drawScreen(enemies, party);
-      if (isAllTrue(deadParty)) drawLosingScreen();
-      if (isAllTrue(deadEnemies)) drawWinningScreen();
+      if (isAllTrue(deadParty)) drawLosingScreen(enemies);
+      if (isAllTrue(deadEnemies)) drawWinningScreen(enemies);
 
 
     }//end of main game loop
