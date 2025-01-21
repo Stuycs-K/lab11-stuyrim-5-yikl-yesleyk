@@ -327,20 +327,16 @@ public class Game{
           // not enough args
           if (inputs.length > 2){
             TextBox(16, 42, 36, 2, userInputErrors[0]);
-//            input = userInput(in);
-//            inputs = input.split(" ");
           }
           // too many args
           else if (inputs.length < 2){
             TextBox(16, 42, 36, 2, userInputErrors[3]);
-//            input = userInput(in);
-//            inputs = input.split(" ");
           }
           // first arg not a move
           else {
             if (!(inputs[0].equals("attack") || inputs[0].equals("a") || 
                   inputs[0].equals("special") || inputs[0].equals("sp") || 
-                  inputs[0].startsWith("su ") || inputs[0].startsWith("support "))){
+                  inputs[0].equals("su") || inputs[0].equals("support"))){
               TextBox(16,42,36,2,userInputErrors[1]);
             }
             // second arg not an int
