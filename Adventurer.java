@@ -5,7 +5,7 @@ public abstract class Adventurer{
     //counters
   private int bubbleBarrier, revival;
   //flags 
-  private boolean revivalFlag, bubbleBarrierFlag , extraTurnFlag , blessingFlag , sleepFlag ; 
+  private boolean revivalFlag, bubbleBarrierFlag , extraTurnFlag  , sleepFlag ; 
 
 
   //Abstract methods are meant to be implemented in child classes.

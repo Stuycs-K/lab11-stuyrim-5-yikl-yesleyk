@@ -54,7 +54,7 @@ public class Peach extends Adventurer {
     }
 
     public String specialAttack(Adventurer other){
-        if (this.getSpecial() == 0)return this.getName() + " wastes her turn looking for stars that no longer exist in the night sky";
+        if (this.getSpecial() <= 0)return this.getName() + " wastes her turn looking for stars that no longer exist in the night sky";
         else if (this.getSpecial() > 0){
             other.setSleep(true);
             setSpecial(getSpecial() - 1);

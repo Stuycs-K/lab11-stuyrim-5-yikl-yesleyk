@@ -53,7 +53,7 @@ public class Boss extends Adventurer {
     }
 
     public String specialAttack(Adventurer other){
-        if (this.getSpecial() == 0) return this.getName() + " wasted a turn looking for shell spins he doesn't have";
+        if (this.getSpecial() <= 0) return this.getName() + " wasted a turn looking for shell spins he doesn't have";
         if (this.getSpecial() > 0){
             // smth with the status effect
             setSpecial(getSpecial() - 1);
