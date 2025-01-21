@@ -5,13 +5,13 @@ public class Mario extends Adventurer{
 
     public Mario(String Input){
         super(Input, 18);
-        this.mushroomMax = 1;
+        this.mushroomMax = 2;
         mushroom = mushroomMax;
     }
 
     public Mario(){
         super("Mario", 18);
-        this.mushroomMax = 1;
+        this.mushroomMax = 2;
         mushroom = mushroomMax;
     }
 
@@ -39,9 +39,9 @@ public class Mario extends Adventurer{
 
     public String specialAttack(Adventurer other ){
         if (getSpecial()  == 0) return this.getName() + " wastes a turn looking for mushrooms he doesnt have";
-        other.setRevival(2);
-        setSpecial(0);
-        return this.getName() + " has given the power of reviving for 2 turns to " + other.getName();
+        other.setSpecial(other.getSpecial() - 2);
+        setSpecial(getSpecial() - 1);
+        return this.getName() + " has taken away 2 " + other.getSpecialName() + " from " + other.getName();
     }
 
     public String support(Adventurer other){

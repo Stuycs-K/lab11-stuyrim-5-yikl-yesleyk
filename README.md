@@ -31,9 +31,9 @@ replace this with your documentation for your two Adventurer subclasses. If you 
     + Mario uses a bubble on himself, blocking incoming damage
 - **Support (other)**: Bubble Barrier (Blocks 60% of incoming damage for 3 turns)
     + Mario uses a bubble on the target character, blocking incoming damage to that character
-- **Special Attack**: Revival Mushrooms (consumes 1 mushroom)
-    + If the targeted character dies within 2 turns, they are revived with 5 HP
-- **Special Resource**: 1-UP Mushroom (1)
+- **Special Attack**: Stealing Mushrooms (consumes 1 mushroom)
+    + Uses one mushroom to steal up to 2 of the target players special 
+- **Special Resource**: 1-UP Mushroom (2)
 ### Luigi (12 HP)
 - **Attack**: Exhaust Pipe Boomerang (1-3 damage, hits twice)
     + Luigi throws an exhaust pipe like a boomerang, hitting the target twice
