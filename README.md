@@ -20,7 +20,8 @@
 - :x: 
 
 ### Bugging Features
-- Charactet Deaths :beetle: 
+- Character Deaths :beetle: 
+- double logging actions sometimes :beetle: 
 
 ## Adventurer Subclasses
 
