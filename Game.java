@@ -7,7 +7,8 @@ public class Game{
   private static final int BORDER_BACKGROUND = Text.WHITE + Text.BACKGROUND;
 
   public static void main(String[] args) {
-    run();
+    drawLosingScreen();
+    //run();
   }
 
   //Display the borders of your screen that will not change.
@@ -227,6 +228,34 @@ public class Game{
     Text.go(17,42);
   }
 
+public static void drawLosingScreen(){
+  for (int i = 1; i < WIDTH; i++){
+    for (int j = 1; j < HEIGHT; j ++){
+      Text.go(i,j);
+      System.out.print(Text.colorize(" ", Text.RED));
+    }
+  }
+  String textToDisplay = "Aw Man you have been defeated by:";
+  for( int i = 0; i < enemies.size();){
+    textToDisplay += enemies.get(i).getName() + ", "; 
+  }
+  TextBox(14, 25, 10, 10, textToDisplay);
+}
+
+public static void drawWinningScreen(){
+  for (int i = 1; i < WIDTH; i++){
+    for (int j = 1; j < HEIGHT; j ++){
+      Text.go(i,j);
+      System.out.print(Text.colorize(" ", Text.GREEN));
+    }
+  }
+  String textToDisplay = "Congratulations you have defeated :";
+  for( int i = 0; i < enemies.size();){
+    textToDisplay += enemies.get(i).getName() + ", "; 
+  }
+  TextBox(14, 25, 10, 10, textToDisplay);
+}
+
   public static void deathChecker(ArrayList<Adventurer> group, boolean[] status){
     for (int i = 0; i < group.size(); i++){
       if (group.get(i).getHP() <= 0){
@@ -244,6 +273,14 @@ public class Game{
       return false;
     }
   }
+
+  public static boolean isAllTrue(boolean[] arr){
+    for ( int i = 0 ; i < arr.length ; i ++){
+      if (!arr[i]) return false; 
+    }
+    return true; 
+  }
+
   public static void printLastActions(ArrayList<String> actions, String newAction){
     if (actions.size() == 0){ 
       actions.add(newAction);
@@ -320,9 +357,9 @@ public class Game{
 
         while(!validinput){
           input = userInput(in);
-          inputs = input.split(" ");
-          action = inputs[0];
-          currAdv = party.get(whichPlayer);
+          String[] inputs = input.split(" ");
+          String action = inputs[0];
+          Adventurer currAdv = party.get(whichPlayer);
 
           // not enough args
           if (inputs.length > 2){
@@ -429,7 +466,7 @@ public class Game{
           }
           if(whichPlayer < party.size()){
 */
-          String prompt = "Enter command for "+party.get(whichPlayer)+": attack/special/quit";
+          String prompt = "Enter command for "+party.get(whichPlayer)+": \n >> attack (a) \n >> special (sp) \n >> support (su) \n >> quit (q)";
           TextBox(10 , 42 ,36 , 11, prompt);
           /* 
           }else{
@@ -517,13 +554,15 @@ public class Game{
         turn++;
         partyTurn=true;
         //display this prompt before player's turn
-        String prompt = "Enter command for "+party.get(whichPlayer)+": attack/special/quit";
+        String prompt = "Enter command for "+party.get(whichPlayer)+": \n >> attack (a) \n >> special (sp) \n >> support (su) \n >> quit (q)";
         TextBox(10 , 42 ,36 , 11, prompt);
       }
 
       //display the updated screen after input has been processed.
       
       drawScreen(enemies, party);
+      if (isAllTrue(deadParty)) drawLosingScreen();
+      if (isAllTrue(deadEnemies)) drawWinningScreen();
 
 
     }//end of main game loop
