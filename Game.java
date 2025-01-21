@@ -297,7 +297,7 @@ public static void drawWinningScreen(ArrayList<Adventurer> enemies){
   public static void printLastActions(ArrayList<String> actions, String newAction){
     if (actions.size() == 0){ 
       actions.add(newAction);
-      TextBox(15 , 2 ,36, 5, actions.get(1));
+      TextBox(15 , 2 ,36, 5, actions.get(0));
     }
     else if (actions.size() == 1){
       actions.add(newAction);

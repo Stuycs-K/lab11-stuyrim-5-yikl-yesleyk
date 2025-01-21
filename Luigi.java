@@ -5,13 +5,13 @@ public class Luigi extends Adventurer {
 
     public Luigi(String Input){
         super(Input, 12);
-        this.wrenchesMax = 1;
+        this.wrenchesMax = 4;
         wrenches =wrenchesMax;
     }
 
     public Luigi(){
         super("Luigi", 12);
-        this.wrenchesMax = 1;
+        this.wrenchesMax = 4;
         wrenches =wrenchesMax;
     }
 
