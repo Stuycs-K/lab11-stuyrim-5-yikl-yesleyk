@@ -55,7 +55,10 @@ public class Luigi extends Adventurer {
     }
 
     public String support(){
+        if(getSpecial() == getSpecialMax()) return this.getName() + "wasted time looking for wrenches when his pockets are already full";
+        else{
         this.restoreSpecial(1);
         return this.getName() + " opens an item box, restoring one wrench";
+        }
     }
 }
