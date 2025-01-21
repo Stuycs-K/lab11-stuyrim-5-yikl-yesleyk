@@ -473,10 +473,10 @@ public static void drawWinningScreen(ArrayList<Adventurer> enemies){
         System.out.print(whichPlayer);
         Text.go(17,42);*/
         deathChecker(party,deadParty);
-        while(deadParty[whichPlayer])whichPlayer++;
 
 
         if(whichPlayer < party.size() ){
+        while(deadParty[whichPlayer] && whichPlayer < party.size())whichPlayer++;
           //This is a player turn.
           //Decide where to draw the following prompt:
            
@@ -576,13 +576,16 @@ public static void drawWinningScreen(ArrayList<Adventurer> enemies){
         
         deathChecker(party,deadParty);
         deathChecker(enemies,deadEnemies);
-        while(deadEnemies[whichOpponent])whichOpponent++;
-        if(enemies.get(whichOpponent).getSleep()){
+        if( whichOpponent < enemies.size()){
+        while(deadEnemies[whichOpponent] && whichOpponent < enemies.size())whichOpponent++;
+        
+        if(whichOpponent < enemies.size() && enemies.get(whichOpponent).getSleep()){
           String sleepyname = enemies.get(whichOpponent).getName();
           party.get(whichOpponent).setSleep(false);
           whichOpponent++;
           words =sleepyname + " has gone to sleep and missed their turn";
           printLastActions(actions, words);
+        }
        }
 
           
