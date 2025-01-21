@@ -491,13 +491,7 @@ public static void drawWinningScreen(){
           //Decide where to draw the following prompt:
           String prompt = "press enter to see enemy turn";
           TextBox(10 , 42 ,36 , 11, prompt);
-          boolean proceed = false;
-          while (!proceed){
-            input = userInput(in);
-            if (input == ""){
-              proceed = true;
-            }
-          }
+          
           partyTurn = false;
           whichPlayer = 0;
           whichOpponent = 0;
@@ -513,6 +507,14 @@ public static void drawWinningScreen(){
         //Enemy action choices go here!
         
         // enemy acttions
+        boolean proceed = false;
+          while (!proceed){
+            input = userInput(in);
+            if (input == ""){
+              proceed = true;
+            }
+          }
+
         Adventurer currEnemy = enemies.get(whichOpponent);
         int enemyMove = (int) (3 * Math.random());
         if (enemyMove == 0){
