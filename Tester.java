@@ -52,8 +52,8 @@ public class Tester{
       Text.go(21,j);
       System.out.print(Text.colorize(" ", BORDER_BACKGROUND));
     }
-    // move cursor to bottom
-    Text.go(32,1);
+    // move cursor to bottom right side box
+    Text.go(17,42);
   }
 
   //Display a line of text starting at
@@ -78,6 +78,18 @@ public class Tester{
   *@param height the number of rows
   */
   public static void TextBox(int row, int col, int width, int height, String text){
+    //clearing box
+ 
+    for(int i = row ; i < row + height  ; i++){
+      for( int j = col ; j < col + width; j ++){
+        Text.go(i, j );
+        System.out.print(" ");
+      }
+      //System.out.print("\r");
+    }
+    Text.go(32,1);
+    
+    //print text
     String[] lines = text.split("\n");
     for (String line : lines){
       String[] words = line.split(" ");
@@ -106,7 +118,7 @@ public class Tester{
     //return a random adventurer (choose between all available subclasses)
     //feel free to overload this method to allow specific names/stats.
     public static ArrayList<Adventurer> createRandomBadAdventurerParty(int capacity){
-      String[] funnyadjectives = new String[] {"evil " , "bad-to-the-bone " , "terrible "};
+      String[] funnyadjectives = new String[] {"Evil " , "Bad-to-the-Bone " , "Terrible "};
       ArrayList<Adventurer> result = new ArrayList<Adventurer>(0); 
       for (int i = 0; i < capacity; i++ ){
         int random = (int)(Math.random() * 3);
@@ -124,7 +136,7 @@ public class Tester{
     }
 
     public static ArrayList<Adventurer> createRandomGoodAdventurerParty(int capacity){
-      String[] funnyadjectives = new String[] {"angelic " , "super " , "terrific "};
+      String[] funnyadjectives = new String[] {"Angelic " , "Super " , "Terrific "};
       ArrayList<Adventurer> result = new ArrayList<Adventurer>(0); 
       for (int i = 0; i < capacity; i++ ){
         int random = (int)(Math.random() * 3);
@@ -153,13 +165,13 @@ public class Tester{
       int column = 4;
       for (int i = 0; i < party.size(); i++){
         Adventurer curr = party.get(i);
-        String text = curr.getName() + '\n' +
+        String text = colorbyAliveness(curr) + '\n' +
                       "HP: " + colorByPercent(curr.getHP(),curr.getmaxHP()) + '\n' +
                       curr.getSpecialName() + ": " + curr.getSpecial();
-        TextBox(startRow, column, 25, 3, text);
+        TextBox(startRow, column, 22, 3, text);
         column += 27;
       }
-      Text.go(32,1);
+      Text.go(17,42);
     }
 
 
@@ -169,6 +181,14 @@ public class Tester{
     if (hp < 0.25 * maxHP) return Text.colorize(output, Text.RED);
     else if (hp < 0.75 * maxHP) return Text.colorize(output, Text.YELLOW);
     else return Text.colorize(output, Text.GREEN);
+  }
+
+  public static String colorbyAliveness(Adventurer currChar){
+    String name = currChar.getName();
+    if (currChar.getHP() <= 0){
+      return Text.colorize(name, Text.GRAY);
+    }
+    return name;
   }
 
 
@@ -185,19 +205,27 @@ public class Tester{
     //draw enemy party
     drawParty(party, 23);
 
-    Text.go(32,1);
+    Text.go(17,42);
   }
 
 
   public static String userInput(Scanner in){
       //Move cursor to prompt location
+      Text.go(17,42);
+      //System.out.print("\033[2K");
+      Text.go(17,42);
       //show cursor
       Text.showCursor();
       String input = in.nextLine();
       //clear the text that was written
-      System.out.print("\r");
+      TextBox(17,42,36,1,"                            ");
+      Text.go(17,42);
+      //System.out.print("\033[2K");
+      Text.hideCursor();
+      /*System.out.print("\r");
       System.out.print("     ");
-      System.out.print("\r");  
+      System.out.print("\r");*/
+      //drawBackground();
       return input;
   }
   
@@ -205,7 +233,7 @@ public class Tester{
   public static void quit(){
     Text.reset();
     Text.showCursor();
-    Text.go(32,1);
+    Text.go(17,42);
   }
 
   public static void run(){
@@ -221,11 +249,12 @@ public class Tester{
     else {
       enemies = createRandomBadAdventurerParty(enemyCount);
     }
+    boolean[] deadEnemies = new boolean[enemies.size()];
 
     //Adventurers you control:
     //Make an ArrayList of Adventurers and add 1-3 Adventurers to it.
     ArrayList<Adventurer> party = createRandomGoodAdventurerParty((int) (Math.random() * 3) + 1);
-
+    boolean[] deadParty = new boolean[party.size()];
 
     boolean partyTurn = true;
     int whichPlayer = 0;
@@ -241,68 +270,88 @@ public class Tester{
     //Main loop
 
     //display this prompt at the start of the game.
-    String preprompt = "Enter command for "+party.get(whichPlayer)+": \n attack \n special \n support \n quit";
-    TextBox(10 , 41 ,37 , 11, preprompt);
+    String preprompt = "Enter command for "+party.get(whichPlayer)+": \n >> attack (a) \n >> special (sp) \n >> support (su) \n >> quit (q)";
+    TextBox(10 , 42 ,36 , 11, preprompt);
+
+    // validifying userInput
 
 
     while(! (input.equalsIgnoreCase("q") || input.equalsIgnoreCase("quit"))){
       //Read user input
-      
+
+      String[] inputs = input.split(" ");
+      String action = " ";
+      int target = 0;
+      Adventurer currAdv = party.get(whichPlayer);
+      TextBox(10 , 42 ,36 , 11, preprompt);
+
+      String[] userInputErrors = {"too many arguments", "invalid move", "invalid character", "too little arguments"};
 
       //example debug statment
       //TextBox(24,2,1,78,"input: "+input+" partyTurn:"+partyTurn+ " whichPlayer="+whichPlayer+ " whichOpp="+whichOpponent );
 
       //display event based on last turn's input
       if(partyTurn){
-        input = userInput(in);
-        String[] inputs = input.split(" ");
-        String action = inputs[0];
-        int target = Integer.parseInt(inputs[1]);
-        Adventurer currAdv = party.get(whichPlayer);
 
+      boolean validinput = false;
+      while(!validinput){
+        input = userInput(in);
+        inputs = input.split(" ");
+        action = inputs[0];
+        target = Integer.parseInt(inputs[1]);
+        currAdv = party.get(whichPlayer);
+
+        
+
+        if (inputs.length > 2){
+          TextBox(17, 42, 36, 11, userInputErrors[0]);
+        }
+        else if (inputs.length < 2){
+          TextBox(17, 42, 36, 11, userInputErrors[3]);
+        }
+        else if (!(inputs[0].equals("attack") || inputs[0].equals("a") || 
+        inputs[0].equals("special") || inputs[0].equals("sp") || 
+        inputs[0].startsWith("su ") || inputs[0].startsWith("support "))){
+          TextBox(17,42,36,11,userInputErrors[1]);
+        }
+        else if(target > enemies.size() || target < 0){
+          String invalidChar = "Please select another enemy to attack. ";
+          TextBox(17,42,36,2,userInputErrors[2] + invalidChar);
+        }
+        else validinput = true;
+        //fix other stuff like if the support is for someone whos dead
+      }
+
+      
         // check for invalid inputs
-        while(!(inputs[0].equals("attack") || inputs[0].equals("a") || 
-             inputs[0].equals("special") || inputs[0].equals("sp") || 
-             inputs[0].startsWith("su ") || inputs[0].startsWith("support ")) ||
-             target > enemies.size()){
-              TextBox(10 , 2 ,37 , 11, "invalid move");
-              Text.go(32,1);
-              input = userInput(in);
-              inputs = input.split(" ");
-              action = inputs[0];
-              target = Integer.parseInt(inputs[1]);
-              currAdv = party.get(whichPlayer);
-             }
-            
 
         String words ="";
         //Process user input for the last Adventurer:
 
+        
+
         if(action.equals("attack") || action.equals("a")){
           words = currAdv.attack(enemies.get(target));
-          TextBox(10 , 2 ,37, 11, words);
+          TextBox(10 , 2 ,36, 11, words);
         }
         else if(action.equals("special") || action.equals("sp")){
           words = currAdv.specialAttack(enemies.get(target));
-          TextBox(10 , 2 ,37 , 11, words);
+          TextBox(10 , 2 ,36 , 11, words);
         }
         else if(action.equals("su") || action.equals("support")){
           //"support 0" or "su 0" or "su 2" etc.
           //assume the value that follows su  is an integer.
           if (target == whichPlayer) words = currAdv.support();
           else words = currAdv.support(party.get(target));
-          TextBox(10 , 2 ,37 , 11, words);
+          TextBox(10 , 2 ,36 , 11, words);
         }
 
         //You should decide when you want to re-ask for user input
-        else {
-          // re ask for input?
-        }
         //If no errors:
         party.get(whichPlayer).decreaseCounter();
         if(party.get(whichPlayer).getRevival() > 0){
           words = party.get(whichPlayer).revivalEffect();
-          TextBox(10 , 2 ,37 , 11, words);
+          TextBox(10 , 2 ,36 , 11, words);
         }
         if(!(party.get(whichPlayer).getExtraTurn())) whichPlayer++;
         else party.get(whichPlayer).setExtraTurn(false);
@@ -313,17 +362,17 @@ public class Tester{
           //This is a player turn.
           //Decide where to draw the following prompt:
           String prompt = "Enter command for "+party.get(whichPlayer)+": attack/special/quit";
-          TextBox(10 , 41 ,37 , 11, prompt);
+          TextBox(10 , 42 ,36 , 11, prompt);
 
 
         }else{
           //This is after the player's turn, and allows the user to see the enemy turn
           //Decide where to draw the following prompt:
           String prompt = "press enter to see enemy turn";
-          TextBox(10 , 41 ,37 , 11, prompt);
+          TextBox(10 , 42 ,36 , 11, prompt);
 
           partyTurn = false;
-
+          whichPlayer = 0;
           whichOpponent = 0;
         }
         //done with one party member
@@ -343,14 +392,14 @@ public class Tester{
           int enemyTarget = (int) (party.size() * Math.random());
           Adventurer attacked = party.get(enemyTarget);
           words = currEnemy.attack(attacked);
-          TextBox(10 , 2 ,37 , 11, words);
+          TextBox(10 , 2 ,36 , 11, words);
         }
         if (enemyMove == 1){
           // special attack
           int enemyTarget = (int) (party.size() * Math.random());
           Adventurer attacked = party.get(enemyTarget);
           words = currEnemy.specialAttack(attacked);
-          TextBox(10 , 2 ,37 , 11, words);
+          TextBox(10 , 2 ,36 , 11, words);
         }
         if (enemyMove == 2){
           // support
@@ -360,14 +409,14 @@ public class Tester{
           }
           else words = currEnemy.support(enemies.get(ally));
 
-          TextBox(10 , 2 ,37 , 11, words);
+          TextBox(10 , 2 ,36 , 11, words);
         }
 
 
 
         //Decide where to draw the following prompt:
         String prompt = "press enter to see next turn";
-        TextBox(10 , 41 ,37 , 11, prompt);
+        TextBox(10 , 42 ,36 , 11, prompt);
         enemies.get(whichOpponent).decreaseCounter();
 
         if(!(enemies.get(whichOpponent).getExtraTurn())) whichOpponent++;
@@ -384,7 +433,7 @@ public class Tester{
         partyTurn=true;
         //display this prompt before player's turn
         String prompt = "Enter command for "+party.get(whichPlayer)+": attack/special/quit";
-        TextBox(10 , 41 ,37 , 11, prompt);
+        TextBox(10 , 42 ,36 , 11, prompt);
       }
 
       //display the updated screen after input has been processed.

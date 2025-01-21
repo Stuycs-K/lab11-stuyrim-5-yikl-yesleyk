@@ -307,11 +307,7 @@ public class Game{
     while(! (input.equalsIgnoreCase("q") || input.equalsIgnoreCase("quit"))){
       //Read user input
 
-      String[] inputs = input.split(" ");
-      String action = " ";
-      int target = 0;
-      Adventurer currAdv = party.get(whichPlayer);
-      TextBox(10 , 42 ,36 , 11, preprompt);
+
 
       String[] userInputErrors = {"Too many arguments. Try again.", "Invalid move. Try again.", "Select an existing character.", "Too little arguments. Try again.", "Second argument must be an integer.", "Please select a living character. "};
 
@@ -423,7 +419,7 @@ public class Game{
         if(whichPlayer < party.size()){
           //This is a player turn.
           //Decide where to draw the following prompt:
-
+          /* 
           if(party.get(whichPlayer).getSleep()){
             String sleepyname = party.get(whichPlayer).getName();
             party.get(whichPlayer).setSleep(false);
@@ -432,18 +428,19 @@ public class Game{
             printLastActions(actions, words);
           }
           if(whichPlayer < party.size()){
-
+*/
           String prompt = "Enter command for "+party.get(whichPlayer)+": attack/special/quit";
           TextBox(10 , 42 ,36 , 11, prompt);
-
+          /* 
           }else{
             String prompt = "press enter to see enemy turn";
             TextBox(10 , 42 ,36 , 11, prompt);
 
             partyTurn = false;
-            whichPlayer = 0;
+            
             whichOpponent = 0;
           }
+          */
         }else{
           //This is after the player's turn, and allows the user to see the enemy turn
           //Decide where to draw the following prompt:
