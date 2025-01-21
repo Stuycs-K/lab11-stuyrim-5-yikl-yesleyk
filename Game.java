@@ -359,7 +359,6 @@ public static void drawWinningScreen(ArrayList<Adventurer> enemies){
       //Read user input
 
 
-
       String[] userInputErrors = {"Too many arguments. Try again.", "Invalid move. Try again.", "Select an existing character.", "Too little arguments. Try again.", "Second argument must be an integer.", "Please select a living character. "};
 
       //example debug statment
