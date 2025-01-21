@@ -244,7 +244,7 @@ public static void drawLosingScreen(ArrayList<Adventurer> enemies){
   }
   Text.go(14,25);
   System.out.print(Text.colorize(textToDisplay,Text.RED + Text.BACKGROUND, Text.WHITE));
-  Text.go(15,25);
+  Text.go(16,25);
   System.out.print(Text.colorize(textChars,Text.RED + Text.BACKGROUND, Text.WHITE));
   Text.hideCursor();
 }
