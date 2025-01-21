@@ -39,6 +39,7 @@ public class Luigi extends Adventurer {
     }
 
     public String specialAttack(Adventurer other ){
+        if( wrenches == 0) return this.getName() + " wastes a turn becuase he has insufficient wrenches";
         wrenches--;
         double random = Math.random();
         if (random < 0.7){
