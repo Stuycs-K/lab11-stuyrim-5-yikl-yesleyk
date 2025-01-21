@@ -317,15 +317,16 @@ public class Game{
       //display event based on last turn's input
       if(partyTurn){
         boolean validinput = false;
-
-        input = userInput(in);
-          String[] inputs = input.split(" ");
-          String action = inputs[0];
-          Adventurer currAdv = party.get(whichPlayer);
-          int target;
+        String[] inputs = new String[2];
+        int target = -1;
+        String action = null;
+        Adventurer currAdv = party.get(whichPlayer);
 
         while(!validinput){
-          
+          input = userInput(in);
+          inputs = input.split(" ");
+          action = inputs[0];
+          currAdv = party.get(whichPlayer);
           
           // not enough args
           if (inputs.length > 2){
@@ -415,6 +416,10 @@ public class Game{
         if(!(party.get(whichPlayer).getExtraTurn()))whichPlayer++;
 
         else party.get(whichPlayer).setExtraTurn(false);
+        // debug sttaemetn whichplayer
+        /*Text.go(31,1);
+        System.out.print(whichPlayer);
+        Text.go(17,42);*/
         
 
 
@@ -449,7 +454,13 @@ public class Game{
           //Decide where to draw the following prompt:
           String prompt = "press enter to see enemy turn";
           TextBox(10 , 42 ,36 , 11, prompt);
-
+          boolean proceed = false;
+          while (!proceed){
+            input = userInput(in);
+            if (input == ""){
+              proceed = true;
+            }
+          }
           partyTurn = false;
           whichPlayer = 0;
           whichOpponent = 0;
