@@ -11,16 +11,16 @@
 - :white_check_mark: Displayed results of attack/special/support inside border
 
 ### Extra Working Features
-- :ballot_box_with_check: Display several past actions using a list
+- Display several past actions using a list :ballot_box_with_check: 
 
 ### Partially Working Features
-- :question: Peach's special ability (putting a character to sleep) only works when the party uses it.
-
+-  Peach's special ability (putting a character to sleep) only works when the party uses it. :question:
+ 
 ### Not Working Features
 - :x: 
 
 ### Bugging Features
-- :beetle: 
+- Charactet Deaths :beetle: 
 
 ## Adventurer Subclasses
 

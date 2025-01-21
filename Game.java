@@ -473,10 +473,7 @@ public static void drawWinningScreen(ArrayList<Adventurer> enemies){
         //You should decide when you want to re-ask for user input
         //If no errors:
         party.get(whichPlayer).decreaseCounter();
-        if(party.get(whichPlayer).getRevival() > 0){
-          words = party.get(whichPlayer).revivalEffect();
-          printLastActions(actions, words);
-        }
+        
         if(!(party.get(whichPlayer).getExtraTurn()))whichPlayer++;
 
         else party.get(whichPlayer).setExtraTurn(false);
