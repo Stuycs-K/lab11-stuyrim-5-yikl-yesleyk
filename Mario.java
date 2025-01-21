@@ -38,7 +38,9 @@ public class Mario extends Adventurer{
     }
 
     public String specialAttack(Adventurer other ){
+        if (getSpecial()  == 0) return this.getName() + " wastes a turn looking for mushrooms he doesnt have";
         other.setRevival(2);
+        setSpecial(getSpecial() - 1);
       return this.getName() + " has given the power of reviving for 2 turns to " + other.getName();
     }
 

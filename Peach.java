@@ -48,12 +48,13 @@ public class Peach extends Adventurer {
     public String support(){
         // maybe we could give her like 3-5 pts of instant healing before healing over time
         int instantHealing = (int) (Math.random() * 2) +3;
-        this.applyDamage(instantHealing);
+        this.heal(instantHealing);
         // something to apply healing status effect
         return this.getName() + " blesses herself with with the power of peach nectar, healing " + instantHealing + " points of damage and applying " + "STATUS PLACEHOLDER" + " to herself.";
     }
 
     public String specialAttack(Adventurer other){
+        if (this.getSpecial == 0)return this.getName() + " wastes her turn looking for stars that no longer exist in the night sky";
         if (this.getSpecial() > 0){
             // smth with the status effect
             setSpecial(getSpecial() - 1);
