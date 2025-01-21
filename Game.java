@@ -327,7 +327,7 @@ public class Game{
           inputs = input.split(" ");
           action = inputs[0];
           currAdv = party.get(whichPlayer);
-
+          
           // not enough args
           if (inputs.length > 2){
             TextBox(16, 42, 36, 2, userInputErrors[0]);
@@ -416,7 +416,7 @@ public class Game{
         if(!(party.get(whichPlayer).getExtraTurn()))whichPlayer++;
 
         else party.get(whichPlayer).setExtraTurn(false);
-
+        
 
 
 
