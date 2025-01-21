@@ -301,14 +301,14 @@ public static void drawWinningScreen(ArrayList<Adventurer> enemies){
     }
     else if (actions.size() == 1){
       actions.add(newAction);
-      TextBox(15 , 2 ,36, 5, actions.get(0));
+      TextBox(15 , 2 ,36, 5, Text.colorize(actions.get(0), Text.GRAY));
       TextBox(10 , 2 ,36, 5, actions.get(1));
     }
     else {
       actions.set(0, actions.get(1));
       actions.set(1, newAction);
-      TextBox(15 , 2 ,36, 5, actions.get(0));
-      TextBox(10 , 2 ,36, 5, actions.get(1));
+      TextBox(15 , 2 ,36, 5, Text.colorize(actions.get(0), Text.GRAY));
+      TextBox(10 , 2 ,36, 5, Text.colorize(actions.get(1), Text.WHITE));
     }
   }
 
