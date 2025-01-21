@@ -274,7 +274,10 @@ public static void drawWinningScreen(ArrayList<Adventurer> enemies){
     for (int i = 0; i < group.size(); i++){
       if (group.get(i).getHP() <= 0){
         group.get(i).setHP(0);
-        status[i] = true;
+        if(!status[i]){
+          status[i] = true;
+
+        }
       }
     }
   }
@@ -349,8 +352,11 @@ public static void drawWinningScreen(ArrayList<Adventurer> enemies){
     //Main loop
 
     //display this prompt at the start of the game.
+    if(deadParty[whichPlayer]) printLastActions(actions, party.get(whichPlayer).getName() + " has fallen and cannot move anymore");
+    else{
     String preprompt = "Enter command for "+party.get(whichPlayer)+": \n >> attack (a) \n >> special (sp) \n >> support (su) \n >> quit (q)";
     TextBox(10 , 42 ,36 , 11, preprompt);
+    }
 
     // validifying userInput
 
@@ -484,7 +490,9 @@ public static void drawWinningScreen(ArrayList<Adventurer> enemies){
 
 
         if(whichPlayer < party.size() ){
-          while(deadParty[whichPlayer] && whichPlayer < party.size())whichPlayer++;
+          //while(deadParty[whichPlayer] && whichPlayer < party.size())whichPlayer++;
+          if(deadParty[whichPlayer]) printLastActions(actions, party.get(whichPlayer).getName() + " has fallen and cannot move anymore");
+    else{
           //This is a player turn.
           //Decide where to draw the following prompt:
           /* 
@@ -495,12 +503,12 @@ public static void drawWinningScreen(ArrayList<Adventurer> enemies){
             whichPlayer++;
             words = sleepyname + " has gone to sleep and missed their turn";
             printLastActions(actions, words);
-          }
+          }*/
           if(whichPlayer < party.size()){ 
           String prompt = "Enter command for "+party.get(whichPlayer)+": \n >> attack (a) \n >> special (sp) \n >> support (su) \n >> quit (q)";
           TextBox(10 , 42 ,36 , 11, prompt);
           }
-          */
+        }
               /* 
           }else{
             String prompt = "press enter to see enemy turn";
@@ -549,6 +557,11 @@ public static void drawWinningScreen(ArrayList<Adventurer> enemies){
             words =sleepyname + " has gone to sleep and missed their turn";
             printLastActions(actions, words);
         }
+        if(deadEnemies[whichOpponent]){
+          printLastActions(actions, enemies.get(whichOpponent).getName() + " has fallen and cannot move anymore");
+          whichOpponent++;
+        } 
+        
 
         if( whichOpponent < enemies.size()){
 
@@ -589,12 +602,13 @@ public static void drawWinningScreen(ArrayList<Adventurer> enemies){
 
         if(!(enemies.get(whichOpponent).getExtraTurn())) whichOpponent++;
         else enemies.get(whichOpponent).setExtraTurn(false);
-        
-      }
+
         deathChecker(party,deadParty);
         deathChecker(enemies,deadEnemies);
         if( whichOpponent < enemies.size()){
         while(deadEnemies[whichOpponent] && whichOpponent < enemies.size())whichOpponent++;
+      }
+
 
       
        }

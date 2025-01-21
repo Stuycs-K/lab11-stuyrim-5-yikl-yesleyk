@@ -138,7 +138,7 @@ public abstract class Adventurer{
     this.HP = hp;
     this.maxHP = hp;
     this.bubbleBarrier = this.revival = 0;
-    this.revivalFlag = this.bubbleBarrierFlag = this.extraTurnFlag = this.blessingFlag = this.sleepFlag = false ;
+    this.revivalFlag = this.bubbleBarrierFlag = this.extraTurnFlag = this.sleepFlag = false ;
   }
 
   //toString method
