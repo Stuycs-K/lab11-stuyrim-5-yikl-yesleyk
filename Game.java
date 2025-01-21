@@ -283,18 +283,18 @@ public static void drawWinningScreen(ArrayList<Adventurer> enemies){
   public static void printLastActions(ArrayList<String> actions, String newAction){
     if (actions.size() == 0){ 
       actions.add(newAction);
-      TextBox(15 , 2 ,36, 5, actions.get(0));
+      TextBox(15 , 2 ,36, 5, actions.get(1));
     }
     else if (actions.size() == 1){
       actions.add(newAction);
-      TextBox(15 , 2 ,36, 5, actions.get(1));
-      TextBox(10 , 2 ,36, 5, actions.get(0));
+      TextBox(15 , 2 ,36, 5, actions.get(0));
+      TextBox(10 , 2 ,36, 5, actions.get(1));
     }
     else {
       actions.set(0, actions.get(1));
       actions.set(1, newAction);
-      TextBox(15 , 2 ,36, 5, actions.get(1));
-      TextBox(10 , 2 ,36, 5, actions.get(0));
+      TextBox(15 , 2 ,36, 5, actions.get(0));
+      TextBox(10 , 2 ,36, 5, actions.get(1));
     }
   }
 
@@ -456,14 +456,14 @@ public static void drawWinningScreen(ArrayList<Adventurer> enemies){
         /*Text.go(31,1);
         System.out.print(whichPlayer);
         Text.go(17,42);*/
-        
+        deathChecker(party,deadParty);
+        while(deadParty[whichPlayer])whichPlayer++;
 
 
-
-        if(whichPlayer < party.size()){
+        if(whichPlayer < party.size() ){
           //This is a player turn.
           //Decide where to draw the following prompt:
-          /* 
+           
           if(party.get(whichPlayer).getSleep()){
             String sleepyname = party.get(whichPlayer).getName();
             party.get(whichPlayer).setSleep(false);
@@ -472,10 +472,10 @@ public static void drawWinningScreen(ArrayList<Adventurer> enemies){
             printLastActions(actions, words);
           }
           if(whichPlayer < party.size()){
-*/
+
           String prompt = "Enter command for "+party.get(whichPlayer)+": \n >> attack (a) \n >> special (sp) \n >> support (su) \n >> quit (q)";
           TextBox(10 , 42 ,36 , 11, prompt);
-          /* 
+          
           }else{
             String prompt = "press enter to see enemy turn";
             TextBox(10 , 42 ,36 , 11, prompt);
@@ -484,7 +484,7 @@ public static void drawWinningScreen(ArrayList<Adventurer> enemies){
             
             whichOpponent = 0;
           }
-          */
+          
         }else{
           //This is after the player's turn, and allows the user to see the enemy turn
           //Decide where to draw the following prompt:
@@ -559,6 +559,17 @@ public static void drawWinningScreen(ArrayList<Adventurer> enemies){
         else enemies.get(whichOpponent).setExtraTurn(false);
         
         deathChecker(party,deadParty);
+        deathChecker(enemies,deadEnemies);
+        while(deadEnemies[whichOpponent])whichOpponent++;
+        if(enemies.get(whichOpponent).getSleep()){
+          String sleepyname = enemies.get(whichOpponent).getName();
+          party.get(whichOpponent).setSleep(false);
+          whichOpponent++;
+          words =sleepyname + " has gone to sleep and missed their turn";
+          printLastActions(actions, words);
+       }
+
+          
       }//end of one enemy.
 
       //modify this if statement.
