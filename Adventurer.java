@@ -3,7 +3,7 @@ public abstract class Adventurer{
   private String name;
   private int HP,maxHP;
     //counters
-  private int bubbleBarrier, blessing, revival;
+  private int bubbleBarrier, revival;
   //flags 
   private boolean revivalFlag, bubbleBarrierFlag , extraTurnFlag , blessingFlag , sleepFlag ; 
 
@@ -64,11 +64,6 @@ public abstract class Adventurer{
     setFlag(n , bubbleBarrierFlag);
   }
 
-  public void setBlessing(int n){
-    blessing = n;
-    setFlag(n , blessingFlag);
-  }
-
   public void setSleep(boolean n){
     sleepFlag = n;
   }
@@ -82,14 +77,9 @@ public abstract class Adventurer{
     extraTurnFlag = n;
   }
 
-
   public int getBubbleBarrier(){
     return bubbleBarrier;
   }
-
-  //public int getBlessing(){
-  //  return blessing;
-  //}
 
   public boolean getExtraTurn(){
     return extraTurnFlag;
@@ -107,12 +97,6 @@ public abstract class Adventurer{
     setBubbleBarrier(getBubbleBarrier() - 1);
     return (int) (damage * .6);
   }
-
-  //public int blessingEffect(){
-  //  setBlessing(getBlessing() - 1);
-  //  return (int) (Math.random() + 2);
-  //0}
-
 
   public String revivalEffect(){
     if (this.getHP() <= 0){
@@ -146,7 +130,6 @@ public abstract class Adventurer{
   public Adventurer(String name){
     this(name, 10);
     this.bubbleBarrier = 0;
-    this.blessing = 0;
     this.revival = 0;
   }
 
@@ -154,7 +137,7 @@ public abstract class Adventurer{
     this.name = name;
     this.HP = hp;
     this.maxHP = hp;
-    this.bubbleBarrier = this.blessing = this.revival = 0;
+    this.bubbleBarrier = this.revival = 0;
     this.revivalFlag = this.bubbleBarrierFlag = this.extraTurnFlag = this.blessingFlag = this.sleepFlag = false ;
   }
 
@@ -192,9 +175,6 @@ public abstract class Adventurer{
     if (bubbleBarrierFlag ){
       setBubbleBarrier(getBubbleBarrier() - 1);
     }
-    //if (blessingFlag ){
-    //  setBlessing(getBlessing() - 1);
-    //}
     if (revivalFlag){
       setRevival(getRevival() - 1);
     }

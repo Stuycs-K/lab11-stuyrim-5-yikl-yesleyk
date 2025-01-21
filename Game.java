@@ -436,8 +436,16 @@ public static void drawWinningScreen(ArrayList<Adventurer> enemies){
 
         String words ="";
         //Process user input for the last Adventurer:
-
-        
+        /* 
+        if(party.get(whichPlayer).getSleep()){
+          String sleepyname = party.get(whichPlayer).getName();
+          party.get(whichPlayer).setSleep(false);
+          whichPlayer++;
+          words = sleepyname + " has gone to sleep and missed their turn";
+          printLastActions(actions, words);
+        }
+        if(whichPlayer < party.size()){
+          */
 
         if(action.equals("attack") || action.equals("a")){
           words = currAdv.attack(enemies.get(target));
@@ -472,26 +480,29 @@ public static void drawWinningScreen(ArrayList<Adventurer> enemies){
         /*Text.go(31,1);
         System.out.print(whichPlayer);
         Text.go(17,42);*/
+      //  }
         deathChecker(party,deadParty);
 
 
         if(whichPlayer < party.size() ){
-        while(deadParty[whichPlayer] && whichPlayer < party.size())whichPlayer++;
+          while(deadParty[whichPlayer] && whichPlayer < party.size())whichPlayer++;
           //This is a player turn.
           //Decide where to draw the following prompt:
-           
+          /* 
+          if(whichPlayer < party.size()){   
           if(party.get(whichPlayer).getSleep()){
             String sleepyname = party.get(whichPlayer).getName();
             party.get(whichPlayer).setSleep(false);
             whichPlayer++;
-            words =sleepyname + " has gone to sleep and missed their turn";
+            words = sleepyname + " has gone to sleep and missed their turn";
             printLastActions(actions, words);
           }
-          if(whichPlayer < party.size()){
-
+          if(whichPlayer < party.size()){ 
           String prompt = "Enter command for "+party.get(whichPlayer)+": \n >> attack (a) \n >> special (sp) \n >> support (su) \n >> quit (q)";
           TextBox(10 , 42 ,36 , 11, prompt);
-          
+          }
+          */
+              /* 
           }else{
             String prompt = "press enter to see enemy turn";
             TextBox(10 , 42 ,36 , 11, prompt);
@@ -499,6 +510,8 @@ public static void drawWinningScreen(ArrayList<Adventurer> enemies){
             partyTurn = false;
             
             whichOpponent = 0;
+          }
+            */
           }
           
         }else{
@@ -530,6 +543,17 @@ public static void drawWinningScreen(ArrayList<Adventurer> enemies){
             }
           }
 
+        if(enemies.get(whichOpponent).getSleep()){
+            String sleepyname = enemies.get(whichOpponent).getName();
+            enemies.get(whichOpponent).setSleep(false);
+            whichOpponent++;
+            words =sleepyname + " has gone to sleep and missed their turn";
+            printLastActions(actions, words);
+        }
+
+        if( whichOpponent < enemies.size()){
+
+        
         Adventurer currEnemy = enemies.get(whichOpponent);
         int enemyMove = (int) (3 * Math.random());
         if (enemyMove == 0){
@@ -564,7 +588,7 @@ public static void drawWinningScreen(ArrayList<Adventurer> enemies){
           printLastActions(actions, words);
         }
 
-
+      
 
         //Decide where to draw the following prompt:
         String prompt = "press enter to see next turn";
@@ -574,18 +598,13 @@ public static void drawWinningScreen(ArrayList<Adventurer> enemies){
         if(!(enemies.get(whichOpponent).getExtraTurn())) whichOpponent++;
         else enemies.get(whichOpponent).setExtraTurn(false);
         
+      }
         deathChecker(party,deadParty);
         deathChecker(enemies,deadEnemies);
         if( whichOpponent < enemies.size()){
         while(deadEnemies[whichOpponent] && whichOpponent < enemies.size())whichOpponent++;
-        
-        if(whichOpponent < enemies.size() && enemies.get(whichOpponent).getSleep()){
-          String sleepyname = enemies.get(whichOpponent).getName();
-          party.get(whichOpponent).setSleep(false);
-          whichOpponent++;
-          words =sleepyname + " has gone to sleep and missed their turn";
-          printLastActions(actions, words);
-        }
+
+      
        }
 
           

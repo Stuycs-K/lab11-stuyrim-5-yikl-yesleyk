@@ -15,6 +15,10 @@ Make a clear list of features that work/dont work
 
 :beetle: This is a bug that affects the game.
 
+Playable :white_check_mark:
+Theme :white_check_mark:
+
+
 
 ## Adventurer Subclasses
 
@@ -43,9 +47,9 @@ replace this with your documentation for your two Adventurer subclasses. If you 
 ### Princess Peach (14 HP)
 - **Attack**: Piercing Parasol (1-2 dmg)
     + Princess Peach pierces an enemy with her colorful bright pink parasol 
-- **Support (self)**: Peach's Blessing (heals 2-3 hp for 3 turns)
+- **Support (self)**: Peach's Blessing (heals 3-5 hp)
     + Princess Peach blesses herself with the power of peach nectar
-- **Support (other)**:Peach's Blessing (heals 2-3 hp for 3 turns)
+- **Support (other)**:Peach's Blessing (heals 3-5 hp)
     + Princess Peach blesses another character with the power of peach nectar
 - **Special Attack**: Sleepy time spell (makes the target character inactive for one turn, consumes 1 star )
     + Princess Peach uses the power of the beautiful night sky to lull the target character to sleep

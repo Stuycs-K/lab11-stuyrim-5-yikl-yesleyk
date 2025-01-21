@@ -42,7 +42,7 @@ public class Peach extends Adventurer {
         int instantHealing = (int) (Math.random() * 2) +3;
         other.heal(instantHealing);
         // something to apply healing status effect
-        return this.getName() + " blesses " + other.getName() + " with with the power of peach nectar, healing " + instantHealing + " points of damage and applying " + "STATUS PLACEHOLDER" + " to " + other.getName() + ".";
+        return this.getName() + " blesses " + other.getName() + " with with the power of peach nectar, healing " + instantHealing + " health to " + other.getName() + ".";
     }
 
     public String support(){
@@ -50,12 +50,12 @@ public class Peach extends Adventurer {
         int instantHealing = (int) (Math.random() * 2) +3;
         this.heal(instantHealing);
         // something to apply healing status effect
-        return this.getName() + " blesses herself with with the power of peach nectar, healing " + instantHealing + " points of damage and applying " + "STATUS PLACEHOLDER" + " to herself.";
+        return this.getName() + " blesses herself with with the power of peach nectar, healing " + instantHealing + " health to herself.";
     }
 
     public String specialAttack(Adventurer other){
         if (this.getSpecial() == 0)return this.getName() + " wastes her turn looking for stars that no longer exist in the night sky";
-        if (this.getSpecial() > 0){
+        else if (this.getSpecial() > 0){
             other.setSleep(true);
             setSpecial(getSpecial() - 1);
             return this.getName() + " uses the power of the beautiful night sky to lull " + other.getName() + " to sleep, consuming one " + this.getSpecialName() + ". ";
