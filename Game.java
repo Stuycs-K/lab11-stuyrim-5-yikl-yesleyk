@@ -228,13 +228,14 @@ public class Game{
   }
 
 public static void drawLosingScreen(ArrayList<Adventurer> enemies){
+  Text.hideCursor();
   for (int i = 1; i < WIDTH; i++){
     for (int j = 1; j < HEIGHT; j ++){
       Text.go(j,i);
       System.out.print(Text.colorize(" ", Text.RED+Text.BACKGROUND));
     }
   }
-  String textToDisplay = "Aw Man you have been defeated by: ";
+  String textToDisplay = "Aw Man you have been defeated by: \n";
   String textChars = "";
   for( int i = 0; i < enemies.size(); i++){
     if (i < enemies.size() - 1) textToDisplay += enemies.get(i).getName() + ", ";
@@ -248,13 +249,14 @@ public static void drawLosingScreen(ArrayList<Adventurer> enemies){
 }
 
 public static void drawWinningScreen(ArrayList<Adventurer> enemies){
+  Text.hideCursor();
   for (int i = 1; i < WIDTH; i++){
     for (int j = 1; j < HEIGHT; j ++){
       Text.go(j,i);
       System.out.print(Text.colorize(" ", Text.GREEN+Text.BACKGROUND));
     }
   }
-  String textToDisplay = "Congratulations you have defeated: ";
+  String textToDisplay = "Congratulations you have defeated: \n";
   String textChars = "";
   for( int i = 0; i < enemies.size(); i++){
     if (i < enemies.size() - 1) textToDisplay += enemies.get(i).getName() + ", ";
