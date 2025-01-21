@@ -224,7 +224,8 @@ public class Game{
   public static void quit(){
     Text.reset();
     Text.showCursor();
-    Text.go(17,42);
+    //Text.go(17,42);
+    Text.go(31, 1);
   }
 
 public static void drawLosingScreen(ArrayList<Adventurer> enemies){
@@ -378,6 +379,8 @@ public static void drawWinningScreen(ArrayList<Adventurer> enemies){
           action = inputs[0];
           currAdv = party.get(whichPlayer);
           if ((inputs[0].equalsIgnoreCase("q") || inputs[0].equalsIgnoreCase("quit"))){
+            System.out.print("You have quit.");
+            quit();
             break;
           }
           // not enough args
@@ -429,7 +432,7 @@ public static void drawWinningScreen(ArrayList<Adventurer> enemies){
           //else validinput = true;
           //fix other stuff like if the support is for someone whos dead
         }
-      target = Integer.parseInt(inputs[1]);
+    //  target = Integer.parseInt(inputs[1]);
 
       
         // check for invalid inputs
@@ -512,7 +515,7 @@ public static void drawWinningScreen(ArrayList<Adventurer> enemies){
             whichOpponent = 0;
           }
             */
-          }
+          
           
         }else{
           //This is after the player's turn, and allows the user to see the enemy turn
