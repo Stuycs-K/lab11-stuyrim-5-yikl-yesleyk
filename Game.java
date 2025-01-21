@@ -313,48 +313,75 @@ public class Game{
       Adventurer currAdv = party.get(whichPlayer);
       TextBox(10 , 42 ,36 , 11, preprompt);
 
-      String[] userInputErrors = {"Too many arguments. Try again.", "Invalid move. Try again.", "You can't select this character. Try again.", "Too little arguments. Try again.", "Second argument is not an integer. Try again."};
+      String[] userInputErrors = {"Too many arguments. Try again.", "Invalid move. Try again.", "Select an existing character.", "Too little arguments. Try again.", "Second argument must be an integer.", "Please select a living character. "};
 
       //example debug statment
       //TextBox(24,2,1,78,"input: "+input+" partyTurn:"+partyTurn+ " whichPlayer="+whichPlayer+ " whichOpp="+whichOpponent );
 
       //display event based on last turn's input
       if(partyTurn){
+        boolean validinput = false;
 
-      boolean validinput = false;
-      while(!validinput){
-        input = userInput(in);
-        inputs = input.split(" ");
-        action = inputs[0];
-        currAdv = party.get(whichPlayer);
-        
-
-        if (inputs.length > 2){
-          TextBox(16, 42, 36, 2, userInputErrors[0]);
+        while(!validinput){
           input = userInput(in);
           inputs = input.split(" ");
-        }
-        if (inputs.length < 2){
-          TextBox(16, 42, 36, 2, userInputErrors[3]);
-          input = userInput(in);
-          inputs = input.split(" ");
-        }
-        if (!(inputs[0].equals("attack") || inputs[0].equals("a") || 
-        inputs[0].equals("special") || inputs[0].equals("sp") || 
-        inputs[0].startsWith("su ") || inputs[0].startsWith("support "))){
-          TextBox(16,42,36,2,userInputErrors[1]);
-        }
+          action = inputs[0];
+          currAdv = party.get(whichPlayer);
 
-        if (!(isInteger(inputs[1]))){
-          TextBox(16,42,36,2,userInputErrors[4]);
+          // not enough args
+          if (inputs.length > 2){
+            TextBox(16, 42, 36, 2, userInputErrors[0]);
+//            input = userInput(in);
+//            inputs = input.split(" ");
+          }
+          // too many args
+          else if (inputs.length < 2){
+            TextBox(16, 42, 36, 2, userInputErrors[3]);
+//            input = userInput(in);
+//            inputs = input.split(" ");
+          }
+          // first arg not a move
+          else {
+            if (!(inputs[0].equals("attack") || inputs[0].equals("a") || 
+                  inputs[0].equals("special") || inputs[0].equals("sp") || 
+                  inputs[0].startsWith("su ") || inputs[0].startsWith("support "))){
+              TextBox(16,42,36,2,userInputErrors[1]);
+            }
+            // second arg not an int
+            else if (!(isInteger(inputs[1]))){
+              TextBox(16,42,36,2,userInputErrors[4]);
+            } else {
+              // 2nd arg IS an int, set target
+              target = Integer.parseInt(inputs[1]);
+              // invalid enemy int
+              if ((action.equals("attack") || action.equals("a")) || 
+                   (!(currAdv instanceof Mario) && (action.equals("special") || action.equals("sp")))){
+                    // target is not in the index of the enemies
+                    if (target < 0 || target >= enemies.size()){
+                      TextBox(16,42,36,2,userInputErrors[2]);
+                    }
+                    else if (deadEnemies[target]){
+                      TextBox(16,42,36,2,userInputErrors[5]);
+                    }
+                    else validinput = true;
+              }
+              else if ((action.equals("su") || action.equals("support")) || 
+                      ((currAdv instanceof Mario) && (action.equals("special") || action.equals("sp")))){
+                    // target is not in the index of the party
+                    if (target < 0 || target >= party.size()){
+                      TextBox(16,42,36,2,userInputErrors[2]);
+                    }
+                    else if (deadParty[target]){
+                      TextBox(16,42,36,2,userInputErrors[5]);
+                    }
+                    else validinput = true;
+              }
+            }
+          }
+          //else validinput = true;
+          //fix other stuff like if the support is for someone whos dead
         }
-        else if(target > enemies.size() || target < 0){
-          TextBox(16,42,36,2,userInputErrors[2]);
-        }
-        else validinput = true;
-        //fix other stuff like if the support is for someone whos dead
-      }
-      target = Integer.parseInt(inputs[1]);
+      //target = Integer.parseInt(inputs[1]);
 
       
         // check for invalid inputs
