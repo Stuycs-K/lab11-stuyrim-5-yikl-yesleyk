@@ -102,7 +102,7 @@ public class Game{
         else {
           drawText(currLine, row, col);
           row++;
-          currLine = "";
+          currLine = word;
         }
       }
       if (currLine.length() > 0){
