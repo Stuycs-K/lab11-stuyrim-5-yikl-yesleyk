@@ -3,22 +3,24 @@
 
 ## Features
 
-Make a clear list of features that work/dont work
+### Working Features
+- :white_check_mark: Group of 3 different adventurers
+- :white_check_mark: Play against 1-3 randomly chosen adventurer opponents
+- :white_check_mark: use attack/special operations on your opponents
+- :white_check_mark: program ends when user chooses to quit, or all enemies are defeated, or entire party is defeated. Win/lose screen is included.
+- :white_check_mark: Displayed results of attack/special/support inside border
 
-:white_check_mark: This feature works.
+### Extra Working Features
+- :ballot_box_with_check: Display several past actions using a list
 
-:question: This feature works partially.
+### Partially Working Features
+- :question: Peach's special ability (putting a character to sleep) only works when the party uses it.
 
-:ballot_box_with_check: This extra (beyond the things that the lab was supposed to do) feature works.
+### Not Working Features
+- :x: 
 
-:x: This required feature does not work.
-
-:beetle: This is a bug that affects the game.
-
-Playable :white_check_mark:
-Theme :white_check_mark:
-
-
+### Bugging Features
+- :beetle: 
 
 ## Adventurer Subclasses
 
