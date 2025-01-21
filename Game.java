@@ -242,9 +242,9 @@ public static void drawLosingScreen(ArrayList<Adventurer> enemies){
     else textChars += enemies.get(i).getName();
   }
   Text.go(14,25);
-  System.out.print(Text.colorize(textToDisplay,Text.RED + Text.BACKGROUND, Text.RED));
+  System.out.print(Text.colorize(textToDisplay,Text.RED + Text.BACKGROUND, Text.WHITE));
   Text.go(15,25);
-  System.out.print(Text.colorize(textChars,Text.RED + Text.BACKGROUND, Text.RED));
+  System.out.print(Text.colorize(textChars,Text.RED + Text.BACKGROUND, Text.WHITE));
   Text.hideCursor();
 }
 
