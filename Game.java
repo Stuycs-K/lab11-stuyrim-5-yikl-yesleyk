@@ -318,11 +318,14 @@ public class Game{
       if(partyTurn){
         boolean validinput = false;
 
+        input = userInput(in);
+          String[] inputs = input.split(" ");
+          String action = inputs[0];
+          Adventurer currAdv = party.get(whichPlayer);
+          int target;
+
         while(!validinput){
-          input = userInput(in);
-          inputs = input.split(" ");
-          action = inputs[0];
-          currAdv = party.get(whichPlayer);
+          
           
           // not enough args
           if (inputs.length > 2){
@@ -373,7 +376,7 @@ public class Game{
           //else validinput = true;
           //fix other stuff like if the support is for someone whos dead
         }
-      //target = Integer.parseInt(inputs[1]);
+      target = Integer.parseInt(inputs[1]);
 
       
         // check for invalid inputs
