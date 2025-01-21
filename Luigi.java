@@ -50,7 +50,7 @@ public class Luigi extends Adventurer {
 
     public String support(Adventurer other){
     other.setExtraTurn(true);
-      return this.getName() + " hyped up  " + other.getName() + " they know have an extra turn";
+      return this.getName() + " hyped up  " + other.getName() + " they now have an extra turn";
     }
 
     public String support(){

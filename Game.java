@@ -299,11 +299,7 @@ public class Game{
     while(! (input.equalsIgnoreCase("q") || input.equalsIgnoreCase("quit"))){
       //Read user input
 
-      String[] inputs = input.split(" ");
-      String action = " ";
-      int target = 0;
-      Adventurer currAdv = party.get(whichPlayer);
-      TextBox(10 , 42 ,36 , 11, preprompt);
+
 
       String[] userInputErrors = {"too many arguments", "invalid move", "invalid character", "too little arguments"};
 
@@ -312,6 +308,12 @@ public class Game{
 
       //display event based on last turn's input
       if(partyTurn){
+
+        String[] inputs = input.split(" ");
+        String action = " ";
+        int target = 0;
+        Adventurer currAdv = party.get(whichPlayer);
+        TextBox(10 , 42 ,36 , 11, preprompt);
 
       boolean validinput = false;
       while(!validinput){
@@ -323,15 +325,15 @@ public class Game{
         
 
         if (inputs.length > 2){
-          TextBox(17, 42, 36, 11, userInputErrors[0]);
+          TextBox(17, 42, 36, 4, userInputErrors[0]);
         }
         else if (inputs.length < 2){
-          TextBox(17, 42, 36, 11, userInputErrors[3]);
+          TextBox(17, 42, 36, 4, userInputErrors[3]);
         }
         else if (!(inputs[0].equals("attack") || inputs[0].equals("a") || 
         inputs[0].equals("special") || inputs[0].equals("sp") || 
         inputs[0].startsWith("su ") || inputs[0].startsWith("support "))){
-          TextBox(17,42,36,11,userInputErrors[1]);
+          TextBox(17,42,36,4,userInputErrors[1]);
         }
         else if(target > enemies.size() || target < 0){
           String invalidChar = "Please select another enemy to attack. ";
@@ -385,7 +387,7 @@ public class Game{
         if(whichPlayer < party.size()){
           //This is a player turn.
           //Decide where to draw the following prompt:
-
+          /* 
           if(party.get(whichPlayer).getSleep()){
             String sleepyname = party.get(whichPlayer).getName();
             party.get(whichPlayer).setSleep(false);
@@ -394,18 +396,19 @@ public class Game{
             printLastActions(actions, words);
           }
           if(whichPlayer < party.size()){
-
+*/
           String prompt = "Enter command for "+party.get(whichPlayer)+": attack/special/quit";
           TextBox(10 , 42 ,36 , 11, prompt);
-
+          /* 
           }else{
             String prompt = "press enter to see enemy turn";
             TextBox(10 , 42 ,36 , 11, prompt);
 
             partyTurn = false;
-            whichPlayer = 0;
+            
             whichOpponent = 0;
           }
+          */
         }else{
           //This is after the player's turn, and allows the user to see the enemy turn
           //Decide where to draw the following prompt:
