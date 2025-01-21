@@ -230,29 +230,41 @@ public class Game{
 public static void drawLosingScreen(ArrayList<Adventurer> enemies){
   for (int i = 1; i < WIDTH; i++){
     for (int j = 1; j < HEIGHT; j ++){
-      Text.go(i,j);
-      System.out.print(Text.colorize(" ", Text.RED));
+      Text.go(j,i);
+      System.out.print(Text.colorize(" ", Text.RED+Text.BACKGROUND));
     }
   }
-  String textToDisplay = "Aw Man you have been defeated by:";
-  for( int i = 0; i < enemies.size();){
-    textToDisplay += enemies.get(i).getName() + ", "; 
+  String textToDisplay = "Aw Man you have been defeated by: ";
+  String textChars = "";
+  for( int i = 0; i < enemies.size(); i++){
+    if (i < enemies.size() - 1) textToDisplay += enemies.get(i).getName() + ", ";
+    else textChars += enemies.get(i).getName();
   }
-  TextBox(14, 25, 10, 10, textToDisplay);
+  Text.go(14,25);
+  System.out.print(Text.colorize(textToDisplay,Text.RED + Text.BACKGROUND, Text.RED));
+  Text.go(15,25);
+  System.out.print(Text.colorize(textChars,Text.RED + Text.BACKGROUND, Text.RED));
+  Text.hideCursor();
 }
 
 public static void drawWinningScreen(ArrayList<Adventurer> enemies){
   for (int i = 1; i < WIDTH; i++){
     for (int j = 1; j < HEIGHT; j ++){
-      Text.go(i,j);
-      System.out.print(Text.colorize(" ", Text.GREEN));
+      Text.go(j,i);
+      System.out.print(Text.colorize(" ", Text.GREEN+Text.BACKGROUND));
     }
   }
-  String textToDisplay = "Congratulations you have defeated :";
-  for( int i = 0; i < enemies.size();){
-    textToDisplay += enemies.get(i).getName() + ", "; 
+  String textToDisplay = "Congratulations you have defeated: ";
+  String textChars = "";
+  for( int i = 0; i < enemies.size(); i++){
+    if (i < enemies.size() - 1) textToDisplay += enemies.get(i).getName() + ", ";
+    else textChars += enemies.get(i).getName();
   }
-  TextBox(14, 25, 10, 10, textToDisplay);
+  Text.go(14,25);
+  System.out.print(Text.colorize(textToDisplay,Text.GREEN + Text.BACKGROUND, Text.WHITE));
+  Text.go(15,25);
+  System.out.print(Text.colorize(textChars,Text.GREEN + Text.BACKGROUND, Text.WHITE));
+  Text.hideCursor();
 }
 
   public static void deathChecker(ArrayList<Adventurer> group, boolean[] status){
