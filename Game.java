@@ -352,7 +352,10 @@ public static void drawWinningScreen(ArrayList<Adventurer> enemies){
     //Main loop
 
     //display this prompt at the start of the game.
-    if(deadParty[whichPlayer]) printLastActions(actions, party.get(whichPlayer).getName() + " has fallen and cannot move anymore");
+    if(deadParty[whichPlayer]){
+      printLastActions(actions, party.get(whichPlayer).getName() + " has fallen and cannot move anymore");
+      whichPlayer++;
+    } 
     else{
     String preprompt = "Enter command for "+party.get(whichPlayer)+": \n >> attack (a) \n >> special (sp) \n >> support (su) \n >> quit (q)";
     TextBox(10 , 42 ,36 , 11, preprompt);
@@ -487,7 +490,10 @@ public static void drawWinningScreen(ArrayList<Adventurer> enemies){
 
         if(whichPlayer < party.size() ){
           //while(deadParty[whichPlayer] && whichPlayer < party.size())whichPlayer++;
-          if(deadParty[whichPlayer]) printLastActions(actions, party.get(whichPlayer).getName() + " has fallen and cannot move anymore");
+          if(deadParty[whichPlayer]){
+            printLastActions(actions, party.get(whichPlayer).getName() + " has fallen and cannot move anymore");
+            whichPlayer++;
+          } 
     else{
           //This is a player turn.
           //Decide where to draw the following prompt:
