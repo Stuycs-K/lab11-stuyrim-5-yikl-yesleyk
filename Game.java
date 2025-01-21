@@ -327,7 +327,9 @@ public class Game{
           inputs = input.split(" ");
           action = inputs[0];
           currAdv = party.get(whichPlayer);
-          
+          if ((inputs[0].equalsIgnoreCase("q") || inputs[0].equalsIgnoreCase("quit"))){
+            break;
+          }
           // not enough args
           if (inputs.length > 2){
             TextBox(16, 42, 36, 2, userInputErrors[0]);
