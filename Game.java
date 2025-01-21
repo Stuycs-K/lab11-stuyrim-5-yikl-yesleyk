@@ -544,13 +544,7 @@ public static void drawWinningScreen(ArrayList<Adventurer> enemies){
         //Enemy action choices go here!
         
         // enemy acttions
-        boolean proceed = false;
-          while (!proceed){
-            input = userInput(in);
-            if (input == ""){
-              proceed = true;
-            }
-          }
+        
 
         if(enemies.get(whichOpponent).getSleep()){
             String sleepyname = enemies.get(whichOpponent).getName();
@@ -563,6 +557,14 @@ public static void drawWinningScreen(ArrayList<Adventurer> enemies){
           printLastActions(actions, enemies.get(whichOpponent).getName() + " has fallen and cannot move anymore");
           whichOpponent++;
         } 
+
+        boolean proceed = false;
+          while (!proceed){
+            input = userInput(in);
+            if (input == ""){
+              proceed = true;
+            }
+          }
         
 
         if( whichOpponent < enemies.size()){
