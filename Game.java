@@ -406,7 +406,7 @@ public static void drawWinningScreen(ArrayList<Adventurer> enemies){
               target = Integer.parseInt(inputs[1]);
               // invalid enemy int
               if ((action.equals("attack") || action.equals("a")) || 
-                   (!(currAdv instanceof Mario) && (action.equals("special") || action.equals("sp")))){
+                   ((action.equals("special") || action.equals("sp")))){
                     // target is not in the index of the enemies
                     if (target < 0 || target >= enemies.size()){
                       TextBox(16,42,36,2,userInputErrors[2]);
@@ -416,8 +416,7 @@ public static void drawWinningScreen(ArrayList<Adventurer> enemies){
                     }
                     else validinput = true;
               }
-              else if ((action.equals("su") || action.equals("support")) || 
-                      ((currAdv instanceof Mario) && (action.equals("special") || action.equals("sp")))){
+              else if ((action.equals("su") || action.equals("support"))){
                     // target is not in the index of the party
                     if (target < 0 || target >= party.size()){
                       TextBox(16,42,36,2,userInputErrors[2]);
@@ -455,10 +454,7 @@ public static void drawWinningScreen(ArrayList<Adventurer> enemies){
           printLastActions(actions, words);
         }
         else if(action.equals("special") || action.equals("sp")){
-          if(currAdv instanceof Mario){
-            words = currAdv.specialAttack(party.get(target));
-          }
-          else words = currAdv.specialAttack(enemies.get(target));
+          words = currAdv.specialAttack(enemies.get(target));
           printLastActions(actions, words);
         }
         else if(action.equals("su") || action.equals("support")){
@@ -568,18 +564,11 @@ public static void drawWinningScreen(ArrayList<Adventurer> enemies){
         }
         if (enemyMove == 1){
           // special attack
-          if(currEnemy instanceof Mario){
-            int enemyTarget = (int) (enemies.size() * Math.random());
-            Adventurer attacked = enemies.get(enemyTarget);
-            words = currEnemy.specialAttack(attacked);
-          }
-          else{
           int enemyTarget = (int) (party.size() * Math.random());
           Adventurer attacked = party.get(enemyTarget);
           words = currEnemy.specialAttack(attacked);
           }
           printLastActions(actions, words);
-        }
         if (enemyMove == 2){
           // support
           int ally = (int) (enemies.size() * Math.random());
