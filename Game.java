@@ -236,6 +236,24 @@ public class Game{
     }
   }
 
+  public static void printLastActions(ArrayList<String> actions, String newAction){
+    if (actions.size() == 0){ 
+      actions.add(newAction);
+      TextBox(15 , 2 ,36, 5, actions.get(0));
+    }
+    else if (actions.size() == 1){
+      actions.add(newAction);
+      TextBox(15 , 2 ,36, 5, actions.get(1));
+      TextBox(10 , 2 ,36, 5, actions.get(0));
+    }
+    else {
+      actions.set(0, actions.get(1));
+      actions.set(1, newAction);
+      TextBox(15 , 2 ,36, 5, actions.get(1));
+      TextBox(10 , 2 ,36, 5, actions.get(0));
+    }
+  }
+
   public static void run(){
     //Clear and initialize
     Text.hideCursor();
@@ -262,6 +280,7 @@ public class Game{
     int turn = 0;
     String input = "";//blank to get into the main loop.
     Scanner in = new Scanner(System.in);
+    ArrayList<String> actions = new ArrayList<String>(2);
 
     //You can add parameters to draw screen!
     drawBackground();
@@ -332,21 +351,21 @@ public class Game{
 
         if(action.equals("attack") || action.equals("a")){
           words = currAdv.attack(enemies.get(target));
-          TextBox(10 , 2 ,36, 11, words);
+          printLastActions(actions, words);
         }
         else if(action.equals("special") || action.equals("sp")){
           if(currAdv instanceof Mario){
             words = currAdv.specialAttack(party.get(target));
           }
           else words = currAdv.specialAttack(enemies.get(target));
-          TextBox(10 , 2 ,36 , 11, words);
+          printLastActions(actions, words);
         }
         else if(action.equals("su") || action.equals("support")){
           //"support 0" or "su 0" or "su 2" etc.
           //assume the value that follows su  is an integer.
           if (target == whichPlayer) words = currAdv.support();
           else words = currAdv.support(party.get(target));
-          TextBox(10 , 2 ,36 , 11, words);
+          printLastActions(actions, words);
         }
 
         //You should decide when you want to re-ask for user input
@@ -354,7 +373,7 @@ public class Game{
         party.get(whichPlayer).decreaseCounter();
         if(party.get(whichPlayer).getRevival() > 0){
           words = party.get(whichPlayer).revivalEffect();
-          TextBox(10 , 2 ,36 , 11, words);
+          printLastActions(actions, words);
         }
         if(!(party.get(whichPlayer).getExtraTurn()))whichPlayer++;
 
@@ -371,7 +390,8 @@ public class Game{
             String sleepyname = party.get(whichPlayer).getName();
             party.get(whichPlayer).setSleep(false);
             whichPlayer++;
-            TextBox(10 , 2 ,36 , 11, sleepyname + " has gone to sleep and missed their turn");
+            words =sleepyname + " has gone to sleep and missed their turn";
+            printLastActions(actions, words);
           }
           if(whichPlayer < party.size()){
 
@@ -414,7 +434,7 @@ public class Game{
           int enemyTarget = (int) (party.size() * Math.random());
           Adventurer attacked = party.get(enemyTarget);
           words = currEnemy.attack(attacked);
-          TextBox(10 , 2 ,36 , 11, words);
+          printLastActions(actions, words);
         }
         if (enemyMove == 1){
           // special attack
@@ -428,7 +448,7 @@ public class Game{
           Adventurer attacked = party.get(enemyTarget);
           words = currEnemy.specialAttack(attacked);
           }
-          TextBox(10 , 2 ,36 , 11, words);
+          printLastActions(actions, words);
         }
         if (enemyMove == 2){
           // support
@@ -438,7 +458,7 @@ public class Game{
           }
           else words = currEnemy.support(enemies.get(ally));
 
-          TextBox(10 , 2 ,36 , 11, words);
+          printLastActions(actions, words);
         }
 
 
