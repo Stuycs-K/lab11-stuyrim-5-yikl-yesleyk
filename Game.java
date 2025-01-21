@@ -244,7 +244,7 @@ public static void drawLosingScreen(ArrayList<Adventurer> enemies){
   }
   Text.go(14,25);
   System.out.print(Text.colorize(textToDisplay,Text.RED + Text.BACKGROUND, Text.WHITE));
-  Text.go(15,25);
+  Text.go(16,25);
   System.out.print(Text.colorize(textChars,Text.RED + Text.BACKGROUND, Text.WHITE));
   Text.hideCursor();
 }
@@ -363,7 +363,6 @@ public static void drawWinningScreen(ArrayList<Adventurer> enemies){
 
     while(! (input.equalsIgnoreCase("q") || input.equalsIgnoreCase("quit"))){
       //Read user input
-
 
 
       String[] userInputErrors = {"Too many arguments. Try again.", "Invalid move. Try again.", "Select an existing character.", "Too little arguments. Try again.", "Second argument must be an integer.", "Please select a living character. "};
